@@ -1,0 +1,126 @@
+
+
+
+
+
+// function login(data, req, res) {
+//   try {
+//     db.query(
+//       'SELECT * FROM accounts WHERE user_email = ?',
+//       [data.inputLogEmail],
+//       (err, records) => {
+//         if (!err) {
+//           const valid = compare(data.inputLogPassword, records[0].pass);
+//           // console.log(records[0])
+//           if (records.length === 0) {
+//             // console.log('404');
+
+//             return {
+//               status: 404,
+//               message: `email "${data.inputLogEmail}" not found`,
+//             };
+//           } else if (!valid) {
+//             // console.log('409');
+//             return { status: 409, message: 'invalid password' };
+//           } else {
+//             return { status: 200, message: 'all good' };
+//             // console.log('both user and pass valid');
+//             // db.query(
+//             //   `SELECT count(id) AS count FROM accounts WHERE user_email="${data.inputLogEmail}";`,
+//             //   (err, records) => {
+//             //     if (!err) {
+//             //       if (!records[0].count) {
+//             //         res.cookie('authorised', data.inputLogEmail);
+//             //         res.cookie('name', result.name);
+
+//             //         res.status(result.status).send(result.message);
+//             //         return {
+//             //           status: 200,
+//             //           authorised: data.inputLogEmail,
+//             //           role: records[0].role,
+//             //           name: records[0].user_full_name,
+//             //         };
+//             //         // resolve({
+
+//             //         //   status: 409,
+//             //         //   message: ` email: "${data.email}", not found,`,
+//             //         // });
+//             //       }
+//             //     }
+//             //   }
+//             // );
+//           }
+//         } else {
+//           console.log(err);
+//         }
+//       }
+//     );
+//   } catch (err) {
+//     console.log(err);
+//     return { status: 500, message: 'Something went wrong' };
+//   }
+// }
+
+// async function login(data) {
+//   return new Promise((resolve, reject) => {
+//     db.query(
+//       `SELECT count(id) AS count FROM accounts WHERE user_email="${data.inputLogEmail}";`,
+//       (err, records) => {
+//         if (!err) {
+//           if (!records[0].count) {
+//             resolve({
+//               status: 409,
+//               message: ` email: "${data.email}", not found,`,
+//             });
+//           } else {
+//             db.query(
+//               `SELECT pass FROM accounts WHERE user_email="${data.inputLogEmail}";`,
+//               (err, records) => {
+//                 if (!err) {
+//                   const valid = compare(data.inputLogPassword, records[0].pass);
+//                   if (valid === false) {
+//                     resolve({
+//                       status: 409,
+//                       message: `invalid password for account "${data.inputLogEmail}"`,
+//                     });
+//                   } else {
+//                     db.query(
+//                       `SELECT * FROM accounts WHERE user_email= "${data.inputLogEmail}"`,
+//                       (err, records) => {
+//                         if (!err) {
+//                           const role = records[0].role;
+//                           const name = records[0].user_full_name;
+//                           console.log(role);
+//                           resolve({
+//                             status: 200,
+//                             message: 'Logged in successfully',
+//                             authorised: data.inputLogEmail,
+//                             role: role,
+//                             name: name,
+//                           });
+//                         } else {
+//                           console.log(err);
+//                           reject({
+//                             status: 500,
+//                             message: 'Some went really wrong',
+//                           });
+//                         }
+//                       }
+//                     );
+//                   }
+//                 } else {
+//                   console.log(err);
+//                   reject({ status: 500, message: 'Some went really wrong' });
+//                 }
+//               }
+//             );
+//           }
+//         } else {
+//           console.log(err);
+//           reject({ status: 500, message: 'Some went really wrong' });
+//         }
+//       }
+//     );
+//     console.log(`You are logged in as: ${data.inputLogEmail}`);
+//   });
+// }

@@ -1,0 +1,1323 @@
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    /> -->
+
+    <link
+      href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css'
+      rel='stylesheet'
+      integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC'
+      crossorigin='anonymous'
+    />
+
+    <link rel='icon' type='image/x-icon' href='assets/favicon.ico' />
+    <link rel='stylesheet' type='text/css' href='style/style.css' />
+    <script src='js/pricing.js' type='text/javascript' defer></script>
+    <title>Business Company</title>
+  </head>
+  <body class='light-grey'>
+
+    <div class='dark-bg bg-dark fixed-top containee'>
+      <div class='container'>
+        <nav
+          class='navbar navbar-expand-sm navbar-fixed-top navbar-dark d-flex justify-content-between'
+        >
+          <a class='navbar-brand' href='/'>
+            <!-- <img src="bootstrap-logo.svg" alt="Bootstrap" width="30" height="24" class="d-inline-block align-top"> -->
+            <h4 class='p-0 m-0 text-center navbar-title'>Academic Writing</h4>
+          </a>
+          <button
+            class='navbar-toggler'
+            type='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#toggleMobileMenu'
+            aria-controls='toggleMobileMenu'
+            aria-expanded='false'
+            aria-label='Toggle navigation'
+          >
+            <span class='navbar-toggler-icon'></span>
+          </button>
+          <div class='collapse navbar-collapse' id='toggleMobileMenu'>
+            <ul class='navbar-nav ms-auto text-center font-12'>
+              {{! <ul class='navbar-nav ms-auto text-center font-12'> }}
+              <li>
+                <a class='nav-link' href='/pricing'>Pricing</a>
+              </li>
+              <li>
+                <a class='nav-link' href='/about'>About</a>
+              </li>
+              {{#if authorised}}
+                {{!-- <li>
+                  <a
+                    {{! class='nav-link d-flex align-items-center gap-1 border-light rounded margin-left-05 border-light' }}
+                    class='nav-link d-flex align-items-center gap-1'
+                    href='/account'
+                  ><span class='d-flex align-items-center'><svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='16'
+                        height='16'
+                        fill='currentColor'
+                        class='bi bi-person'
+                        viewBox='0 0 16 16'
+                      >
+                        <path
+                          d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z'
+                        ></path></svg></span><span>Account</span></a>
+                </li> --}}
+                <li>
+                  <a class='nav-link pe-0' href='/logout'>Logout</a>
+                </li>
+
+              {{else}}
+                <li>
+                  <a class='nav-link' href='/login'>Login</a>
+                </li>
+                <li>
+                  <a class='nav-link pe-0' href='/register'>Register</a>
+                </li>
+              {{/if}}
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class='empty-space'></div>
+
+    {{! <div class='container-xl h-100 px-4'> }}
+
+    {{#if authorised}}
+
+      <div class='bg-white'>
+
+        <div class='container mt-3'>
+    <nav class='navbar navbar-expand-lg navbar-light'>
+          <div class='container-fluid'>
+            <button
+              class='navbar-toggler'
+              type='button'
+              data-bs-toggle='collapse'
+              data-bs-target='#navbarTogglerDemo01'
+              aria-controls='navbarTogglerDemo01'
+              aria-expanded='false'
+              aria-label='Toggle navigation'
+            >
+              <span class='navbar-toggler-icon'></span>
+            </button>
+            <div class='collapse navbar-collapse' id='navbarTogglerDemo01'>
+              <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+                <li class='nav-item '>
+                  <a
+                    class='nav-link active  ms-0'
+                    aria-current='page'
+                    href='/customer-home'
+                  >Home</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link active current'  href='/pricing'>New Order</a>
+                </li>
+                <li class='nav-item'>
+                  <a class='nav-link active' href='/customer-orders'>Orders</a>
+                </li>
+              </ul>
+              <div class='dropdown'>
+                <button
+                  class='btn btn-outline-secondary dropdown-toggle'
+                  type='button'
+                  id='dropdownMenuButton1'
+                  data-bs-toggle='dropdown'
+                  aria-expanded='false'
+                >
+                  Account
+                </button>
+                <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
+                  <li><a class='dropdown-item' href='/profile'>Profile</a></li>
+                  <li><a class='dropdown-item' href='/billing'>Billing</a></li>
+                  <li><a
+                      class='dropdown-item'
+                      href='/security'
+                    >Security</a></li>
+                  <li><a
+                      class='dropdown-item'
+                      href='/notifications-settings'
+                    >Notifications</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+    
+        </div>
+      </div>
+      <hr class='mt-0 mb-4' />
+
+      {{!-- <section class='container'>
+      {{else}} --}}
+
+    {{/if}}
+
+    <section class='container container-res'>
+
+      <div class='row'>
+        <div class='col-lg-8'>
+          {{! <div class='container'> }}
+          <div id='multi-step-form-container '>
+            <ul
+              class='form-stepper form-stepper-horizontal text-center mx-auto pl-0'
+            >
+              <!-- Step 1 -->
+              <li
+                class='form-stepper-active text-center form-stepper-list'
+                step='1'
+              >
+                <a class='mx-2 text-decoration-none'>
+                  <span class='form-stepper-circle'>
+                    <span>1</span>
+                  </span>
+                  <div class='label'>Step 1</div>
+                </a>
+              </li>
+              <!-- Step 2 -->
+              <li
+                class='form-stepper-unfinished text-center form-stepper-list'
+                step='2'
+              >
+                <a class='mx-2 text-decoration-none'>
+                  <span class='form-stepper-circle'>
+                    <span>2</span>
+                  </span>
+                  <div class='label orange'>Step 2</div>
+                </a>
+              </li>
+            </ul>
+            
+            <form
+              id='userMainCartForm'
+              {{! name='userMainCartForm'
+              action='/pricing'
+              method='post'
+              enctype='multipart/form-data'
+              autocomplete='off' }}
+            >
+
+              <section id='step-1' class='card form-step'>
+                <div class='h4 form-step-title-1'>Select Services</div>
+                <hr />
+                <div class='form-label-group'>
+
+                  <label
+                    for='radioCurrency'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Currency</label>
+                  <div id='radioCurrency' name='radioCurrency' class='radio'>
+                    <input
+                      label='EUR'
+                      type='radio'
+                      id='eur'
+                      name='currency'
+                      value='eur'
+                      required
+                    />
+                    <input
+                      label='USD'
+                      type='radio'
+                      id='usd'
+                      name='currency'
+                      value='usd'
+                      required
+                    />
+                    <input
+                      label='GBP'
+                      type='radio'
+                      id='gbp'
+                      name='currency'
+                      value='gbp'
+                      required
+                    />
+                    <input
+                      label='AUD'
+                      type='radio'
+                      id='aud'
+                      name='currency'
+                      value='aud'
+                      required
+                    />
+                    <input
+                      label='CAD'
+                      type='radio'
+                      id='cad'
+                      name='currency'
+                      value='cad'
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class='form-label-group'>
+
+                  <label
+                    for='type-service'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Type of Service</label>
+                  <select
+                    class='form-select inp-shadow'
+                    name='typeService'
+                    id='typeService'
+                  >
+                    <option value='Academic Paper Writing ' selected>
+                      Academic Paper Writing
+                    </option>
+                    <option value='Dissertation Services'>
+                      Disertation Services
+                    </option>
+                    <option value='Writing Incl. Calculations'>
+                      Writing Incl. Calculations
+                    </option>
+                    <option value='Admission Services'>
+                      Admission Services
+                    </option>
+                    <option value='M/P/E/S Problems'>
+                      Math/Physic/Economic/Statistic Problems
+                    </option>
+                    <option value='Multiple Choice Questions'>
+                      Multiple Choice Questions
+                    </option>
+                    <option value='Editing'>
+                      Editing
+                    </option>
+                    <option value='Proofreading'>
+                      Proofreading
+                    </option>
+                    <option value='Rewriting'>
+                      Rewriting
+                    </option>
+                    <option value='Copywriting'>
+                      Copywriting
+                    </option>
+                    <option value='Resume/CV Services'>
+                      Resume/CV services
+                    </option>
+                  </select>
+                </div>
+
+                <div class='form-label-group'>
+                  <label
+                    for='typePaper'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Type of Paper</label>
+                  <select
+                    class='form-select inp-shadow'
+                    name='typePaper'
+                    id='typePaper'
+                  >
+                    <option value='essay'>Essay</option>
+                    <option value='coursework'>Coursework</option>
+                    <option value='research-paper'>Research Paper</option>
+                    <option value='term-paper'>Term-paper</option>
+                    <option value='case-study'>Case Study</option>
+                    <option value='capstone-project'>Capstone Project</option>
+                    <option value='assigment'>Assignment</option>
+                  </select>
+                </div>
+
+                <div class='form-label-group'>
+                  <label
+                    for='numOfPages'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Pages</label>
+                  <div class='number'>
+
+                    <span class='minus'>-</span>
+                    <input
+                      id='numOfPages'
+                      name='numOfPages'
+                      type='text'
+                      value='1'
+                      maxlength='3'
+                      oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                    />
+                    <span class='plus'>+</span>
+
+                  </div>
+                </div>
+
+                <div class='form-label-group'>
+                  <label
+                    for='academicLevel'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Academic Level</label>
+
+                  <select
+                    class='form-select inp-shadow'
+                    name='academicLevel'
+                    id='academicLevel'
+                  >
+                    <option value='high-school'>High School</option>
+                    <option value='freshman'>Freshman &#40; College 1st year
+                      &#41;
+                    </option>
+                    <option value='sophomore'>Sophomore &#40; College 2nd year
+                      &#41;
+                    </option>
+                    <option value='junior'>Junior &#40; College 3rd year &#41;
+                    </option>
+                    <option value='senior'>Senior &#40; College 4th year &#41;</option>
+                    <option value='master'>Master's</option>
+                    <option value='doctoral'>Doctoral</option>
+                  </select>
+
+                </div>
+
+                {{!-- {{! <div class='wrapper-p'> }} --}}
+                {{! <div class='wrapper-p'> }}
+
+                <div class='mt-3 services-radio-table'>
+                  <table class='table' id='table'>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Urgency</th>
+                        <th>Prices</th>
+                        <th>Deadline</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class='radio-td'><input
+                            type='radio'
+                            value='3'
+                            id='0'
+                            name='urgency'
+                          /></td>
+                        <td><label for='0'>3 days</label></td>
+                        <td><label for='0'>$21.99/page</label></td>
+                        <td><label for='0'>07/02/2023</label></td>
+                      </tr>
+                      <tr>
+                        <td class='radio-td'><input
+                            type='radio'
+                            value='5'
+                            id='1'
+                            name='urgency'
+                          /></td>
+                        <td><label for='1'>5 days</label></td>
+                        <td><label for='1'>$21.99/page</label></td>
+                        <td><label for='1'>07/02/2023</label></td>
+                      </tr>
+                      <tr>
+                        <td class='radio-td'><input
+                            type='radio'
+                            value='7'
+                            id='2'
+                            name='urgency'
+                          /></td>
+                        <td><label for='2'>7 days</label></td>
+                        <td><label for='2'>$21.99/page</label></td>
+                        <td><label for='2'>07/02/2023</label></td>
+                      </tr>
+                      <tr>
+                        <td class='radio-td'><input
+                            type='radio'
+                            value='14'
+                            id='3'
+                            name='urgency'
+                          /></td>
+                        <td><label for='3'>13 days</label></td>
+                        <td><label for='3'>$21.99/page</label></td>
+                        <td><label for='3'>07/02/2023</label></td>
+                      </tr>
+                      <tr>
+                        <td class='radio-td'><input
+                            type='radio'
+                            value='17'
+                            id='4'
+                            name='urgency'
+                          /></td>
+                        <td><label for='4'>17 days</label></td>
+                        <td><label for='4'>$21.99/page</label></td>
+                        <td><label for='4'>07/02/2023</label></td>
+                      </tr>
+                      <tr>
+                        <td class='radio-td'><input
+                            type='radio'
+                            value='30'
+                            id='5'
+                            name='urgency'
+                          /></td>
+                        <td><label for='5'>30 days</label></td>
+                        <td><label for='5'>$21.99/page</label></td>
+                        <td><label for='5'>07/02/2023</label></td>
+                      </tr>
+                      <tr>
+                        <td class='radio-td'><input
+                            type='radio'
+                            value='40'
+                            id='6'
+                            name='urgency'
+                          /></td>
+                        <td><label for='6'>40 days</label></td>
+                        <td><label for='6'>$21.99/page</label></td>
+                        <td><label for='6'>07/02/2023</label></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+                {{! </div> }}
+                {{! </div> }}
+                <div class='form-label-group'>
+
+                  <div class='next-button'>
+                    <button
+                      class='button btn-navigate-form-step fw-boldish'
+                      type='button'
+                      step_number='2'
+                      id='nextButton'
+                    >
+                      Next
+                    </button>
+                  </div>
+
+                </div>
+                <div class='text-center small mt-1 mb-5'>All these selections
+                  can be changed by emailing us at academicwriting@gmail.com</div>
+
+              </section>
+
+              <section id='step-2' class='card form-step d-none'>
+                <div class='h4 onyx'>Select Services</div>
+                <hr />
+                <div class='form-label-group'>
+                  <label
+                    for='radioPaaperFormat'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Paper Format</label>
+                  <div
+                    id='radioPaperFormat'
+                    name='radioPaperFormat'
+                    class='radio smaller'
+                  >
+                    <input
+                      label='MLA'
+                      type='radio'
+                      id='MLA'
+                      name='paperFormat'
+                      value='MLA'
+                      required
+                    />
+                    <input
+                      label='APA'
+                      type='radio'
+                      id='APA'
+                      name='paperFormat'
+                      value='APA'
+                      required
+                    />
+                    <input
+                      label='Chicago'
+                      type='radio'
+                      id='Chicago'
+                      name='paperFormat'
+                      value='Chicago'
+                      required
+                    />
+                    <input
+                      label='Harvard'
+                      type='radio'
+                      id='Harvard'
+                      name='paperFormat'
+                      value='Harvard'
+                      required
+                    />
+                    <input
+                      label='OSCOLA'
+                      type='radio'
+                      id='OSCOAL'
+                      name='paperFormat'
+                      value='OSCOLA'
+                      required
+                    />
+                  </div>
+                </div>
+
+                {{! <div>You tried to upload not supported format. Available
+                  formats: pdf, rtf, txt, doc, docx, odt, zip, gz, png, jpg,
+                  jpeg, gif, xls, xlsx, csv, rar, ppt, pptx. Bad format. Read
+                  more at:
+                  https://academized.com/account/orders/new?assignment_type=1&words=275&academic_level=1&urgency=1
+                </div> }}
+
+                <div class='form-label-group'>
+
+                  <label
+                    for='subjectArea'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Subject Area</label>
+                  <select
+                    class='form-select inp-shadow'
+                    name='subjectArea'
+                    id='subjectArea'
+                  >
+                    <option value='art'>
+                      Art</option>
+                    <option value='Movies'>
+                      Movies</option>
+                    <option value='Music'>
+                      Music</option>
+                    <option value='Paintings'>
+                      Paintings</option>
+                    <option value='Theatre'>
+                      Theatre</option>
+                    <option value='Arhitecture'>
+                      Arhitecture</option>
+                    <option value='Business'>
+                      Business</option>
+                    <option value='Comm. & Media'>
+                      Communications & Media</option>
+                    <option value='Journalism'>
+                      Journalism</option>
+                    <option value='Advertising'>
+                      Advertising</option>
+                    <option value='Public Relations'>
+                      Public Relations</option>
+                    <option value='Comm. Strategies'>
+                      Communication Strategies</option>
+                    <option value='Economics'>
+                      Economics</option>
+                    <option value='Logistics'>
+                      Logistics</option>
+                    <option value='Trade'>
+                      Trade</option>
+                    <option value='E-commerce'>
+                      E-commerce</option>
+                    <option value='Social Work'>
+                      Social Work</option>
+                    <option value='Political Science'>
+                      Political Science</option>
+                    <option value='Sociology'>
+                      Sociology</option>
+                    <option value='Finance'>
+                      Finance</option>
+                    <option value='Physical Studies'>
+                      Physical Studies</option>
+                    <option value='Accounting'>
+                      Accounting</option>
+                    <option value='Investment'>
+                      Investment</option>
+                    <option value='Engineering'>
+                      Engineering</option>
+                    <option value='English'>
+                      English</option>
+                    <option value='Healthcare & Medicine'>
+                      Healthcare & Medicine</option>
+                    <option value='Medicine & Dentistry'>
+                      Medicine & Dentistry</option>
+                    <option value='Nursing'>
+                      Nursing</option>
+                    <option value='Phatogenesis of Disease'>
+                      Phatogenesis of disease</option>
+                    <option value='History'>
+                      History</option>
+                    <option value='IT & Technology'>
+                      IT & Technology</option>
+                    <option value='Law'>
+                      Law</option>
+                    <option value='Literature'>
+                      Literature</option>
+                    <option value='Management'>
+                      Management</option>
+                    <option value='Sports'>
+                      Sports</option>
+                    <option value='Marketing'>
+                      Marketing</option>
+                    <option value='Int. Relations'>
+                      International Relations</option>
+                    <option value='Public Health'>
+                      Public Health</option>
+                    <option value='Linguistics'>
+                      Linguistics</option>
+                    <option value='Mathematics'>
+                      Mathematics</option>
+                    <option value='Natural Science'>
+                      Natural Science</option>
+                    <option value='Agriculture'>
+                      Agriculture</option>
+                    <option value='Env. Science'>
+                      Enviromental Science</option>
+                    <option value='Anthropology'>
+                      Anthropology</option>
+                    <option value='Chemistry'>
+                      Chemistry</option>
+                    <option value='Astronomy'>
+                      Astronomy</option>
+                    <option value='Geology'>
+                      Geology</option>
+                    <option value='Geography'>
+                      Geography</option>
+                    <option value='Biology'>
+                      Biology</option>
+                    <option value='Physics'>
+                      Physics</option>
+                    <option value='Pedagogy'>
+                      Pedagogy</option>
+                    <option value='Philosophy'>
+                      Philosophy</option>
+                    <option value='Psychology'>
+                      Psychology</option>
+                    <option value='Statistics'>
+                      Statistics</option>
+                    <option value='Other'>
+                      Other</option>
+                    <option value='Religion & Theology'>
+                      Religion & Theology</option>
+                    <option value='Tourism'>
+                      Tourism</option>
+                    <option value='Education'>
+                      Education</option>
+                    <option value='Nutrition'>
+                      Nutrition</option>
+                    <option value='Criminal Justice'>
+                      Criminal Justice</option>
+                    <option value='Property/Real Estate'>
+                      Property/Real Estate</option>
+                  </select>
+
+                </div>
+
+                <div class='form-label-group'>
+                  <label
+                    for='numOfResouces'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Num. of Sources </label>
+                  <div class='number'>
+                    <span class='minus-r'>-</span>
+                    <input
+                      id='numOfResouces'
+                      name='numOfResources'
+                      type='text'
+                      value='1'
+                      maxlength='3'
+                      oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                    />
+                    <span class='plus-r'>+</span>
+                  </div>
+                </div>
+
+                <div class='form-label-group'>
+                  <label
+                    for='topic'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Topic</label>
+                  <input
+                    class='inp-shadow2'
+                    id='topic'
+                    name='topic'
+                    type='text'
+                    maxlength='300'
+                    placeholder='max 300 characters'
+                  />
+                </div>
+                <div class='form-label-group'>
+                  <label
+                    for='paperDetails'
+                    class='h5 normal-weight text-muted mt-3'
+                  >Paper Details</label>
+
+                  <textarea
+                    class='inp-shadow3'
+                    id='paperDetails'
+                    name='paperDetails'
+                    rows='3'
+                    placeholder='max 3000 characters'
+                    maxlength='3000'
+                  ></textarea>
+                </div>
+
+                {{#if authorised}}
+
+                  <div class='form-label-group2'>
+
+                    <button
+                      class='button btn-navigate-form-step prev fw-boldish'
+                      type='button'
+                      step_number='1'
+                      id='prevButton'
+                    >
+                      Prev
+                    </button>
+
+                    <button
+                      class='button submit-btn fw-boldish'
+                      type='submit'
+                    >Next</button>
+
+                  </div>
+                {{else}}
+                  <div class='form-label-group2'>
+
+                    <div class='not-authenticated w-100'>
+                      <div>You need to authenticate first</div>
+                      <a
+                        class='button btn-navigate-form-step text-white log-in-link fw-boldish'
+                        href='/login'
+                      >Log-in</a>
+                      <a
+                        class='button btn-navigate-form-step text-white register-link fw-boldish'
+                        href='/register'
+                      >Register</a>
+
+                    </div>
+                  </div>
+
+                  <div class='d-flex justify-start p-4'>
+                    <div
+                      class='btn-navigate-form-step2 go-back'
+                      step_number='1'
+                      id='prevButton'
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='20'
+                        height='20'
+                        fill='currentColor'
+                        class='bi bi-arrow-right-circle-fill'
+                        viewBox='0 0 16 16'
+                      >
+                        <path
+                          d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z'
+                        ></path>
+                      </svg>
+                      <span>Step 1</span>
+                    </div>
+                  </div>
+                {{/if}}
+                <div class='text-center small mt-1 mb-3'>All these selections
+                  can be changed by emailing us at academicwriting@gmail.com</div>
+
+                {{! <div class='mt-3 final-buttons'>
+                  <button
+                    class='button btn-navigate-form-step prev'
+                    type='button'
+                    step_number='1'
+                  >
+                    Prev
+                  </button>
+                  <button class='button submit-btn' type='submit'>Save</button>
+                </div> }}
+              </section>
+            </form>
+          </div>
+          {{! </div> }}
+
+        </div>
+        <div class='col col-lg-4'>
+
+          <div class='card mini-summary'>
+            <div class='h4'>Summary</div>
+            <hr class='mb-0' />
+            <div class='zig-zag-bottom'></div>
+            <div class='row'>
+              <div class='col-5 h-30 d-flex align-items-center no-break'>
+                Title page
+              </div>
+              <div
+                class='col-4 d-flex justify-content-end align-items-center gap-2'
+              >
+                for
+                <span class='line-through'>$4.99</span>
+              </div>
+
+              <div
+                class='col-3 d-flex justify-content-end align-items-center'
+              ><span class='free'>
+                  FREE
+
+                </span>
+              </div>
+
+            </div>
+
+            <hr class='my-0' />
+            <div class='row'>
+              <div class='col-5 h-30 d-flex align-items-center no-break'>
+                Formatting
+              </div>
+              <div
+                class='col-4 d-flex justify-content-end align-items-center gap-2'
+              >
+                for
+                <span class='line-through'>$4.99</span>
+              </div>
+              <div
+                class='col-3 d-flex justify-content-end align-items-center'
+              ><span class='free'>
+                  FREE
+                </span>
+              </div>
+            </div>
+            <hr class='my-0' />
+            <div class='row'>
+              <div class='col-5 h-30 d-flex align-items-center no-break'>
+                Title page
+              </div>
+              <div
+                class='col-4 d-flex justify-content-end align-items-center gap-2'
+              >
+                for
+                <span class='line-through'>$4.99</span>
+              </div>
+              <div
+                class='col-3 d-flex justify-content-end align-items-center'
+              ><span class='free'>
+                  FREE
+                </span>
+              </div>
+            </div>
+            <hr class='my-0' />
+            <div class='row'>
+              <div class='col-5 h-30 d-flex align-items-center no-break'>
+                Title page
+              </div>
+              <div
+                class='col-4 d-flex justify-content-end align-items-center gap-2'
+              >
+                for
+                <span class='line-through'>$4.99</span>
+              </div>
+              <div
+                class='col-3 d-flex justify-content-end align-items-center'
+              ><span class='free'>
+                  FREE
+                </span>
+              </div>
+            </div>
+
+            <div id='currencyMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Currency
+                </div>
+                <div
+                  class='col-5 d-flex justify-content-center align-items-center'
+                  id='currencyMiniVal'
+                >
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div id='typeServiceMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Service
+                </div>
+                <div
+                  class='col-5 d-flex justify-content-start align-items-center'
+                  id='typeServiceMiniVal'
+                >
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center'
+                ><svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div id='typePaperMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row' class='w-100'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Paper
+                </div>
+                <div
+                  class='col-5 d-flex justify-content-center align-items-center text-center'
+                  id='typePaperMiniVal'
+                >
+
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+                {{! <div class='col-4 d-flex align-items-center'>
+                    
+                  </div>
+                  <div class='d-flex'>
+                    <div >
+                    </div>
+                    <div class=''>
+                    </div>
+                  </div> }}
+              </div>
+            </div>
+
+            <div id='numOfPagesMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Number of Pages
+                </div>
+                <div
+                  id='numOfPagesMiniVal'
+                  class='col-5 d-flex justify-content-center align-items-center'
+                >
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div id='academicLevelMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Level
+                </div>
+                <div
+                  id='academicLevelMiniVal'
+                  class='col-5 d-flex justify-content-center align-items-center text-center'
+                >
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center text-center'
+                ><svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div id='urgencyMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Urgency
+                </div>
+                <div
+                  id='urgencyMiniVal'
+                  class='col-5 d-flex justify-content-center align-items-center text-center'
+                >
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center text-center'
+                ><svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div id='paperFormatMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Format
+                </div>
+                <div
+                  id='paperFormatMiniVal'
+                  class='col-5 d-flex justify-content-center align-items-center text-center'
+                >
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center text-center'
+                ><svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div id='subjectAreaMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Area
+                </div>
+                <div
+                  id='subjectAreaMiniVal'
+                  class='col-5 d-flex justify-content-center align-items-center text-center'
+                >
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center text-center'
+                ><svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div id='numberOfResourcesMiniBig' style='display: none;'>
+              <hr class='my-0' />
+              <div class='row'>
+                <div class='col-5 h-30 d-flex align-items-center'>
+                  Num. Sources
+                </div>
+                <div
+                  id='numberOfResourcesMiniVal'
+                  class='col-5 d-flex justify-content-center align-items-center text-center'
+                >
+                </div>
+                <div
+                  class='checked col-2 d-flex justify-content-center align-items-center text-center'
+                ><svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='25'
+                    height='25'
+                    fill='currentColor'
+                    class='bi bi-check2-circle'
+                    viewBox='0 0 16 16'
+                  >
+                    <path
+                      d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
+                    ></path>
+                    <path
+                      d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <br>
+
+            {{#if authorised}}
+
+              <a
+                href='/pricing'
+                class='btn bg-orange text-white enjoy-button'
+              >Next</a>
+            {{/if}}
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class='footer-container bg-dark border-top text-light pt-5'>
+      <section class='container'>
+        <footer>
+          <div class='row'>
+            <div class='col-6 col-md-2 mb-3'>
+              <h5>Section</h5>
+              <ul class='nav flex-column'>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Home</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Features</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Pricing</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>FAQs</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class='col-6 col-md-2 mb-3 text-light'>
+              <h5>Section</h5>
+              <ul class='nav flex-column'>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Home</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Features</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Pricing</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>FAQs</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class='col-6 col-md-2 mb-3'>
+              <h5>Section</h5>
+              <ul class='nav flex-column'>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Home</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Features</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>Pricing</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>FAQs</a>
+                </li>
+                <li class='nav-item mb-2'>
+                  <a href='#' class='nav-link p-0 text-light'>About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class='col-md-5 offset-md-1 mb-3'>
+              <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of what's new and exciting from us.</p>
+                <div class='d-flex flex-column flex-sm-row w-100 gap-2'>
+                  <label for='newsletter1' class='visually-hidden'>Email address</label>
+                  <input
+                    id='newsletter1'
+                    type='text'
+                    class='form-control'
+                    placeholder='Email address'
+                  />
+                  <button class='btn btn-primary' type='button'>
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              class='d-flex flex-column flex-sm-row justify-content-between py-2 my-2'
+            >
+              <p>&copy; 2022 Company, Inc. All rights reserved.</p>
+
+            </div>
+          </div>
+        </footer>
+      </section>
+    </section>
+    <script
+      src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
+      integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM'
+      crossorigin='anonymous'
+    ></script>
+
+  </body>
+</html>
