@@ -14,10 +14,7 @@ const {
   createCustomerOrder,
 } = require('./modules/orders');
 
-
-
 const bcrypt = require('bcrypt');
-
 
 ///////HOME page routes
 
@@ -28,39 +25,36 @@ router.get('/', (req, res) => {
   //   const authorised = decrypt(cookieValue);
   // res.render('home', { authorised , success: req.flash('success')});
   // }
+
+  // role: res.cookie('_ro2e12s3'),
+
   res.render('home', {
-    role: res.cookie('_ro2e12s3'),
+    // role: res.cookie('_ro2e12s3'),
     authorised: req.cookies['_aut121421'],
   });
 });
-
-
 
 router.get('/testing', (req, res) => {
   console.log('GET /Testing');
 
   const saltRounds = 10;
- 
-  const inputPassword = 'p455w0rd'
-  
+
+  const inputPassword = 'p455w0rd';
+
   const salt = bcrypt.genSaltSync(saltRounds);
   const hashedPassword = bcrypt.hashSync(inputPassword, salt);
 
   // console.log(hashedPassword)
-  
-  const result =  bcrypt.compareSync( 'p455w0rd','$2b$10$4VmT8yTGEEoHx3xeckuEq.xO88MDJR/ICWITGawr5C2yJixdBA.Pm')
-  console.log(result)
 
-
+  const result = bcrypt.compareSync(
+    'p455w0rd',
+    '$2b$10$4VmT8yTGEEoHx3xeckuEq.xO88MDJR/ICWITGawr5C2yJixdBA.Pm'
+  );
+  console.log(result);
 
   // res.send(hashedPassword)
-  res.send(result)
-
+  res.send(result);
 });
-
-
-
-
 
 ////////// CUSTOMER_HOME
 
@@ -69,25 +63,24 @@ router.get('/customer-home', (req, res) => {
   // let authorised;
   // const cookieValue = req.cookies.authorised;
   // if (cookieValue !== undefined) {
-    //   authorised = decrypt(cookieValue);
-    
-   const  userFirstName=  req.cookies['_firN21kll21']
-  const authorised = req.cookies['_aut121421']
-  console.log("userFirstName", userFirstName)
+  //   authorised = decrypt(cookieValue);
 
+  const userFirstName = req.cookies['_firN21kll21'];
+  const authorised = req.cookies['_aut121421'];
+  console.log('userFirstName', userFirstName);
 
   if (!authorised) {
     res.redirect('/login');
   }
   // if (!authorised || !role==='customer')
   // const role = req.cookies['_ro2e12s3'],
-    
+
   const data = getSlickOrders(authorised);
   res.render('customer-home', {
     data: data,
     // role: res.cookie('_ro2e12s3'),
     authorised: authorised,
-    // userFirstName: req.cookies['_firN21kll21'],
+    userFirstName: req.cookies['_firN21kll21'],
     userLastName: req.cookies['_sltN21kll21'],
     success: req.flash('success'),
     registered: req.flash('registered'),
@@ -97,8 +90,6 @@ router.get('/customer-home', (req, res) => {
 });
 
 ///////LOGIN & REGISTER routes
-
-const db = require('./modules/db');
 
 router.get('/login', async (req, res) => {
   console.log('GET /login');
@@ -114,13 +105,13 @@ router.post('/login', async (req, res) => {
 
   const data = req.body;
 
-  console.log("THE DATA",data)
+  console.log('THE DATA', data);
 
   login(data)
     .then((result) => {
       // handle successful login
-      console.log("THE FUCKING RESULT",result);
-      console.log("THE FUCKING RESULT.ROLE",result.role);
+      console.log('THE FUCKING RESULT', result);
+      console.log('THE FUCKING RESULT.ROLE', result.role);
       req.flash('success', `${result.message}`);
       res.cookie('_aut121421', `${data.inputLogEmail}`);
       res.cookie('_ro2e12s3', `${result.role}`);
@@ -195,7 +186,7 @@ router.get('/logout', (req, res) => {
   console.log('GET /logout');
   res.clearCookie('_aut121421');
   res.clearCookie('_ro2e12s3');
-  res.clearCookie('_fN21kll21');
+  res.clearCookie('_firN21kll21');
   res.clearCookie('_sltN21kll21');
   res.redirect('/');
 });
@@ -218,7 +209,7 @@ router.get('/logout', (req, res) => {
 
 router.get('/about', (req, res) => {
   console.log('GET /about');
-  const authorised = req.cookies['authorised'];
+  const authorised = req.cookies['_aut121421'];
   res.render('about', { authorised });
 });
 
@@ -226,13 +217,13 @@ router.get('/about', (req, res) => {
 
 router.get('/pricing', (req, res) => {
   console.log('GET /pricing');
-  const authorised = req.cookies['authorised'];
+  const authorised = req.cookies['_aut121421'];
   res.render('pricing', { authorised });
 });
 
 router.post('/pricing', (req, res) => {
   console.log('/POST /pricing');
-  const authorised = req.cookies['authorised'];
+  const authorised = req.cookies['_aut121421'];
   const data = req.body;
 
   console.log('The form data is:', data);
@@ -247,7 +238,7 @@ router.post('/pricing', (req, res) => {
 
 router.get('/summary', (req, res) => {
   console.log('GET /summary');
-  const authorised = req.cookies['authorised'];
+  const authorised = req.cookies['_aut121421'];
 
   res.render('summary', { authorised });
 });

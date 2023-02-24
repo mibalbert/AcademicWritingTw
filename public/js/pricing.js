@@ -3,12 +3,6 @@
 window.addEventListener('DOMContentLoaded', () => {
 	console.log('DOMContentLoaded');
 	
-	try{
-		sessionStorage.setItem('subjectArea', 'sub');
-
-	} catch(err) {
-		console.log(err)
-	}
 
 	document
 		.getElementById('userMainCartForm')
@@ -228,7 +222,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	//   }
 	// });
 
-	numOfPages.addEventListener('input', function () {
+	numOfPages.addEventListener('input', function (event) {
 		event.preventDefault();
 		a = numOfPages.value;
 		numOfPagesMiniBig.style.display = 'block';

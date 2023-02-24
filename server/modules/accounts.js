@@ -11,7 +11,7 @@ function login(data) {
       'SELECT * FROM accounts WHERE user_email = ?',
       [data.inputLogEmail],
       (err, records) => {
-        console.log("THE FUCKING ROLE",records[0].role)
+        console.log("THE FUCKING ROLE",records[0])
         if (!records || !records[0]) {
           reject('Invalid Email / Password');
           return;
