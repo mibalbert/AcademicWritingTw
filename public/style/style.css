@@ -1870,9 +1870,7 @@ input.invalid {
 .waves {
   width: 100%;
   margin-bottom: -7px;
-
 }
-
 
 .parallax > use {
   animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
@@ -2666,8 +2664,11 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
   }
 }
 
-
 @media screen and (max-width: 552px) {
+
+  
+
+
   .services-radio-table {
     width: 100%;
     overflow-x: scroll;
@@ -2757,9 +2758,12 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
 }
 
 @media screen and (max-width: 813px) {
-
-
-
+  
+  .alert {
+    left: 10%;
+    width: 80%;
+  }
+  
   .banner {
     height: fit-content;
     padding-top: 5rem;
@@ -3135,7 +3139,6 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
 .hero-img-container {
   width: 100%;
   height: 100%;
-  
 }
 
 .hero-img {
@@ -3150,7 +3153,7 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
   min-height: 600px; */
 }
 @media screen and (max-width: 572px) {
-  .small-d-none { 
+  .small-d-none {
     display: none;
   }
   .pt-xs-1 {
@@ -3199,27 +3202,48 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
   text-overflow: ellipsis;
 }
 
-
 .min-h-60 {
   min-height: 60vh;
 }
-
 
 #someBetween {
   display: none;
 }
 
-
 .round {
   border-radius: 10px;
 }
-
-
 
 .current {
   color: #fc8433 !important;
 }
 .currentBig {
-  
   color: #0061f2 !important;
 }
+
+
+
+
+.alert {
+  position: fixed;
+  top: 6%;
+  left: 20%;
+  width: 60%;
+  z-index: 1000000;
+}
+
+
+#incorect-phone {
+  display: none;
+  color: tomato;
+}
+
+#incorectConfPassword {
+  display: none;
+  color: tomato;
+}
+
+
+
+
+

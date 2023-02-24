@@ -108,6 +108,33 @@
         </nav>
       </div>
     </div>
+    
+    {{#if success}}
+      <div class='alert alert-success alert-dismissible fade show' role='alert'>
+        <strong>{{success}}</strong>
+        You are logged in as user
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Close'
+        ></button>
+      </div>
+    {{/if}}
+    {{#if registered}}
+      <div class='alert alert-success alert-dismissible fade show' role='alert'>
+        <strong>{{registered}}</strong>
+        New account registered
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Close'
+        ></button>
+      </div>
+    {{/if}}
+
+    
     <div class='empty-space'></div>
     <div class='bg-white'>
 
@@ -173,8 +200,10 @@
 
     <div class='container'>
       <div class='h4 py-2'>
+        {{#if userFirstName}}
         Hi there
-        {{user}}
+        {{userFirstName}}
+        {{/if}}
       </div>
     </div>
     <div class='container container3'>

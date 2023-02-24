@@ -5,15 +5,17 @@
     <meta name='description' content='form to add new books' />
     <meta name='author' content='Alberto Paros' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 
-    <link
+    <script
+      src='https://unpkg.com/libphonenumber-js/bundle/libphonenumber-js.min.js'
+    ></script>
+    {{! <link
       rel='stylesheet'
       href='https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css'
     />
     <script
       src='https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/js/intlTelInput.min.js'
-    ></script>
+    ></script> }}
 
     <link
       href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css'
@@ -88,6 +90,23 @@
     </div>
     <main>
 
+      {{#if error}}
+        <div
+          class='alert alert-danger alert-dismissible fade show'
+          role='alert'
+        >
+          <strong>Sorry</strong>
+          Email already in use
+          <button
+            type='button'
+            class='btn-close'
+            data-bs-dismiss='alert'
+            aria-label='Close'
+          ></button>
+        </div>
+
+      {{/if}}
+
       <section class='container mt-10vh mb-10vh onyx'>
         <div class='my-5'>
 
@@ -98,10 +117,11 @@
           </div>
           <h6 class='h5 mb-0 px-4 text-center'>Hello there.</h6>
           <form
-          id='registerForm'
+            name='registerForm'
+            action='/register'
+            method='POST'
+            id='registerForm'
             class='form-signin d-flex flex-column gap-3 p-4 max-width-850 mx-auto'
-            {{! action='/register'
-            method='post' }}
           >
             <div class='row'>
               <div class='col-xl-6'>
@@ -109,11 +129,27 @@
                   <label
                     class='h5 normal-weight text-muted mt-3'
                     for='inputName'
-                  >Full name</label>
+                  >First Name</label>
                   <input
                     type='text'
-                    id='inputFullName'
-                    name='inputFullName'
+                    id='inputFirstName'
+                    name='inputFirstName'
+                    class='form-control'
+                    placeholder='Full name'
+                    required
+                    autofocus
+                  />
+                </div>
+
+                <div class='form-label-group'>
+                  <label
+                    class='h5 normal-weight text-muted mt-3'
+                    for='inputName'
+                  >Last name</label>
+                  <input
+                    type='text'
+                    id='inputLastName'
+                    name='inputLastName'
                     class='form-control'
                     placeholder='Full name'
                     required
@@ -126,7 +162,11 @@
                     class='h5 normal-weight text-muted mt-3'
                     for='country'
                   >Country</label>
-                  <select class='form-control' name='inputCountry' id='inputCountry'>
+                  <select
+                    class='form-control'
+                    name='inputCountry'
+                    id='inputCountry'
+                  >
                     <option value=''>Select your country</option>
                     <option value='Afganistan'>Afghanistan</option>
                     <option value='Aland Islands'>Aland Islands</option>
@@ -432,6 +472,7 @@
                       maxlength='15'
                       required
                     />
+                    <div id='incorect-phone'>Incorect phone number format</div>
                   </div>
                 </div>
 
@@ -478,6 +519,8 @@
                     placeholder='Confirm password'
                     required
                   />
+                  <div id='incorect-confPassword'>Password and Confirm Password
+                    do NOT match.</div>
                 </div>
                 <div class='form-label-group'>
                   <label class='h5 normal-weight text-muted mt-3'>Subscribe to
@@ -489,7 +532,7 @@
                         type='checkbox'
                         value=''
                         id='subscribed'
-                        name="subscribed"
+                        name='subscribed'
                         checked
                       />
                       <label class='form-check-label' for='flexCheckChecked'>

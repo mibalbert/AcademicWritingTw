@@ -1,8 +1,12 @@
+/** router.js */
+
 const express = require('express');
 const router = express.Router();
-const userController = require('./modules/userController');
+const flash = require('express-flash');
 
-const login = require('./modules/accounts');
+const userController = require('./modules/userController');
+const { login, register } = require('./modules/accounts');
+const { encrypt, decrypt } = require('./modules/utils');
 const {
   getSlickOrders,
   getUserOrders,
@@ -10,12 +14,86 @@ const {
   createCustomerOrder,
 } = require('./modules/orders');
 
+
+
+const bcrypt = require('bcrypt');
+
+
 ///////HOME page routes
 
 router.get('/', (req, res) => {
   console.log('GET / /');
-  const authorised = req.cookies['authorised'];
-  res.render('home', { authorised });
+  // const cookieValue = req.cookies.authorised;
+  // if (!cookieValue == undefined) {
+  //   const authorised = decrypt(cookieValue);
+  // res.render('home', { authorised , success: req.flash('success')});
+  // }
+  res.render('home', {
+    role: res.cookie('_ro2e12s3'),
+    authorised: req.cookies['_aut121421'],
+  });
+});
+
+
+
+router.get('/testing', (req, res) => {
+  console.log('GET /Testing');
+
+  const saltRounds = 10;
+ 
+  const inputPassword = 'p455w0rd'
+  
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hashedPassword = bcrypt.hashSync(inputPassword, salt);
+
+  // console.log(hashedPassword)
+  
+  const result =  bcrypt.compareSync( 'p455w0rd','$2b$10$4VmT8yTGEEoHx3xeckuEq.xO88MDJR/ICWITGawr5C2yJixdBA.Pm')
+  console.log(result)
+
+
+
+  // res.send(hashedPassword)
+  res.send(result)
+
+});
+
+
+
+
+
+////////// CUSTOMER_HOME
+
+router.get('/customer-home', (req, res) => {
+  console.log('GET /customer-home');
+  // let authorised;
+  // const cookieValue = req.cookies.authorised;
+  // if (cookieValue !== undefined) {
+    //   authorised = decrypt(cookieValue);
+    
+   const  userFirstName=  req.cookies['_firN21kll21']
+  const authorised = req.cookies['_aut121421']
+  console.log("userFirstName", userFirstName)
+
+
+  if (!authorised) {
+    res.redirect('/login');
+  }
+  // if (!authorised || !role==='customer')
+  // const role = req.cookies['_ro2e12s3'],
+    
+  const data = getSlickOrders(authorised);
+  res.render('customer-home', {
+    data: data,
+    // role: res.cookie('_ro2e12s3'),
+    authorised: authorised,
+    // userFirstName: req.cookies['_firN21kll21'],
+    userLastName: req.cookies['_sltN21kll21'],
+    success: req.flash('success'),
+    registered: req.flash('registered'),
+  });
+
+  // Redirect the user to the login page if they are not authorised
 });
 
 ///////LOGIN & REGISTER routes
@@ -24,59 +102,78 @@ const db = require('./modules/db');
 
 router.get('/login', async (req, res) => {
   console.log('GET /login');
-  const authorised = req.cookies['authorised'];
-  res.render('login', { authorised });
 
-  // res.cookie('adsasdasd', 'adasdadsas')
+  res.render('login', {
+    success: req.flash('success'),
+    error: req.flash('error'),
+  });
 });
 
 router.post('/login', async (req, res) => {
   console.log('POST /login');
-  const data = req.body.payload;
 
-  login(data, (err, result) => {
-    if (err) {
-      console.log('The error', err);
-    } else {
-      if (result.authenticated) {
+  const data = req.body;
 
+  console.log("THE DATA",data)
 
+  login(data)
+    .then((result) => {
+      // handle successful login
+      console.log("THE FUCKING RESULT",result);
+      console.log("THE FUCKING RESULT.ROLE",result.role);
+      req.flash('success', `${result.message}`);
+      res.cookie('_aut121421', `${data.inputLogEmail}`);
+      res.cookie('_ro2e12s3', `${result.role}`);
+      res.cookie('_firN21kll21', `${result.userFirstName}`);
+      res.cookie('_sltN21kll21', `${result.userLastName}`);
+      req.session.save(() => {
+        res.redirect('/customer-home');
+      });
+    })
+    .catch((error) => {
+      // handle login error
+      console.error(error);
+      req.flash('error', `${error}`);
+      req.session.save(() => {
+        res.redirect('/login');
+      });
+    });
+});
 
-        res.setHeader('Set-Cookie', `${'authorised'}=${data.inputLogEmail}`);
-
-//         req.session.myKey = 'myValue'; // set session storage
-//         res.send('Done')
-
-// const myCookie = cookie.serialize('myCookie', 'myValue', options);
-
-// res.setHeader('Set-Cookie', myCookie);
-
-//         res
-//           .cookie('authorised', data.inputLogEmail)
-//           .status(result.code)
-//           .send(result.message)
-          res.redirect('/customer-home');
-      } else {
-        res.status(result.code).send(result.message);
-      }
-    }
+router.get('/register', (req, res) => {
+  console.log('GET /register');
+  res.render('register', {
+    error: req.flash('error'),
   });
 });
 
-router.get('/register', async (context) => {
-  console.log('GET /register');
-
-  const authorised = req.cookies['authorised'];
-  res.render('register', { authorised });
-});
-
-router.post('/register', async (context) => {
+router.post('/register', (req, res) => {
   console.log('POST /register');
-  const body = context.request.body({ type: 'json' });
-  const value = await body.value;
-  const result = await register(value.payload, context);
-  context.response.status = result.status;
-  context.response.message = result.message;
+  const data = req.body;
+
+  console.log(data);
+
+  register(data)
+    .then((result) => {
+      // handle successful registration
+      console.log(result);
+      req.flash('registered', `${result.message}`);
+      res.cookie('_aut121421', `${data.email}`);
+      res.cookie('_ro2e12s3', `customer`);
+      res.cookie('_firN21kll21', `${data.inputFirstName}`);
+      res.cookie('_sltN21kll21', `${data.inputLastName}`);
+      req.session.save(() => {
+        res.redirect('/Customer-home');
+      });
+    })
+    .catch((error) => {
+      // handle registration error
+      console.error('THE ERROR', error);
+      req.flash('error', `${error}`);
+      req.session.save(() => {
+        res.redirect('/register');
+      });
+    });
 });
 
 // router.get('/confirm', (ctx) => {
@@ -96,9 +193,10 @@ router.post('/register', async (context) => {
 
 router.get('/logout', (req, res) => {
   console.log('GET /logout');
-  res.clearCookie('authorised');
-  res.clearCookie('role');
-  res.clearCookie('name');
+  res.clearCookie('_aut121421');
+  res.clearCookie('_ro2e12s3');
+  res.clearCookie('_fN21kll21');
+  res.clearCookie('_sltN21kll21');
   res.redirect('/');
 });
 
@@ -115,26 +213,6 @@ router.get('/logout', (req, res) => {
 // 	const body = await handle.renderView('dashboard');
 // 	context.response.body = body;
 // });
-
-/////// CUSTOMER HOME
-
-router.get('/customer-home', (req, res) => {
-  console.log('GET /customer-home');
-
-  const authorised = req.cookies['authorised'];
-  const permission = req.cookies['permission'];
-  const user = req.cookies['user'];
-
-  // if (!authorised) {
-  // res.redirect('/login');
-  // }
-  const data = getSlickOrders(authorised);
-  res.render('customer-home', {
-    authorised,
-    user,
-    data,
-  });
-});
 
 // /////// ABOUT
 

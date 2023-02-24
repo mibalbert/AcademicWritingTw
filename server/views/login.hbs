@@ -19,7 +19,12 @@
 
   </head>
   <body>
+
+
+
+
     <div class='dark-bg bg-dark fixed-top'>
+
       <div class='container'>
         <nav
           class='navbar navbar-expand-sm navbar-fixed-top navbar-dark d-flex justify-content-between'
@@ -53,7 +58,7 @@
                   <a class='nav-link' href='/logout'>Log-out</a>
                 </li>
               {{else}}
-                
+
                 <li>
                   <a class='nav-link' href='/register'>Register</a>
                 </li>
@@ -64,6 +69,33 @@
       </div>
 
     </div>
+
+    {{#if success}}
+      <div class='alert alert-success alert-dismissible fade show' role='alert'>
+        <strong>{{success}}</strong>
+        You are logged in as user
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Close'
+        ></button>
+      </div>
+    {{/if}}
+
+    {{#if error}}
+      <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+        <strong>Sorry</strong>
+        Email/Password incorrect
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Close'
+        ></button>
+      </div>
+
+    {{/if}}
 
     <div class='empty-space'></div>
 
@@ -117,10 +149,15 @@
               class='alert alert-danger mt-3'
               style='display: none;'
             ></div>
+
             {{! <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Remember password</label>
                 </div> }}
+            {{!-- {{#if message}}
+              <div id='alert'>{{message}}</div>
+            {{/if}} --}}
+
             <button
               id='submit'
               class='btn w-100 btn-lg btn-block text-white my-3 bg-orange'

@@ -45,3 +45,13 @@ $('.responsive').slick({
 		// instead of a settings object
 	],
 });
+
+
+
+const alert = document.querySelector(".alert");
+
+if(alert){
+	setTimeout( ()=> {
+		alert.parentNode.removeChild(alert);
+	}, 1700)
+}
