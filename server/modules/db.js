@@ -1,14 +1,16 @@
-/** db.js */
+  /** db.js */
 
-// const mysql = require('mysql');
-const mysql = require('mysql');
-// const bluebird = require('bluebird');
+  const util = require('util');
+  const mysql = require('mysql');
 
-const db = mysql.createConnection({
-  host: 'acad-instance.ccrrwdu5ff9c.us-east-1.rds.amazonaws.com',
-  user: 'root',
-  password: 'ore!Lmp0123',
-  database: 'acad',
-});
+  const db = mysql.createConnection({
+    host: 'acad-instance.ccrrwdu5ff9c.us-east-1.rds.amazonaws.com',
+    user: 'root',
+    password: 'ore!Lmp0123',
+    database: 'acad',
+  });
 
-module.exports = db;
+  const query = util.promisify(connection.query).bind(connection);
+
+  
+  module.exports = db;

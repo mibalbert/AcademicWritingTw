@@ -5,18 +5,26 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
+
+
+function testing() {
+  // .query('SELECT * FROM accounts', (error, results) => error ? console.error(error) : console.log(results));
+}
+
+
+
+
 function login(data) {
   return new Promise(async (resolve, reject) => {
     db.query(
       'SELECT * FROM accounts WHERE user_email = ?',
       [data.inputLogEmail],
       (err, records) => {
-        console.log("THE FUCKING ROLE",records[0])
         if (!records || !records[0]) {
           reject('Invalid Email / Password');
           return;
         }
-
+        
         const email = records[0].user_email;
         const pass = records[0].pass;
         if (

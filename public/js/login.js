@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if(alert){
     setTimeout( ()=> {
       alert.parentNode.removeChild(alert);
-    }, 1700)
+    }, 2700)
   }
 
 });

@@ -20,17 +20,22 @@ const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => {
   console.log('GET / /');
-  // const cookieValue = req.cookies.authorised;
-  // if (!cookieValue == undefined) {
-  //   const authorised = decrypt(cookieValue);
-  // res.render('home', { authorised , success: req.flash('success')});
-  // }
 
-  // role: res.cookie('_ro2e12s3'),
+  const roleData = req.cookies['_ro2e12s3'];
+  let roleCustomer = false;
+  let roleAdmin = false;
+  console.log(roleData)
 
+  if (!roleData === 'customer') {
+    roleCustomer = true;
+  } else {
+    roleAdmin = true;
+  }
+  console.log(roleCustomer, roleAdmin)
   res.render('home', {
-    // role: res.cookie('_ro2e12s3'),
     authorised: req.cookies['_aut121421'],
+    roleCustomer: roleCustomer,
+    roleAdmin: roleAdmin,
   });
 });
 
@@ -60,33 +65,35 @@ router.get('/testing', (req, res) => {
 
 router.get('/customer-home', (req, res) => {
   console.log('GET /customer-home');
-  // let authorised;
-  // const cookieValue = req.cookies.authorised;
-  // if (cookieValue !== undefined) {
-  //   authorised = decrypt(cookieValue);
-
-  const userFirstName = req.cookies['_firN21kll21'];
   const authorised = req.cookies['_aut121421'];
-  console.log('userFirstName', userFirstName);
+  const userFirstName = req.cookies['_firN21kll21'];
+  const roleData = res.cookie('_ro2e12s3');
+  let roleCustomer = false;
+  let roleAdmin = false;
 
   if (!authorised) {
     res.redirect('/login');
   }
-  // if (!authorised || !role==='customer')
-  // const role = req.cookies['_ro2e12s3'],
-
-  const data = getSlickOrders(authorised);
-  res.render('customer-home', {
-    data: data,
-    // role: res.cookie('_ro2e12s3'),
-    authorised: authorised,
-    userFirstName: req.cookies['_firN21kll21'],
-    userLastName: req.cookies['_sltN21kll21'],
-    success: req.flash('success'),
-    registered: req.flash('registered'),
-  });
-
-  // Redirect the user to the login page if they are not authorised
+  getSlickOrders(authorised)
+    .then(() => {
+      if (roleData === 'customer') {
+        roleCustomer = true;
+      } else {
+        roleAdmin = true;
+      }
+      res.render('customer-home', {
+        data: orders.records,
+        authorised: authorised,
+        userFirstName: userFirstName,
+        roleCustomer: roleCustomer,
+        roleAdmin: roleAdmin,
+        success: req.flash('success'),
+        registered: req.flash('registered'),
+      });
+    })
+    .catch(() => {
+      res.render('customer-home');
+    });
 });
 
 ///////LOGIN & REGISTER routes
@@ -109,9 +116,6 @@ router.post('/login', async (req, res) => {
 
   login(data)
     .then((result) => {
-      // handle successful login
-      console.log('THE FUCKING RESULT', result);
-      console.log('THE FUCKING RESULT.ROLE', result.role);
       req.flash('success', `${result.message}`);
       res.cookie('_aut121421', `${data.inputLogEmail}`);
       res.cookie('_ro2e12s3', `${result.role}`);
@@ -122,7 +126,6 @@ router.post('/login', async (req, res) => {
       });
     })
     .catch((error) => {
-      // handle login error
       console.error(error);
       req.flash('error', `${error}`);
       req.session.save(() => {

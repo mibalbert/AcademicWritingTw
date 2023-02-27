@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (alert) {
     setTimeout(() => {
       alert.parentNode.removeChild(alert);
-    }, 1700);
+    }, 2700);
   }
 
   const inputPassword = document.getElementById('inputPassword');

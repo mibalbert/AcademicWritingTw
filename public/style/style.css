@@ -3226,7 +3226,7 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
 
 .alert {
   position: fixed;
-  top: 6%;
+  bottom: 2%;
   left: 20%;
   width: 60%;
   z-index: 1000000;

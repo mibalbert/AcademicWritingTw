@@ -2,23 +2,21 @@
 
 const db = require('./db.js');
 
-function getSlickOrders(authorised) {
-  try {
+function getSlickOrders(email) {
+  return new Promise(async (resolve, reject) => {
     db.query(
-      `SELECT * FROM orders WHERE user_email='${authorised}' LIMIT 3`,
+      `SELECT * FROM orders WHERE user_email = ?`,
+      [email],
       (err, records) => {
-        // When done with the connection, release it
-        if (!err) {
-          return records;
+        if (!records) {
+          console.log(records)
+          resolve({message:'Found some records', records: records});
         } else {
-          console.log(err);
+          reject({message:'No records found'});
         }
-        // console.log('The data from user table: \n', records);
       }
     );
-  } catch (err) {
-    console.log(err);
-  }
+  });
 }
 
 function getOrderDetails(uuid) {
@@ -56,7 +54,6 @@ function getUserOrders(authorised) {
   }
 }
 
-
 const dateTimeCreated = new Date();
 
 /**
@@ -89,11 +86,11 @@ const dateTimeCreated = new Date();
  */
 
 function createCustomerOrder(data, authorised) {
-	const uuid = generateProductId();
-		
+  const uuid = generateProductId();
+
   try {
     db.query(
-			`INSERT INTO orders          \
+      `INSERT INTO orders          \
 			(	
 				user_email VARCHAR(255) NOT NULL,\
 				user_full_name VARCHAR(255),\
@@ -113,16 +110,16 @@ function createCustomerOrder(data, authorised) {
 				uuid VARCHAR(255) NOT NULL\
 				VALUES ( ?, ?, ?, ?, ?, ?, ?, ?,\
 			)`[
-				(email,
-					data.fields.typeService,
-					data.fields.typePaper,
-					data.fields.numberOfPages,
-					data.fields.academicLevel,
-					data.fields.choice,
-					dateTimeCreated,
-					uuid)
-			],
-		),
+        (email,
+        data.fields.typeService,
+        data.fields.typePaper,
+        data.fields.numberOfPages,
+        data.fields.academicLevel,
+        data.fields.choice,
+        dateTimeCreated,
+        uuid)
+      ]
+    ),
       (err, result) => {
         // When done with the connection, release it
         if (!err) {
@@ -131,31 +128,28 @@ function createCustomerOrder(data, authorised) {
           console.log(err);
         }
         console.log('The data from post order: \n', result);
-      }
+      };
   } catch (err) {
     console.log(err);
   }
-  
 }
 
 function generateProductId() {
-	const characters =
-		'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-	let productId = '';
-	for (let i = 0; i < 7; i++) {
-		productId += characters.charAt(
-			Math.floor(Math.random() * characters.length),
-		);
-	}
-	console.log(productId);
-	return productId;
+  const characters =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let productId = '';
+  for (let i = 0; i < 7; i++) {
+    productId += characters.charAt(
+      Math.floor(Math.random() * characters.length)
+    );
+  }
+  console.log(productId);
+  return productId;
 }
-
-
 
 module.exports = {
   getSlickOrders,
   getUserOrders,
   getOrderDetails,
-  createCustomerOrder
-}
+  createCustomerOrder,
+};
