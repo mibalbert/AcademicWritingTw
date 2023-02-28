@@ -1,16 +1,14 @@
-  /** db.js */
+/** db.js */
 
-  const util = require('util');
-  const mysql = require('mysql');
+const mysql = require('mysql2/promise');
+const db = mysql.createPool({
+  host: 'acad-instance.ccrrwdu5ff9c.us-east-1.rds.amazonaws.com',
+  user: 'root',
+  password: 'ore!Lmp0123',
+  database: 'acad',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
 
-  const db = mysql.createConnection({
-    host: 'acad-instance.ccrrwdu5ff9c.us-east-1.rds.amazonaws.com',
-    user: 'root',
-    password: 'ore!Lmp0123',
-    database: 'acad',
-  });
-
-  const query = util.promisify(connection.query).bind(connection);
-
-  
-  module.exports = db;
+module.exports = db;

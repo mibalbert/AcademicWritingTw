@@ -33,15 +33,14 @@ app.use(flash());
 app.use(express.static('public'));
 
 // Templating Engine
-const handlebars = exphbs.create({
-  extname: '.hbs',
-  defaultLayout: false,
-});
+const handlebars = exphbs.create({ extname: '.hbs', });
 app.engine('.hbs', handlebars.engine);
 app.set('view engine', '.hbs');
 app.set('views', 'server/views');
 
-const routes = require('./server/router');
+
+  
+const routes = require('./server/routes/router');
 app.use('/', routes);
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));

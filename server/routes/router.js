@@ -4,17 +4,25 @@ const express = require('express');
 const router = express.Router();
 const flash = require('express-flash');
 
-const userController = require('./modules/userController');
-const { login, register } = require('./modules/accounts');
-const { encrypt, decrypt } = require('./modules/utils');
+const { login, register } = require('../modules/accounts');
+const { encrypt, decrypt } = require('../modules/utils');
 const {
   getSlickOrders,
   getUserOrders,
   getOrderDetails,
   createCustomerOrder,
-} = require('./modules/orders');
+} = require('../modules/orders');
 
 const bcrypt = require('bcrypt');
+
+
+
+
+
+const userController = require('../contollers/userController');
+
+
+
 
 ///////HOME page routes
 
@@ -63,76 +71,72 @@ router.get('/testing', (req, res) => {
 
 ////////// CUSTOMER_HOME
 
-router.get('/customer-home', (req, res) => {
-  console.log('GET /customer-home');
-  const authorised = req.cookies['_aut121421'];
-  const userFirstName = req.cookies['_firN21kll21'];
-  const roleData = res.cookie('_ro2e12s3');
-  let roleCustomer = false;
-  let roleAdmin = false;
+// router.get('/customer-home', (req, res) => {
+  //   console.log('GET /customer-home');
+  //   const authorised = req.cookies['_aut121421'];
+  //   const userFirstName = req.cookies['_firN21kll21'];
+  //   const roleData = res.cookie('_ro2e12s3');
+  //   let roleCustomer = false;
+  //   let roleAdmin = false;
 
-  if (!authorised) {
-    res.redirect('/login');
-  }
-  getSlickOrders(authorised)
-    .then(() => {
-      if (roleData === 'customer') {
-        roleCustomer = true;
-      } else {
-        roleAdmin = true;
-      }
-      res.render('customer-home', {
-        data: orders.records,
-        authorised: authorised,
-        userFirstName: userFirstName,
-        roleCustomer: roleCustomer,
-        roleAdmin: roleAdmin,
-        success: req.flash('success'),
-        registered: req.flash('registered'),
-      });
-    })
-    .catch(() => {
-      res.render('customer-home');
-    });
-});
+//   if (!authorised) {
+//     res.redirect('/login');
+//   }
+//   getSlickOrders(authorised)
+//     .then(() => {
+//       if (roleData === 'customer') {
+//         roleCustomer = true;
+//       } else {
+  //         roleAdmin = true;
+//       }
+//       res.render('customer-home', {
+//         data: orders.records,
+//         authorised: authorised,
+//         userFirstName: userFirstName,
+//         roleCustomer: roleCustomer,
+//         roleAdmin: roleAdmin,
+//         success: req.flash('success'),
+//         registered: req.flash('registered'),
+//       });
+//     })
+//     .catch(() => {
+  //       res.render('customer-home');
+  //     });
+// });
 
 ///////LOGIN & REGISTER routes
 
-router.get('/login', async (req, res) => {
-  console.log('GET /login');
+router.get('/login', userController.loginGET);
+router.post('/login', userController.loginPOST)
+router.get('/customer-home', userController.customerHomeGET)
+router.get('/testing/:id', userController.testing)
 
-  res.render('login', {
-    success: req.flash('success'),
-    error: req.flash('error'),
-  });
-});
+// router.post('/login', async (req, res) => {
+//   console.log('POST /login');
 
-router.post('/login', async (req, res) => {
-  console.log('POST /login');
+//   const data = req.body;
 
-  const data = req.body;
+//   console.log('THE DATA', data);
 
-  console.log('THE DATA', data);
-
-  login(data)
-    .then((result) => {
-      req.flash('success', `${result.message}`);
-      res.cookie('_aut121421', `${data.inputLogEmail}`);
-      res.cookie('_ro2e12s3', `${result.role}`);
-      res.cookie('_firN21kll21', `${result.userFirstName}`);
-      res.cookie('_sltN21kll21', `${result.userLastName}`);
-      req.session.save(() => {
-        res.redirect('/customer-home');
-      });
-    })
-    .catch((error) => {
-      console.error(error);
-      req.flash('error', `${error}`);
-      req.session.save(() => {
-        res.redirect('/login');
-      });
-    });
-});
+//   login(data)
+//     .then((result) => {
+//       req.flash('success', `${result.message}`);
+//       res.cookie('_aut121421', `${data.inputLogEmail}`);
+//       res.cookie('_ro2e12s3', `${result.role}`);
+//       res.cookie('_firN21kll21', `${result.userFirstName}`);
+//       res.cookie('_sltN21kll21', `${result.userLastName}`);
+//       req.session.save(() => {
+//         res.redirect('/customer-home');
+//       });
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       req.flash('error', `${error}`);
+//       req.session.save(() => {
+//         res.redirect('/login');
+//       });
+//     });
+// });
 
 router.get('/register', (req, res) => {
   console.log('GET /register');

@@ -1,233 +1,62 @@
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <meta name='description' content='Writer Home Page' />
-    <meta name='author' content='Alberto Paros' />
-    <link rel='icon' type='image/x-icon' href='assets/favicon.ico' />
-    <script src='https://code.jquery.com/jquery-1.10.2.min.js'></script>
-    <link
-      href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css'
-      rel='stylesheet'
-    />
-    <script
-      src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'
-    ></script>
+<script src='js/testing.js' type='text/javascript' defer></script>
 
-    <link rel='stylesheet' type='text/css' href='style/style.css' />
-    <script src='js/testing.js' type='text/javascript' defer></script>
+<title>Home (Writer)</title>
+<div class='empty-space'></div>
 
-    <title>Home (Writer)</title>
-  </head>
-  <body>
-    <div class='dark-bg fixed-top'>
-      <div class='container'>
-        <nav
-          class='navbar navbar-expand-sm navbar-fixed-top navbar-dark d-flex justify-content-between'
-        >
-          <a class='navbar-brand' href='/'>
-            <!-- <img src="bootstrap-logo.svg" alt="Bootstrap" width="30" height="24" class="d-inline-block align-top"> -->
-            <h4 class='p-0 m-0 text-center'>Academic Writing</h4>
-          </a>
-          <button
-            class='navbar-toggler'
-            type='button'
-            data-bs-toggle='collapse'
-            data-bs-target='#toggleMobileMenu'
-            aria-controls='toggleMobileMenu'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span class='navbar-toggler-icon'></span>
-          </button>
-          <div class='collapse navbar-collapse' id='toggleMobileMenu'>
-            <ul class='navbar-nav ms-auto text-center font-12'>
-              <li>
-                <a class='nav-link' href='/pricing'>Pricing</a>
-              </li>
-              <li>
-                <a class='nav-link' href='/about'>About</a>
-              </li>
-              <li>
-                <a
-                  class='nav-link d-flex align-items-center gap-1 border-light rounded margin-left-05 border-light'
-                  href='/account'
-                ><span class='d-flex align-items-center'><svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      width='16'
-                      height='16'
-                      fill='currentColor'
-                      class='bi bi-person'
-                      viewBox='0 0 16 16'
-                    >
-                      <path
-                        d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z'
-                      ></path></svg></span><span>Account</span></a>
-              </li>
-              <li>
-                <a class='nav-link' href='/logout'>Logout</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </div>
-    <div class='empty-space'></div>
+<div class='container mt-4'>
 
-    <div class='container mt-4'>
+  <nav class='nav nav-borders'>
 
-      <nav class='nav nav-borders'>
+    <a class='nav-link ms-0' href='/pricing'>New Order</a>
+    <a class='nav-link' href='/'>Orders</a>
 
-        <a class='nav-link ms-0' href='/pricing'>New Order</a>
-        <a class='nav-link' href='/'>Orders</a>
+    <a class='nav-link' href='/billing'>Billing</a>
 
-        <a class='nav-link' href='/billing'>Billing</a>
+    <a class='nav-link' href='/security'>Security</a>
+    <a class='nav-link' href='/notifications-settings'>Notifications</a>
+    <a class='nav-link active' href='/profile'>Profile</a>
+  </nav>
+</div>
+<hr class='mt-0 mb-4' />
 
-        <a class='nav-link' href='/security'>Security</a>
-        <a class='nav-link' href='/notifications-settings'>Notifications</a>
-        <a class='nav-link active' href='/profile'>Profile</a>
-      </nav>
-    </div>
-    <hr class='mt-0 mb-4' />
+<section class='container'>
+  <div class='row'>
+    <div class='col-lg-8'>
 
-    <section class='container'>
-      <div class='row'>
-        <div class='col-lg-8'>
-
-          <div class='card mb-4'>
-            <div class='card-header'>Hi there
-              {{authorised}}
-              this is Writer-Home</div>
-            <div class='card-body'>
-              <div>Card body</div>
-            </div>
-          </div>
-
-          <div class='card mb-4'>
-            <div class='card-header'>Security Preferences</div>
-            <div class='card-body'>
-
-            </div>
-          </div>
-        </div>
-        <div class='col-lg-4'>
-
-          <div class='card mb-4'>
-            <div class='card-header'>Two-Factor Authentication</div>
-            <div class='card-body'>
-              <p>Add another level of security to your account by enabling
-                two-factor authentication. We will send you a text message to
-                verify your login attempts on unrecognized devices and browsers.</p>
-              
-            </div>
-          </div>
-
-          <div class='card mb-4'>
-            <div class='card-header'></div>
-            <div class='card-body'>
-              </div>
-          </div>
+      <div class='card mb-4'>
+        <div class='card-header'>Hi there
+          {{authorised}}
+          this is Writer-Home</div>
+        <div class='card-body'>
+          <div>Card body</div>
         </div>
       </div>
 
-    </section>
+      <div class='card mb-4'>
+        <div class='card-header'>Security Preferences</div>
+        <div class='card-body'>
 
-    <section class='footer-container border-top text-light pt-5'>
-      <section class='container'>
-        <footer>
-          <div class='row'>
-            <div class='col-6 col-md-2 mb-3'>
-              <h5>Section</h5>
-              <ul class='nav flex-column'>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Home</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Features</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Pricing</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>FAQs</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>About</a>
-                </li>
-              </ul>
-            </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-lg-4'>
 
-            <div class='col-6 col-md-2 mb-3 text-light'>
-              <h5>Section</h5>
-              <ul class='nav flex-column'>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Home</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Features</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Pricing</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>FAQs</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>About</a>
-                </li>
-              </ul>
-            </div>
+      <div class='card mb-4'>
+        <div class='card-header'>Two-Factor Authentication</div>
+        <div class='card-body'>
+          <p>Add another level of security to your account by enabling
+            two-factor authentication. We will send you a text message to verify
+            your login attempts on unrecognized devices and browsers.</p>
 
-            <div class='col-6 col-md-2 mb-3'>
-              <h5>Section</h5>
-              <ul class='nav flex-column'>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Home</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Features</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>Pricing</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>FAQs</a>
-                </li>
-                <li class='nav-item mb-2'>
-                  <a href='#' class='nav-link p-0 text-light'>About</a>
-                </li>
-              </ul>
-            </div>
+        </div>
+      </div>
 
-            <div class='col-md-5 offset-md-1 mb-3'>
-              <form>
-                <h5>Subscribe to our newsletter</h5>
-                <p>Monthly digest of what's new and exciting from us.</p>
-                <div class='d-flex flex-column flex-sm-row w-100 gap-2'>
-                  <label for='newsletter1' class='visually-hidden'>Email address</label>
-                  <input
-                    id='newsletter1'
-                    type='text'
-                    class='form-control'
-                    placeholder='Email address'
-                  />
-                  <button class='btn btn-primary' type='button'>
-                    Subscribe
-                  </button>
-                </div>
-              </form>
-            </div>
+      <div class='card mb-4'>
+        <div class='card-header'></div>
+        <div class='card-body'>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <div
-              class='d-flex flex-column flex-sm-row justify-content-between py-2 my-2'
-            >
-              <p>&copy; 2022 Company, Inc. All rights reserved.</p>
-
-            </div>
-          </div>
-        </footer>
-      </section>
-    </section>
-
-  </body>
-</html>
+</section>

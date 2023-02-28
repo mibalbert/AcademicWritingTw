@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		// Function code here
 	}
 	window.addEventListener('scroll', function () {
-		if (window.scrollY >= 180) {
+		if (window.scrollY >= 175) {
 			myFunction();
 		}
 	});
