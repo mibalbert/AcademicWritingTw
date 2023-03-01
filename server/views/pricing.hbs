@@ -1,74 +1,10 @@
 <script src='js/pricing.js' type='text/javascript' defer></script>
 <title>Academic Writing - New Order</title>
 
-<div class='empty-space'></div>
-
-{{! <div class='container-xl h-100 px-4'> }}
-
 {{#if authorised}}
 
-  <div class='bg-white'>
 
-    <div class='container mt-3'>
-      <nav class='navbar navbar-expand-lg navbar-light'>
-        <div class='container-fluid'>
-          <button
-            class='navbar-toggler'
-            type='button'
-            data-bs-toggle='collapse'
-            data-bs-target='#navbarTogglerDemo01'
-            aria-controls='navbarTogglerDemo01'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span class='navbar-toggler-icon'></span>
-          </button>
-          <div class='collapse navbar-collapse' id='navbarTogglerDemo01'>
-            <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-              <li class='nav-item'>
-                <a
-                  class='nav-link active ms-0'
-                  aria-current='page'
-                  href='/customer-home'
-                >Home</a>
-              </li>
-              <li class='nav-item'>
-                <a class='nav-link active current' href='/pricing'>New Order</a>
-              </li>
-              <li class='nav-item'>
-                <a class='nav-link active' href='/customer-orders'>Orders</a>
-              </li>
-            </ul>
-            <div class='dropdown'>
-              <button
-                class='btn btn-outline-secondary dropdown-toggle'
-                type='button'
-                id='dropdownMenuButton1'
-                data-bs-toggle='dropdown'
-                aria-expanded='false'
-              >
-                Account
-              </button>
-              <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-                <li><a class='dropdown-item' href='/profile'>Profile</a></li>
-                <li><a class='dropdown-item' href='/billing'>Billing</a></li>
-                <li><a class='dropdown-item' href='/security'>Security</a></li>
-                <li><a
-                    class='dropdown-item'
-                    href='/notifications-settings'
-                  >Notifications</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-    </div>
-  </div>
-  <hr class='mt-0 mb-4' />
-
-  {{!-- <section class='container'>
-      {{else}} --}}
+{{> user-header}}
 
 {{/if}}
 
@@ -109,6 +45,8 @@
 
         <form
           id='userMainCartForm'
+              action='/testing'
+              method='post'
           {{! name='userMainCartForm'
               action='/pricing'
               method='post'
@@ -132,7 +70,8 @@
                   id='eur'
                   name='currency'
                   value='eur'
-                  required
+                  checked
+                  {{!-- required --}}
                 />
                 <input
                   label='USD'
@@ -140,7 +79,7 @@
                   id='usd'
                   name='currency'
                   value='usd'
-                  required
+                  {{!-- required --}}
                 />
                 <input
                   label='GBP'
@@ -148,7 +87,7 @@
                   id='gbp'
                   name='currency'
                   value='gbp'
-                  required
+                  {{!-- required --}}
                 />
                 <input
                   label='AUD'
@@ -156,7 +95,7 @@
                   id='aud'
                   name='currency'
                   value='aud'
-                  required
+                  {{!-- required --}}
                 />
                 <input
                   label='CAD'
@@ -164,7 +103,7 @@
                   id='cad'
                   name='currency'
                   value='cad'
-                  required
+                  {{!-- required --}}
                 />
               </div>
             </div>
@@ -226,7 +165,7 @@
                 name='typePaper'
                 id='typePaper'
               >
-                <option value='essay'>Essay</option>
+                <option value='essay' selected>Essay</option>
                 <option value='coursework'>Coursework</option>
                 <option value='research-paper'>Research Paper</option>
                 <option value='term-paper'>Term-paper</option>
@@ -268,7 +207,7 @@
                 name='academicLevel'
                 id='academicLevel'
               >
-                <option value='high-school'>High School</option>
+                <option value='high-school' selected>High School</option>
                 <option value='freshman'>Freshman &#40; College 1st year &#41;
                 </option>
                 <option value='sophomore'>Sophomore &#40; College 2nd year &#41;
@@ -302,6 +241,7 @@
                         value='3'
                         id='0'
                         name='urgency'
+                        checked
                       /></td>
                     <td><label for='0'>3 days</label></td>
                     <td><label for='0'>$21.99/page</label></td>
@@ -417,7 +357,8 @@
                   id='MLA'
                   name='paperFormat'
                   value='MLA'
-                  required
+                  checked
+                  {{!-- required --}}
                 />
                 <input
                   label='APA'
@@ -425,7 +366,7 @@
                   id='APA'
                   name='paperFormat'
                   value='APA'
-                  required
+                  {{!-- required --}}
                 />
                 <input
                   label='Chicago'
@@ -433,7 +374,7 @@
                   id='Chicago'
                   name='paperFormat'
                   value='Chicago'
-                  required
+                  {{!-- required --}}
                 />
                 <input
                   label='Harvard'
@@ -441,7 +382,7 @@
                   id='Harvard'
                   name='paperFormat'
                   value='Harvard'
-                  required
+                  {{!-- required --}}
                 />
                 <input
                   label='OSCOLA'
@@ -449,7 +390,7 @@
                   id='OSCOAL'
                   name='paperFormat'
                   value='OSCOLA'
-                  required
+                  {{!-- required --}}
                 />
               </div>
             </div>

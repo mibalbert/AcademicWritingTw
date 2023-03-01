@@ -2,104 +2,23 @@
 <script src='../js/profile.js' type='text/javascript' defer></script>
 <script src='../js/all.js' type='text/javascript' defer></script>
 
+
 <title>Academic Writing - Profile</title>
 
-<div class='empty-space'></div>
-<div class='bg-white'>
 
-  <div class='container mt-4'>
-    <nav class='navbar navbar-expand-lg navbar-light'>
-      <div class='container-fluid'>
-        <button
-          class='navbar-toggler'
-          type='button'
-          data-bs-toggle='collapse'
-          data-bs-target='#navbarTogglerDemo01'
-          aria-controls='navbarTogglerDemo01'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
-        >
-          <span class='navbar-toggler-icon'></span>
-        </button>
-        <div class='collapse navbar-collapse' id='navbarTogglerDemo01'>
-          <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-            <li class='nav-item'>
-              <a
-                class='nav-link active current ms-0'
-                aria-current='page'
-                href='/customer-home'
-              >Home</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link active' href='/pricing'>New Order</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link active' href='/customer-orders'>Orders</a>
-            </li>
-          </ul>
-          <div class='dropdown'>
-            <button
-              class='btn btn-outline-secondary dropdown-toggle current'
-              type='button'
-              id='dropdownMenuButton1'
-              data-bs-toggle='dropdown'
-              aria-expanded='false'
-            >
-              Account
-            </button>
-            <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-              <li><a
-                  class='dropdown-item current'
-                  href='/profile '
-                >Profile</a></li>
-              <li><a class='dropdown-item' href='/billing'>Billing</a></li>
-              <li><a class='dropdown-item' href='/security'>Security</a></li>
-              <li><a
-                  class='dropdown-item'
-                  href='/notifications-settings'
-                >Notifications</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
 
-  </div>
-</div>
-<hr class='mt-0 mb-4' />
 
-<section class='container container4'>
-  <div class='row py-4'>
-    <div class='col-lg-4'>
-      <div class='card mb-4 mb-xl-0 round'>
-        <div class='h5 px-4 pt-4'>User</div>
-        <div class='card-body text-center'>
-          {{! <img
-                    class='img-account-profile rounded-circle mb-2'
-                    src='assets/icons8-user-90.png'
-                    alt=''
-                  /> }}
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='120'
-            height='120'
-            fill='currentColor'
-            class='bi bi-person'
-            viewBox='0 0 16 16'
-          >
-            <path
-              d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z'
-            ></path>
-          </svg>
-          <div class='medium font-italic text-muted mt-4 mb-4'>Hi there
-            {{data.user_full_name}}</div>
-        </div>
-      </div>
-    </div>
+{{> user-header}}
+
+<section class='container mh'>
+      <div class='h4 py-4'>Account Details</div>
+  <div class='row'>
     <div class='col-lg-8'>
+      
 
       <div class='card mb-5 p-2e5rem round'>
-        <div class='card-header h4'>Account Details</div>
+      
+        <div class='card-header text-center h4'>Change Profile Details</div>
         <hr class='mb-0' />
         <div class='card-body'>
           <form class='mx-600 mx-auto'>
@@ -174,5 +93,84 @@
         </div>
       </div>
     </div>
+    <div class='col-lg-4'>
+
+      <div class=''>
+
+        <div class='card mini-summary2'>
+          <div class='h5'>Amazing things for FREE</div>
+          <hr class='mb-0' />
+          <ul id='mini-ul2'>
+            <li>
+              <div class='mini-summary-serv-title'>
+                Title page
+              </div>
+              <div class='d-flex'>
+                <div>for
+                  <span>$4.99</span>
+                </div>
+                <div class='free'>FREE</div>
+              </div>
+            </li>
+
+            <hr class='my-0' />
+
+            <li>
+              <div class='mini-summary-serv-title'>
+                Formating
+              </div>
+              <div class='d-flex'>
+                <div>for
+                  <span>$7.99</span>
+                </div>
+                <div class='free'>FREE</div>
+              </div>
+            </li>
+
+            <hr class='my-0' />
+
+            <li>
+              <div class='mini-summary-serv-title'>
+                Title page
+              </div>
+              <div class='d-flex'>
+                <div>for
+                  <span>$4.99</span>
+                </div>
+                <div class='free'>FREE</div>
+              </div>
+            </li>
+
+            <hr class='my-0' />
+
+            <li>
+              <div class='mini-summary-serv-title'>
+                Title page
+              </div>
+              <div class='d-flex'>
+                <div>for
+                  <span>$4.99</span>
+                </div>
+                <div class='free'>FREE</div>
+              </div>
+            </li>
+
+            <hr class='my-0' />
+          </ul>
+          <a
+            href='/pricing'
+            class='btn bg-orange text-white enjoy-button'
+          >Enjoy</a>
+        </div>
+
+      </div>
+
+    </div>
   </div>
+
 </section>
+
+
+
+
+

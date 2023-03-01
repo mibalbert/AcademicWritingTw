@@ -3243,7 +3243,27 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
   color: tomato;
 }
 
+.w-10prc {
+  width: 10% !important;
+  min-width: 40px;
+}
+.min-h-300px {
+  min-height: 300px;
+}
 
+.min-h-30px {
+  min-height: 30px;
 
+}
 
+.w-80{
+  width: 80%;
+}
+.slick-prev .slick-arrow { 
+  display: none;
+}
 
+.org-col-imp {
+  font-weight: 600;
+  color: #fc8433 !important;
+}

@@ -4,85 +4,23 @@
 
 <title>Academic Writing - Billing</title>
 
-<div class='empty-space'></div>
-
-<div class='container mt-4'>
-  <nav class='navbar navbar-expand-lg navbar-light'>
-    <div class='container-fluid'>
-      <button
-        class='navbar-toggler'
-        type='button'
-        data-bs-toggle='collapse'
-        data-bs-target='#navbarTogglerDemo01'
-        aria-controls='navbarTogglerDemo01'
-        aria-expanded='false'
-        aria-label='Toggle navigation'
-      >
-        <span class='navbar-toggler-icon'></span>
-      </button>
-      <div class='collapse navbar-collapse' id='navbarTogglerDemo01'>
-        <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-          <li class='nav-item'>
-            <a
-              class='nav-link active ms-0'
-              aria-current='page'
-              href='/customer-home'
-            >Home</a>
-          </li>
-          <li class='nav-item'>
-            <a class='nav-link active' href='/pricing'>New Order</a>
-          </li>
-          <li class='nav-item'>
-            <a class='nav-link active' href='/customer-orders'>Orders</a>
-          </li>
-        </ul>
-        <div class='dropdown'>
-          <button
-            class='btn btn-outline-secondary dropdown-toggle current'
-            type='button'
-            id='dropdownMenuButton1'
-            data-bs-toggle='dropdown'
-            aria-expanded='false'
-          >
-            Account
-          </button>
-          <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-            <li><a class='dropdown-item' href='/profile'>Profile</a></li>
-            <li><a
-                class='dropdown-item current'
-                href='/billing'
-              >Billing</a></li>
-            <li><a class='dropdown-item' href='/security'>Security</a></li>
-            <li><a
-                class='dropdown-item'
-                href='/notifications-settings'
-              >Notifications</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-</div>
-
-<hr class='mt-0 mb-4' />
+{{> user-header}}
 
 <section class='container mh'>
-  <div class='row'>
-    <div class='col-lg-8'>
 
       <div class='h4 py-4'>Billing History</div>
+  <div class='row'>
+    <div class='col-lg-8'>
       <div class='card mb-4'>
-        <div class='card-body p-0'>
-
-          <div class='table-responsive table-billing-history'>
-            <table class='table mb-0'>
-              <thead>
+        <div class='card-body w-100 h-100 d-flex justify-content-center align-center'>
+            {{#if data}}
+            <table class='table w-80 min-h-300px'>
+              <thead class="border-bottom">
                 <tr>
                   <th class='border-gray-200' scope='col'>Transaction ID</th>
                   <th class='border-gray-200' scope='col'>Date</th>
                   <th class='border-gray-200' scope='col'>Amount</th>
-                  <th class='border-gray-200' scope='col'>Status</th>
+                  <th class='border-gray-200 ' scope='col'>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -90,38 +28,56 @@
                   <td>#39201</td>
                   <td>06/15/2021</td>
                   <td>$29.99</td>
-                  <td><span class='badge bg-light text-dark'>Pending</span></td>
+                  <td><span class='badge bg-light text-dark min-h-30px d-flex justify-content-center align-items-center'>Pending</span></td>
                 </tr>
                 <tr>
                   <td>#38594</td>
                   <td>05/15/2021</td>
                   <td>$29.99</td>
-                  <td><span class='badge bg-success'>Paid</span></td>
+                  <td><span class='badge bg-success min-h-30px d-flex justify-content-center align-items-center'>Paid</span></td>
                 </tr>
                 <tr>
                   <td>#38223</td>
                   <td>04/15/2021</td>
                   <td>$29.99</td>
-                  <td><span class='badge bg-success'>Paid</span></td>
+                  <td><span class='badge bg-success min-h-30px d-flex justify-content-center align-items-center'>Paid</span></td>
                 </tr>
                 <tr>
                   <td>#38125</td>
                   <td>03/15/2021</td>
                   <td>$29.99</td>
-                  <td><span class='badge bg-success'>Paid</span></td>
+                  <td><span class='badge bg-success min-h-30px d-flex justify-content-center align-items-center'>Paid</span></td>
                 </tr>
               </tbody>
             </table>
-          </div>
+            {{else}}
+           <div class='w-100'>
+          <a class='new-ord-cell d-flex' href='/pricing'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='30'
+              height='30'
+              fill='currentColor'
+              class='bi bi-plus-circle-fill'
+              viewBox='0 0 16 16'
+            >
+              <path
+                d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z'
+              ></path>
+            </svg>
+            {{! <div class="new-order-cont">New Order</div> }}
+            <div class='orange'>Create a new Order</div>
+          </a>
+        </div>
+            {{/if}}
         </div>
       </div>
 
     </div>
     <div class='col-lg-4'>
 
-      <div class='py-4'>
+      <div class=''>
 
-        <div class='h4 py-4'></div>
         <div class='card mini-summary2'>
           <div class='h5'>Amazing things for FREE</div>
           <hr class='mb-0' />
