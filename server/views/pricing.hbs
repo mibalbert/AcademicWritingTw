@@ -6,6 +6,10 @@
 
 {{> user-header}}
 
+{{else}}
+
+<div class='empty-space'></div>
+
 {{/if}}
 
 <section class='container container-res'>
@@ -43,16 +47,20 @@
           </li>
         </ul>
 
-        <form
+          
+          
+        {{!-- <form --}}
+          <div
           id='userMainCartForm'
-              action='/testing'
-              method='post'
+          >
+              {{!-- action='/testing'
+              method='post' --}}
           {{! name='userMainCartForm'
               action='/pricing'
               method='post'
               enctype='multipart/form-data'
               autocomplete='off' }}
-        >
+        
 
           <section id='step-1' class='card form-step'>
             <div class='h4 form-step-title-1'>Select Services</div>
@@ -602,8 +610,9 @@
                 </button>
 
                 <button
+                  id="submit-btn"
                   class='button submit-btn fw-boldish'
-                  type='submit'
+                  {{!-- type='submit' --}}
                 >Next</button>
 
               </div>
@@ -660,7 +669,8 @@
                   <button class='button submit-btn' type='submit'>Save</button>
                 </div> }}
           </section>
-        </form>
+        {{!-- </form> --}}
+        </div>
       </div>
       {{! </div> }}
 
@@ -1049,14 +1059,6 @@
         </div>
 
         <br />
-
-        {{#if authorised}}
-
-          <a
-            href='/pricing'
-            class='btn bg-orange text-white enjoy-button'
-          >Next</a>
-        {{/if}}
 
       </div>
 

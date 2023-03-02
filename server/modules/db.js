@@ -6,9 +6,9 @@ const db = mysql.createPool({
   user: 'root',
   password: 'ore!Lmp0123',
   database: 'acad',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+  // waitForConnections: true,
+  // connectionLimit: 10,
+  // queueLimit: 0,
 });
 
 module.exports = db;

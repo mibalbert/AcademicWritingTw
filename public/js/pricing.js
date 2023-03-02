@@ -3,6 +3,44 @@
 window.addEventListener('DOMContentLoaded', () => {
   console.log('DOMContentLoaded');
 
+  const typeOfServiceData = new Map([
+    [{id: 1}, {name: 'Academic Paper Writing'}, {price: 10}],
+    [{id: 2}, 'Disertation Services', 11],
+    // [{id: 3}, 'Writing Incl. Calculations', 9.2],
+    // [{id: 4}, 'Admission Services', 10],
+    // [{id: 5}, 'Math/Physic/Economic/Statistic Problems', 40],
+    // [{id: 6}, 'Multiple Choice Questions', 12],
+    // [{id: 7}, 'Editing', 12],
+    // [{id: 8}, 'Proofreading', 12],
+    // [{id: 9}, 'Rewriting', 44],
+    // [{id: 10}, 'Copywriting', 9],
+    // [{id: 11}, 'Resume/CV services', 10],
+    // [{id: 12}, 'Rewriting', 12],
+  ]);
+  
+  // console.log(typeOfServiceData)
+  
+  const typeOfPaperData = new Map([
+    [1, 'Essay', 12],
+    [2, 'Coursework' ,4],
+    [3, 'Research Paper', 4],
+    [4, 'Term-paper' ,6],
+    [5, 'Case Study',54 ],
+    [6, 'Capstone Project', 12],
+    [7, 'Assignment', 43]
+  ])
+
+  for(const det of typeOfServiceData) {
+    console.log(det)
+  }
+
+
+
+
+
+
+
+
   const radioGroup = document.getElementsByName('currency');
   const typeService = document.getElementById('typeService');
   const typePaper = document.getElementById('typePaper');
@@ -10,11 +48,11 @@ window.addEventListener('DOMContentLoaded', () => {
   const academicLevel = document.getElementById('academicLevel');
   const radioUrgency = document.getElementsByName('urgency');
   const radioFormat = document.getElementsByName('paperFormat');
+  const subjectArea = document.getElementById('subjectArea');
+  const numOfResouces = document.getElementById('numOfResouces');
   const topic = document.getElementById('topic');
   const details = document.getElementById('paperDetails');
   const textarea = document.querySelector('textarea');
-  const numOfResouces = document.getElementById('numOfResouces');
-  const subjectArea = document.getElementById('subjectArea');
 
   const currencyMiniBig = document.getElementById('currencyMiniBig');
   const currencyMiniVal = document.getElementById('currencyMiniVal');
@@ -47,61 +85,59 @@ window.addEventListener('DOMContentLoaded', () => {
     'numberOfResourcesMiniVal'
   );
 
-  document
-    .getElementById('userMainCartForm')
-    .addEventListener('submit', async function (event) {
-      if (event.keyCode === 13 && event.target.nodeName !== 'TEXTAREA') {
-        event.preventDefault();
-      }
-      console.log('Working')
-      // fetch('http://localhost:3000/create-checkout-session', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     items: [
-      //       { id: 1, quantity: 3 },
-      //       { id: 2, quantity: 1 },
-      //     ],
-      //   }),
-      // })
-      //   .then((res) => {
-      //     // if (res.ok) return res.json();
-      //     if (res.ok) console.log(res)
-      //     return res.json().then((json) => Promise.reject(json));
-      //   })
-      //   .then(({ url }) => {
-      //     console.log(url)
-      //     // window.location = url;
-      //   })
-      //   .catch((e) => {
-      //     console.error(e.error);
-      //   });
+  const myDiv = document.getElementById('userMainCartForm');
+  const inputs = myDiv.querySelectorAll('input, select, text, textarea');
+  const formData = {};
 
-      // alert('asssa');
+  inputs.forEach((input) => {
+    formData[input.name] = input.value;
+  });
 
-      // var emptyFields = Array.from(document.querySelectorAll(':required')).filter(function(input) {
-      //   return !input.value;
-      // });
+  // console.log(formData);
 
-      // if (emptyFields.length) {
-      //   e.preventDefault();
-      //   var alertDiv = document.querySelector('.alert');
-      //   if (alertDiv) {
-      //     alertDiv.remove();
-      //   }
-      //   var alertMessage = document.createElement('div');
-      //   alertMessage.classList.add('alert', 'alert-danger');
-      //   alertMessage.setAttribute('role', 'alert');
-      //   alertMessage.textContent = 'Please fill out all required fields.';
-      // }
-    });
+  const submitBtn = document.getElementById('submit-btn');
 
-  //     const button = document.querySelector("button")
-  // button.addEventListener("click", () => {
+  submitBtn.addEventListener('click', async function (event) {
+    if (event.keyCode === 13 && event.target.nodeName !== 'TEXTAREA') {
+      event.preventDefault();
+    }
 
-  // })
+    window.location = '/summary';
+  });
+
+  let selectedValue;
+  for (const radio of radioGroup) {
+    if (radio.checked) {
+      selectedValue = radio.value;
+      break;
+    }
+  }
+  let selectedValue2;
+  for (const radio of radioUrgency) {
+    if (radio.checked) {
+      selectedValue2 = radio.value;
+      break;
+    }
+  }
+  let selectedValue3;
+  for (const radio of radioFormat) {
+    if (radio.checked) {
+      selectedValue3 = radio.value;
+      break;
+    }
+  }
+
+  sessionStorage.setItem('currency', selectedValue);
+  sessionStorage.setItem('typeService', typeService.value);
+  sessionStorage.setItem('typePaper', typePaper.value);
+  sessionStorage.setItem('numOfPages', numOfPages.value);
+  sessionStorage.setItem('academicLevel', academicLevel.value);
+  sessionStorage.setItem('urgency', selectedValue2);
+  sessionStorage.setItem('format', selectedValue3);
+  sessionStorage.setItem('subjectArea', subjectArea.value);
+  sessionStorage.setItem('topic', topic.value);
+  sessionStorage.setItem('details', details.value);
+  sessionStorage.setItem('numOfResources', numOfResouces.value);
 
   typeService.addEventListener('click', function () {
     let tps = this.value;

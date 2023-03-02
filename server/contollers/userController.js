@@ -1,16 +1,13 @@
-
 /** userController.js */
 
 const db = require('../modules/db.js');
-require('dotenv').config()
+require('dotenv').config();
 
 const bcrypt = require('bcrypt');
 const flash = require('express-flash');
-const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
-
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const SALTROUNDS = 10;
-
 
 // Home
 exports.homeGET = (req, res) => {
@@ -42,14 +39,17 @@ exports.loginGET = (req, res) => {
 
 exports.loginPOST = async (req, res) => {
   console.log('POST /login');
+  const start = new Date();
   const { inputLogEmail, inputLogPassword } = req.body;
 
+
+  
   const conn = await db.getConnection();
   try {
     const [rows] = await db.execute(
       'SELECT * FROM accounts WHERE user_email = ?',
       [inputLogEmail]
-    );
+      );
 
     if (!rows || !rows[0]) {
       req.flash('emailError', 'Email not found');
@@ -66,9 +66,9 @@ exports.loginPOST = async (req, res) => {
       res.cookie('_ro2e12s3', `${role}`);
       res.cookie('_firN21kll21', `${user_first_name}`);
       res.cookie('_sltN21kll21', `${user_last_name}`);
-      req.session.save(() => {
+      // req.session.save(() => {
         res.redirect('/customer-home');
-      });
+      // });
     } else {
       req.flash('passError', 'Incorrect password');
       return req.session.save(() => {
@@ -83,6 +83,9 @@ exports.loginPOST = async (req, res) => {
   } finally {
     conn.release();
   }
+  const end = new Date();
+  const duration = end - start;
+  console.log(`It took ${duration} milliseconds to complete.`);
 };
 
 // Register
@@ -204,10 +207,63 @@ exports.pricingGET = (req, res) => {
   res.render('pricing', { authorised, activePricing });
 };
 
-exports.summary = (req, res) => {
-  console.log('GET /summary');
-  const authorised = req.cookies['_aut121421'];
-  res.render('summary', { authorised });
+const storeItems = new Map([
+  // [1, {currency: 'cad'},]
+
+  // typeService: 'Academic Paper Writing ',
+  // typePaper: 'essay',
+  // numOfPages: '1',
+  // academicLevel: 'high-school',
+  // urgency: '40',
+  // paperFormat: 'OSCOLA',
+  // subjectArea: 'art',
+  // numOfResources: '1',
+  // topic: '',
+  // paperDetails: ''
+
+  [1, { priceInCents: 10000, name: 'Learn React Today', type: 'some Type' }],
+  [2, { priceInCents: 20000, name: 'Learn CSS Today', type: 'some Type' }],
+]);
+
+exports.createCheckoutSessionsPOST = async (req, res) => {
+  console.log('GET /Create checkout session');
+  try {
+    // let result = req.body.items.map((item) => {
+    //   const storeItem = storeItems.get(item.id);
+    //   return {
+    //     name: storeItem.name,
+    //     name2: item.name,
+    //     type: storeItem.type,
+    //     value: item.value,
+    //   };
+    // });
+    // console.log("The result", result)
+    // console.log(req.body.items[0].currency)
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      mode: 'payment',
+      line_items: req.body.items.map((item) => {
+        const storeItem = storeItems.get(item.id);
+        return {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: storeItem.name,
+            },
+            unit_amount: storeItem.priceInCents,
+          },
+          quantity: item.quantity,
+        };
+      }),
+      // success_url: `${process.env.CLIENT_URL}/success.html`,
+      // cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
+      success_url: `http://localhost:8080/`,
+      cancel_url: `http://localhost:8080/pricing`,
+    });
+    res.json({ url: session.url });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 };
 
 exports.orderID = async (req, res) => {
@@ -337,6 +393,23 @@ exports.customerOrdersGET = (req, res) => {
     });
   }
 };
+
+
+
+exports.summaryGET = (req, res) => {
+  console.log('GET /customer-orders');
+  const authorised = req.cookies['_aut121421'];
+  if (!authorised) {
+    res.redirect('/login');
+  } else {
+    res.render('summary', {
+      authorised,
+    });
+  }
+};
+
+
+
 
 exports.testingPOST = (req, res) => {
   console.log('POST /testing');
