@@ -3267,3 +3267,41 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
   font-weight: 600;
   color: #fc8433 !important;
 }
+
+
+
+
+.order-title-id {
+  font-size: 28;
+}
+
+.bi-hash {
+  color: #2b2b2b;
+  font-size: 28px;
+}
+
+/* 
+
+.bi {
+  color: #2b2b2b;
+  font-size: 26px;
+} */
+
+.list-choices i {
+  color: #2b2b2b;
+  font-size: 18px;
+}
+
+.list-choices-title {
+  font-weight: 600;
+  color: #2b2b2b;
+  font-size: 20px;
+}
+.list-choices-more {
+  padding-left: 2rem;
+}
+
+.font-32 {
+
+  font-size: 26px;
+}

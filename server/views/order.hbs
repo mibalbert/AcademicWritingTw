@@ -1,13 +1,16 @@
-<title>Academic Writing - Summary</title>
-
-<script src='js/summary.js' type='text/javascript' defer></script>
-
+{{!-- <script src='../js/testing.js' type='text/javascript' defer></script> --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<title>Academic Writing - Order</title>
 
 {{> user-header}}
 
-<div class='container mt-4'>
+<div class='container container3'>
+</div>
+<br />
+<section class='container mh'>
+        <div class='card-header order-title-id'><i class="bi bi-hash"></i>ID : {{rows.uuid}}</div>
   <div class='row'>
-    <div class='col-8 mb-md-5'>
+    <div class='col-lg-8 mb-md-5'>
 
       <div class='card mb-4'>
         {{!-- <div class='card-header text-center pt-5 boldish font-36'>Order Details</div> --}}
@@ -48,11 +51,87 @@
         </div>
       </div> --}}
     </div>
+
+
+
+    <div class='col-lg-4'>
+          <div class=''>
+        <div class='card mini-summary2 mb-5'>
+          <div class='h5'>Amazing things for FREE</div>
+          <hr class='mb-0' />
+          <ul id='mini-ul2'>
+            <li>
+              <div class='mini-summary-serv-title'>
+                Title page
+              </div>
+              <div class='d-flex'>
+                <div>for
+                  <span>$4.99</span>
+                </div>
+                <div class='free'>FREE</div>
+              </div>
+            </li>
+            <hr class='my-0' />
+            <li>
+              <div class='mini-summary-serv-title'>
+                Formating
+              </div>
+              <div class='d-flex'>
+                <div>for
+                  <span>$7.99</span>
+                </div>
+                <div class='free'>FREE</div>
+              </div>
+            </li>
+            <hr class='my-0' />
+            <li>
+              <div class='mini-summary-serv-title'>
+                Title page
+              </div>
+              <div class='d-flex'>
+                <div>for
+                  <span>$4.99</span>
+                </div>
+                <div class='free'>FREE</div>
+              </div>
+            </li>
+            <hr class='my-0' />
+            <li>
+              <div class='mini-summary-serv-title'>
+                Title page
+              </div>
+              <div class='d-flex'>
+                <div>for
+                  <span>$4.99</span>
+                </div>
+                <div class='free'>FREE</div>
+              </div>
+            </li>
+
+            <hr class='my-0' />
+          </ul>
+          <a
+            href='/pricing'
+            class='btn bg-orange text-white enjoy-button'
+          >Enjoy</a>
+        </div>
+      </div>
+
+
+      {{!-- <div class=''>
+      </div>
+      <div class='card mb-4 p-4'>
+        <div class='card-header'>Order Status</div>
+        <div class='card-body'>
+          <p>Place a new order </p>
+          <a
+            href='/pricing'
+            class='btn bg-orange text-white w-100 enjoy-button'
+          >Enjoy</a>
+          
+        </div>
+       </div> --}}
+    </div>
   </div>
-  {{!-- <div class='h4 py-4'>Summary</div>
-  <div class='card mb-4'>
-    <div class='card-body p-0'>
-      <div class="summary"></div>
-    </div> --}}
-  </div>
-</div>
+
+</section>

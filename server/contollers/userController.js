@@ -16,6 +16,7 @@ exports.homeGET = (req, res) => {
   let roleCustomer = false;
   let roleAdmin = false;
 
+  console.log('adasdasdasdas')
   if (roleData !== 'admin') {
     roleCustomer = true;
   } else {
@@ -278,8 +279,9 @@ exports.orderID = async (req, res) => {
         const [data] = await db.query(`SELECT * FROM orders WHERE uuid = ?`, [
           uuid,
         ]);
-        if (!data.length == 0) {
-          res.render('order', { authorised, data });
+        if (data.length !== 0) {
+          const rows = data[0]
+          res.render('order', { authorised, rows });
         } else {
           res.redirect('/');
         }

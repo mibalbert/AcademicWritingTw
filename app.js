@@ -34,6 +34,21 @@ app.use(express.static('public'));
 // Templating Engine
 const handlebars = exphbs.create({
   extname: '.hbs',
+  helpers: {
+    // capitalize: (str) => {
+    //   return str.toUpperCase() + str.slice(1);
+    // },
+    // pluralize: (str, count) => {
+    //   if (count === 1) {
+    //     return `${count} ${str}`;
+    //   }
+    //   return `${count} ${str}s`;
+    // }
+    // status: (str) => {
+    //   if(str === 'in-progress') return true
+    //   return false
+    // }
+  }
 });
 
 app.engine('.hbs', handlebars.engine);
