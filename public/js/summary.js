@@ -2,6 +2,16 @@
 window.addEventListener('DOMContentLoaded', async () => {
   console.log('DOMContentLoaded')
 
+
+
+
+
+
+
+
+
+
+  
   
   const currency = sessionStorage.getItem('currency');
   const typeService = sessionStorage.getItem('typeService');
