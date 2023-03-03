@@ -208,64 +208,64 @@ exports.pricingGET = (req, res) => {
   res.render('pricing', { authorised, activePricing });
 };
 
-const storeItems = new Map([
-  // [1, {currency: 'cad'},]
+// const storeItems = new Map([
+//   // [1, {currency: 'cad'},]
 
-  // typeService: 'Academic Paper Writing ',
-  // typePaper: 'essay',
-  // numOfPages: '1',
-  // academicLevel: 'high-school',
-  // urgency: '40',
-  // paperFormat: 'OSCOLA',
-  // subjectArea: 'art',
-  // numOfResources: '1',
-  // topic: '',
-  // paperDetails: ''
+//   // typeService: 'Academic Paper Writing ',
+//   // typePaper: 'essay',
+//   // numOfPages: '1',
+//   // academicLevel: 'high-school',
+//   // urgency: '40',
+//   // paperFormat: 'OSCOLA',
+//   // subjectArea: 'art',
+//   // numOfResources: '1',
+//   // topic: '',
+//   // paperDetails: ''
 
-  [1, { priceInCents: 10000, name: 'Learn React Today', type: 'some Type' }],
-  [2, { priceInCents: 20000, name: 'Learn CSS Today', type: 'some Type' }],
-]);
+//   [1, { priceInCents: 10000, name: 'Learn React Today', type: 'some Type' }],
+//   [2, { priceInCents: 20000, name: 'Learn CSS Today', type: 'some Type' }],
+// ]);
 
-exports.createCheckoutSessionsPOST = async (req, res) => {
-  console.log('GET /Create checkout session');
-  try {
-    // let result = req.body.items.map((item) => {
-    //   const storeItem = storeItems.get(item.id);
-    //   return {
-    //     name: storeItem.name,
-    //     name2: item.name,
-    //     type: storeItem.type,
-    //     value: item.value,
-    //   };
-    // });
-    // console.log("The result", result)
-    // console.log(req.body.items[0].currency)
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      mode: 'payment',
-      line_items: req.body.items.map((item) => {
-        const storeItem = storeItems.get(item.id);
-        return {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: storeItem.name,
-            },
-            unit_amount: storeItem.priceInCents,
-          },
-          quantity: item.quantity,
-        };
-      }),
-      // success_url: `${process.env.CLIENT_URL}/success.html`,
-      // cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
-      success_url: `http://localhost:8080/`,
-      cancel_url: `http://localhost:8080/pricing`,
-    });
-    res.json({ url: session.url });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
-};
+// exports.createCheckoutSessionsPOST = async (req, res) => {
+//   console.log('GET /Create checkout session');
+//   try {
+//     // let result = req.body.items.map((item) => {
+//     //   const storeItem = storeItems.get(item.id);
+//     //   return {
+//     //     name: storeItem.name,
+//     //     name2: item.name,
+//     //     type: storeItem.type,
+//     //     value: item.value,
+//     //   };
+//     // });
+//     // console.log("The result", result)
+//     // console.log(req.body.items[0].currency)
+//     const session = await stripe.checkout.sessions.create({
+//       payment_method_types: ['card'],
+//       mode: 'payment',
+//       line_items: req.body.items.map((item) => {
+//         const storeItem = storeItems.get(item.id);
+//         return {
+//           price_data: {
+//             currency: 'usd',
+//             product_data: {
+//               name: storeItem.name,
+//             },
+//             unit_amount: storeItem.priceInCents,
+//           },
+//           quantity: item.quantity,
+//         };
+//       }),
+//       // success_url: `${process.env.CLIENT_URL}/success.html`,
+//       // cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
+//       success_url: `http://localhost:8080/`,
+//       cancel_url: `http://localhost:8080/pricing`,
+//     });
+//     res.json({ url: session.url });
+//   } catch (e) {
+//     res.status(500).json({ error: e.message });
+//   }
+// };
 
 exports.orderID = async (req, res) => {
   console.log('/GET /order/:uuid');
@@ -399,7 +399,7 @@ exports.customerOrdersGET = (req, res) => {
 
 
 exports.summaryGET = (req, res) => {
-  console.log('GET /customer-orders');
+  console.log('GET /summary');
   const authorised = req.cookies['_aut121421'];
   if (!authorised) {
     res.redirect('/login');
@@ -409,6 +409,65 @@ exports.summaryGET = (req, res) => {
     });
   }
 };
+
+exports.summaryCompleteGET = (req, res) => {
+  console.log('GET /summary-complete');
+  res.render('summary-complete')
+};
+
+
+
+
+exports.configGET = (req, res) => {
+  res.send({
+    publishableKey: process.env.STRIPE_PUBLIC_KEY,
+  })
+}
+
+
+
+
+const calculateOrderAmount =  (items) => {
+  
+  items.forEach( async item => {
+    const name = item.name;
+    const quantity = item.quantity;
+    // const {id} = await db.query('SELECT price FROM items WHERE name = ?', [name])
+    const {id, user_email} = await db.query('SELECT * FROM accounts')
+     console.log('asdasdsadasdasdasdasdasd')
+    });
+  
+
+
+
+
+  return 1400;
+};
+
+
+
+exports.createPaymentIntentPOST =  async (req, res) => {
+  const { items } = req.body;
+  console.log(items)
+
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    // amount: calculateOrderAmount(items),
+    amount: '1222',
+    currency: items[0].currency,
+    automatic_payment_methods: {
+      enabled: true,
+    },
+  });
+
+  res.send({
+    clientSecret: paymentIntent.client_secret,
+  });
+};
+
+
+
+
 
 
 
