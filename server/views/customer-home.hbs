@@ -84,7 +84,8 @@
               <div class='top-dots'></div>
               <div class='ord-img bd-blue'>
                 <div class='ord-prew'>
-                  <div class='book-min-title'>Title:<br />{{this.title}}</div>
+                  {{!-- <div class='book-min-title'>Title:<br />{{this.title}}</div> --}}
+                  <div class='book-min-title'>{{this.title}}</div>
                   <div class='book-min-aut'>Academic Writing </div>
                 </div>
               </div>
@@ -120,8 +121,8 @@
                       {{this.date_time_created}}
                     </span>
                   </div>
-                  <div class='ord-status mt-2 h5'>Status:
-                    <span class='orange'>
+                  <div class='ord-status'>Status:
+                    <span class='text-primary fw-boldish'>
                       {{this.status}}
                     </span>
                   </div>

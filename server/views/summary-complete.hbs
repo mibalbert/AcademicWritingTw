@@ -1,25 +1,46 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+/>
+
 <title>Academic Writing - Summary</title>
 
- <script src="https://js.stripe.com/v3/"></script>
-{{!-- <script src='js/summary.js' type='text/javascript' defer></script> --}}
-    <script src="js/complete.js" type='text/javascript' defer></script>
-  
+<script src="https://js.stripe.com/v3/"></script>
+<script src="js/complete.js" type="text/javascript" defer></script>
 
 {{> user-header}}
 
-<div class='container mt-4'>
-        <div class=" text-center py-4 mt-2 font-32">Payment Status</div>
-  <div class='row '>
-    <div class='col-12 mb-md-5 min-h-400px'>
-      <div class='card mb-4 h-100'>
-        
-        
-        
-        <div class="font-32 text-center mt-5 text-success">Succesfull payment!</div>
-        
-        <pre id="payment-intent"></pre>
+<div class="container mt-4">
+  <div class="text-center py-4 mt-2 font-32">Payment Status</div>
+  <div class="row">
+    <div class="col-12 mb-5rem">
+      <div class="card mb-4 h-100">
+
+        <div class="font-32 text-center mt-5 text-success2">Succesfull payment! <i class="bi bi-check-lg font-32 text-success2"></i></div>
+        {{! <pre id="payment-intent"></pre> }}
+
+        <div class="d-flex flex-column justify-content-center py-5">
+          <div class="d-flex justify-content-center text-primary-bo" >Amount paid:
+            <div id="payed-total" class="mx-2 text-primary boldishing "></div>
+            <div
+              id="payed-total-currency"
+              class="text-primary boldishing"
+            ></div>
+          </div>
+          <div class="d-flex justify-content-center">Status:
+            <div id="payment-status" class="text-success mx-2"></div>
+          </div>
+        </div>
+
+        <div class="w-100 d-flex justify-content-center py-5">
+          <a
+            href="/customer-home"
+            class="go-back-home onyx d-flex align-items-center"
+          ><i class="bi bi-house-door px-1 onyx"></i>Home</a>
+        </div>
+
       </div>
     </div>
   </div>
-  </div>
 </div>
+{{! </div> }}

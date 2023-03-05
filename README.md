@@ -1,4 +1,4 @@
-# Real World Aplication for Academic Wrinting Company
+# Real World Aplication for an Academic Wrinting Company
 
 
 ## Create .env file

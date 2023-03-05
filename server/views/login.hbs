@@ -1,5 +1,5 @@
 {{! <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script> }}
-<script src='../js/login.js' type='text/javascript' defer></script>
+<script src="../js/login.js" type="text/javascript" defer></script>
 <title>Academic Writing - Login</title>
 
 {{!-- {{#if success}}
@@ -15,82 +15,92 @@
   </div>
 {{/if}} --}}
 
-{{#if emailError}}
-  <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-    <strong>Sorry</strong>
-    {{emailError}}
+{{#if systemError}}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Sorry :(</strong>
+    {{systemError}}
     <button
-      type='button'
-      class='btn-close'
-      data-bs-dismiss='alert'
-      aria-label='Close'
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
     ></button>
   </div>
-
+{{/if}}
+{{#if emailError}}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Sorry :(</strong>
+    {{emailError}}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
 {{/if}}
 {{#if passError}}
-  <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Sorry</strong>
     {{passError}}
     <button
-      type='button'
-      class='btn-close'
-      data-bs-dismiss='alert'
-      aria-label='Close'
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
     ></button>
   </div>
-
 {{/if}}
 
-<div class='empty-space'></div>
+<div class="empty-space"></div>
 
 <main>
-  <section class='container mt-10vh mb-10vh'>
-    <div class='max-width-320 my-5 mx-auto'>
+  <section class="container mt-10vh mb-10vh">
+    <div class="max-width-320 my-5 mx-auto">
 
-      <div class='mb-3 mt-3'>
-        <h3 class='h2 font-weight-bold text-center orange'>
+      <div class="mb-3 mt-3">
+        <h3 class="h2 font-weight-bold text-center orange">
           Log-in
         </h3>
       </div>
-      <h6 class='h5 mb-0 px-4 text-center'>Welcome back.</h6>
+      <h6 class="h5 mb-0 px-4 text-center">Welcome back.</h6>
       <form
-        id='loginForm'
-        class='form-signin d-flex flex-column gap-3 p-4'
-        action='/login'
-        method='post'
+        id="loginForm"
+        class="form-signin d-flex flex-column gap-3 p-4"
+        action="/login"
+        method="post"
       >
-        <div class='form-label-group'>
-          <label class='h5 normal-weight text-muted' for='inputLogEmail'>Email
+        <div class="form-label-group">
+          <label class="h5 normal-weight text-muted" for="inputLogEmail">Email
             address</label>
           <input
-            type='email'
-            id='inputLogEmail'
-            name='inputLogEmail'
-            class='form-control mt-1'
-            placeholder='Email address'
+            type="email"
+            id="inputLogEmail"
+            name="inputLogEmail"
+            class="form-control mt-1"
+            placeholder="Email address"
             required
             autofocus
           />
         </div>
-        <div class='form-label-group'>
+        <div class="form-label-group">
           <label
-            class='h5 normal-weight text-muted'
-            for='inputLogPassword'
+            class="h5 normal-weight text-muted"
+            for="inputLogPassword"
           >Password</label>
           <input
-            type='password'
-            id='inputLogPassword'
-            name='inputLogPassword'
-            class='form-control mt-1'
-            placeholder='Password'
+            type="password"
+            id="inputLogPassword"
+            name="inputLogPassword"
+            class="form-control mt-1"
+            placeholder="Password"
             required
           />
         </div>
         <div
-          id='login-error'
-          class='alert alert-danger mt-3'
-          style='display: none;'
+          id="login-error"
+          class="alert alert-danger mt-3"
+          style="display: none;"
         ></div>
 
         {{! <div class="custom-control custom-checkbox mb-3">
@@ -102,14 +112,14 @@
             {{/if}} --}}
 
         <button
-          id='submit'
-          class='btn w-100 btn-lg btn-block text-white my-3 bg-orange'
-          type='submit'
+          id="submit"
+          class="btn w-100 btn-lg btn-block text-white my-3 bg-orange"
+          type="submit"
         >Sign in</button>
 
-        <p class='text-center'>
+        <p class="text-center">
           Not registered?
-          <a class='' href='/register'>Register here!</a>
+          <a class="" href="/register">Register here!</a>
         </p>
 
       </form>

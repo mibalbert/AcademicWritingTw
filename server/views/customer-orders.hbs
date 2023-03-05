@@ -16,13 +16,13 @@
       {{#if data}}
         {{#each data}}
           <a
-            href='#'
+            href='order/{{this.uuid}}'
             class='list-group-item list-group-item-action'
             aria-current='true'
           >
             <div class='d-flex w-100 justify-content-between'>
-              <h5 class='mb-1 truncate'>{{inc @index}}.{{this.title}}</h5>
-              <small>{{days this.date_time_created}}</small>
+              <h5 class='mb-1 truncate'>{{this.title}}</h5>
+              <small>{{this.date_time_created}}</small>
             </div>
             <div class='d-flex justify-content-between'>
               <div>

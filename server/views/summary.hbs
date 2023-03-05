@@ -1,25 +1,34 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+/>
 <title>Academic Writing - Summary</title>
 
- <script src="https://js.stripe.com/v3/"></script>
-<script src='js/summary.js' type='text/javascript' defer></script>
-    {{!-- <script src="checkout.js" defer></script> --}}
-  
+<script src="https://js.stripe.com/v3/"></script>
+<script src="js/summary.js" type="text/javascript" defer></script>
+{{! <script src="checkout.js" defer></script> }}
 
 {{> user-header}}
 
-<div class='container mt-4'>
-  <div class='row'>
-    <div class='col-12 col-lg-7  mb-md-5'>
+<div class="container container-res mt-4">
 
-      <div class='card mb-4'>
-        
-        <div class="card-body p-4 p-md-5 m-md-3 mb-md-2 pt-md-2 d-flex flex-column gap-15">
-           <div class="list-choices"><div class="list-choices-title text-center p2-4 pt-4 mt-2 font-32"> Order Details</div> </div> 
-           <hr class="mb-4 p-0">
+  <div class="h4 py-4">Final Step</div>
 
-           
-                              {{!-- <div class="list-choices"><div class="list-choices-title"><i class="bi bi-fonts pe-2"></i>Topic: </div> <div id="list-choices-more-title" ></div> </div> 
+  <div class="row">
+    <div class="col-12 col-lg-7 ">
+
+      <div class="card ">
+
+        <div
+          class="card-body p-4 p-md-5 m-md-3 mb-md-2 pt-md-2 d-flex flex-column gap-15"
+        >
+          <div class="list-choices"><div
+              class="list-choices-title text-center p2-4 pt-4 mt-2 mb-3 font-32"
+            > Order Details</div>
+          </div>
+          {{!-- <hr class="mb-4 p-0" /> --}}
+
+          {{! <div class="list-choices"><div class="list-choices-title"><i class="bi bi-fonts pe-2"></i>Topic: </div> <div id="list-choices-more-title" ></div> </div> 
                               <div class="list-choices"><div class="list-choices-title"><i class="bi bi-type pe-2"></i>Type Service: </div><div id="list-choices-more-type-service" ></div> </div>
                               <div class="list-choices"><div class="list-choices-title"><i class="bi bi-paperclip pe-2"></i>Type Paper: </div><div id="list-choices-more-type-paper" ></div></div> 
                               <div class="list-choices"><div class="list-choices-title"><i class="bi bi-mortarboard pe-2"></i> Academic Level: </div><div id="list-choices-more-academic-level" ></div></div> 
@@ -28,46 +37,118 @@
                               <div class="list-choices"><div class="list-choices-title"><i class="bi bi-clock pe-2"></i>Paper Format: </div><div id="list-choices-more-format" ></div> </div>
                               <div class="list-choices"><div class="list-choices-title"><i class="bi bi-calendar-plus pe-2"></i>Urgency: </div><div id="list-choices-more-urgency" ></div></div>
                               <div class="list-choices"><div class="list-choices-title"><i class="bi bi-justify-left pe-2"></i> Subject Area </div><div id="list-choices-more-subject-area" ></div></div>
-                              <div class="list-choices"><div class="list-choices-title"><i class="bi bi-justify-left pe-2"></i> Subject Area </div><div id="list-choices-more-subject-area" ></div></div> --}}
-                    
+                              <div class="list-choices"><div class="list-choices-title"><i class="bi bi-justify-left pe-2"></i> Subject Area </div><div id="list-choices-more-subject-area" ></div></div> }}
 
-                          
-              
-        
-        
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-currency-euro pe-2"></i>  Currency: </div> <div class="ps-2rem" id="list-choices-more-currency" ></div> </div> 
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-fonts pe-2"></i> Topic: </div> <div class="ps-2rem" id="list-choices-more-title" ></div> </div> 
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-type pe-2"></i> Type Service: </div><div class="ps-2rem" id="list-choices-more-type-service" ></div> </div>
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-paperclip pe-2"></i> Type Paper: </div><div class="ps-2rem" id="list-choices-more-type-paper" ></div></div> 
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-mortarboard pe-2"></i> Academic Level: </div><div class="ps-2rem" id="list-choices-more-academic-level" ></div></div> 
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-file-earmark-plus pe-2"></i> Number of Pages: </div><div class="ps-2rem" id="list-choices-more-number-of-pages" ></div></div> 
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-shield-check pe-2"></i> Number of Resources: </div><div class="ps-2rem" id="list-choices-more-number-of-resources" ></div> </div>
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-file-earmark-text pe-2"></i> Paper Format: </div><div class="ps-2rem" id="list-choices-more-format" ></div> </div>
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-clock pe-2"></i> Urgency: </div><div class="ps-2rem" id="list-choices-more-urgency" ></div></div>
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-book pe-2"></i> Subject Area </div><div class="ps-2rem" id="list-choices-more-subject-area" ></div></div>
-                          <div class="list-choices inner-shad px-4 py-2"><div class="list-choices-title-summary"> <i class="bi bi-justify-left pe-2"></i>  Details: </div><div class="ps-2rem" id="list-choices-more-description" ></div> </div>
-           
-           <hr class="mt-4 p-0 ">
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi  bi-cash-coin pe-2"></i>
+              Currency:
+            </div>
+            <div class="ps-2rem" id="list-choices-more-currency">
+            </div>
+          </div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-fonts pe-2"></i>
+              Topic:
+            </div>
+            <div class="ps-2rem" id="list-choices-more-title">
+
+            </div>
+          </div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-type pe-2"></i>
+              Type Service:
+            </div>
+            <div class="ps-2rem" id="list-choices-more-type-service"></div>
+          </div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-paperclip pe-2"></i>
+              Type Paper:
+            </div>
+            <div class="ps-2rem" id="list-choices-more-type-paper"></div></div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-mortarboard pe-2"></i>
+              Academic Level:
+            </div>
+            <div
+              class="ps-2rem"
+              id="list-choices-more-academic-level"
+            ></div></div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-file-earmark-plus pe-2"></i>
+              Number of Pages:
+            </div>
+            <div class="ps-2rem" id="list-choices-more-number-of-pages">
+
+            </div>
+          </div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-shield-check pe-2"></i>
+              Number of Resources:
+            </div><div
+              class="ps-2rem"
+              id="list-choices-more-number-of-resources"
+            ></div>
+          </div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-file-earmark-text pe-2"></i>
+              Paper Format:
+            </div><div class="ps-2rem" id="list-choices-more-format">
+
+            </div>
+          </div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-clock pe-2"></i>
+              Urgency:
+            </div>
+            <div class="ps-2rem" id="list-choices-more-urgency"></div>
+            
+          </div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-book pe-2"></i>
+              Subject Area
+            </div>
+            <div
+              class="ps-2rem"
+              id="list-choices-more-subject-area"
+            ></div></div>
+          <div class="list-choices inner-shad px-4 py-2">
+            <div class="list-choices-title-summary">
+              <i class="bi bi-justify-left pe-2"></i>
+              Details:
+            </div>
+            <div class="ps-2rem" id="list-choices-more-description"></div>
+          </div>
+
+          <hr class="mt-4 p-0" />
         </div>
-           <div class='text-center small pt-3 px-4 mt-1 mb-5'>All these selections can be
-              changed by emailing us at academicwriting@gmail.com</div>
+        <div class="text-center small pt-3 px-4 mt-1 mb-5">All these selections
+          can be changed by emailing us at academicwriting@gmail.com</div>
 
       </div>
 
     </div>
-    <div class='col-12 col-lg-5 mb-md-5'>
-      <div class='card mb-4'>
+    <div class="col-12 col-lg-5 mb-6rem mt-3rem mt-md-0 ">
+      <div class="card mb-4">
         <div class="checkout-form">
           <div class="h3 text-center">Checkout</div>
-        <form id="payment-form">
-          <div id="payment-element"></div>
-          <button>Pay</button>
-          <div id="error-message"></div>
-        </form>
+          <form id="payment-form">
+            <div id="payment-element"></div>
+            <button id="pay-button">Pay 100</button>
+            <div id="error-message"></div>
+          </form>
 
         </div>
       </div>
     </div>
-  </div>
   </div>
 </div>

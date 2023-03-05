@@ -1,230 +1,224 @@
-<script src='js/pricing.js' type='text/javascript' defer></script>
+<script src="js/pricing.js" type="text/javascript" defer></script>
 <title>Academic Writing - New Order</title>
 
 {{#if authorised}}
 
-
-{{> user-header}}
+  {{> user-header}}
 
 {{else}}
 
-<div class='empty-space'></div>
+  <div class="empty-space"></div>
 
 {{/if}}
 
-<section class='container container-res'>
+<section class="container container-res">
 
-  <div class='row'>
-    <div class='col-lg-8'>
+  <div class="row">
+    <div class="col-lg-8">
       {{! <div class='container'> }}
-      <div id='multi-step-form-container '>
+      <div id="multi-step-form-container ">
         <ul
-          class='form-stepper form-stepper-horizontal text-center mx-auto pl-0'
+          class="form-stepper form-stepper-horizontal text-center mx-auto pl-0"
         >
           <!-- Step 1 -->
           <li
-            class='form-stepper-active text-center form-stepper-list'
-            step='1'
+            class="form-stepper-active text-center form-stepper-list"
+            step="1"
           >
-            <a class='mx-2 text-decoration-none'>
-              <span class='form-stepper-circle'>
+            <a class="mx-2 text-decoration-none">
+              <span class="form-stepper-circle">
                 <span>1</span>
               </span>
-              <div class='label'>Step 1</div>
+              <div class="label">Step 1</div>
             </a>
           </li>
           <!-- Step 2 -->
           <li
-            class='form-stepper-unfinished text-center form-stepper-list'
-            step='2'
+            class="form-stepper-unfinished text-center form-stepper-list"
+            step="2"
           >
-            <a class='mx-2 text-decoration-none'>
-              <span class='form-stepper-circle'>
+            <a class="mx-2 text-decoration-none">
+              <span class="form-stepper-circle">
                 <span>2</span>
               </span>
-              <div class='label orange'>Step 2</div>
+              <div class="label orange">Step 2</div>
             </a>
           </li>
         </ul>
 
-          
-          
-        {{!-- <form --}}
-          <div
-          id='userMainCartForm'
-          >
-              {{!-- action='/testing'
-              method='post' --}}
+        {{! <form }}
+        <div id="userMainCartForm">
+          {{! action='/testing'
+              method='post' }}
           {{! name='userMainCartForm'
               action='/pricing'
               method='post'
               enctype='multipart/form-data'
               autocomplete='off' }}
-        
 
-          <section id='step-1' class='card form-step'>
-            <div class='h4 form-step-title-1'>Select Services</div>
+          <section id="step-1" class="card form-step">
+            <div class="h4 form-step-title-1">Select Services</div>
             <hr />
-            <div class='form-label-group'>
+            <div class="form-label-group">
 
               <label
-                for='radioCurrency'
-                class='h5 normal-weight text-muted mt-3'
+                for="radioCurrency"
+                class="h5 normal-weight text-muted mt-3"
               >Currency</label>
-              <div id='radioCurrency' name='radioCurrency' class='radio'>
+              <div id="radioCurrency" name="radioCurrency" class="radio">
                 <input
-                  label='EUR'
-                  type='radio'
-                  id='eur'
-                  name='currency'
-                  value='eur'
+                  label="EUR"
+                  type="radio"
+                  id="eur"
+                  name="currency"
+                  value="EUR"
                   checked
-                  {{!-- required --}}
+                  {{! required }}
                 />
                 <input
-                  label='USD'
-                  type='radio'
-                  id='usd'
-                  name='currency'
-                  value='usd'
-                  {{!-- required --}}
+                  label="USD"
+                  type="radio"
+                  id="usd"
+                  name="currency"
+                  value="USD"
+                  {{! required }}
                 />
                 <input
-                  label='GBP'
-                  type='radio'
-                  id='gbp'
-                  name='currency'
-                  value='gbp'
-                  {{!-- required --}}
+                  label="GBP"
+                  type="radio"
+                  id="gbp"
+                  name="currency"
+                  value="GBP"
+                  {{! required }}
                 />
                 <input
-                  label='AUD'
-                  type='radio'
-                  id='aud'
-                  name='currency'
-                  value='aud'
-                  {{!-- required --}}
+                  label="AUD"
+                  type="radio"
+                  id="aud"
+                  name="currency"
+                  value="AUD"
+                  {{! required }}
                 />
                 <input
-                  label='CAD'
-                  type='radio'
-                  id='cad'
-                  name='currency'
-                  value='cad'
-                  {{!-- required --}}
+                  label="CAD"
+                  type="radio"
+                  id="cad"
+                  name="currency"
+                  value="CAD"
+                  {{! required }}
                 />
               </div>
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
 
               <label
-                for='type-service'
-                class='h5 normal-weight text-muted mt-3'
+                for="type-service"
+                class="h5 normal-weight text-muted mt-3"
               >Type of Service</label>
               <select
-                class='form-select inp-shadow'
-                name='typeService'
-                id='typeService'
+                class="form-select inp-shadow"
+                name="typeService"
+                id="typeService"
               >
-                <option value='Academic Paper Writing ' selected>
+                <option value="Academic Paper Writing" selected>
                   Academic Paper Writing
                 </option>
-                <option value='Dissertation Services'>
+                <option value="Disertation Services">
                   Disertation Services
                 </option>
-                <option value='Writing Incl. Calculations'>
+                <option value="Writing Incl. Calculations">
                   Writing Incl. Calculations
                 </option>
-                <option value='Admission Services'>
+                <option value="Admission Services">
                   Admission Services
                 </option>
-                <option value='M/P/E/S Problems'>
+                <option value="M/P/E/S Problems">
                   Math/Physic/Economic/Statistic Problems
                 </option>
-                <option value='Multiple Choice Questions'>
+                <option value="Multiple Choice Questions">
                   Multiple Choice Questions
                 </option>
-                <option value='Editing'>
+                <option value="Editing">
                   Editing
                 </option>
-                <option value='Proofreading'>
+                <option value="Proofreading">
                   Proofreading
                 </option>
-                <option value='Rewriting'>
+                <option value="Rewriting">
                   Rewriting
                 </option>
-                <option value='Copywriting'>
+                <option value="Copywriting">
                   Copywriting
                 </option>
-                <option value='Resume/CV Services'>
+                <option value="Resume/CV Services">
                   Resume/CV services
                 </option>
               </select>
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                for='typePaper'
-                class='h5 normal-weight text-muted mt-3'
+                for="typePaper"
+                class="h5 normal-weight text-muted mt-3"
               >Type of Paper</label>
               <select
-                class='form-select inp-shadow'
-                name='typePaper'
-                id='typePaper'
+                class="form-select inp-shadow"
+                name="typePaper"
+                id="typePaper"
               >
-                <option value='essay' selected>Essay</option>
-                <option value='coursework'>Coursework</option>
-                <option value='research-paper'>Research Paper</option>
-                <option value='term-paper'>Term-paper</option>
-                <option value='case-study'>Case Study</option>
-                <option value='capstone-project'>Capstone Project</option>
-                <option value='assigment'>Assignment</option>
+                <option value="Essay" selected>Essay</option>
+                <option value="Coursework">Coursework</option>
+                <option value="Research Paper">Research Paper</option>
+                <option value="Term-paper">Term-paper</option>
+                <option value="Case Study">Case Study</option>
+                <option value="Capstone Project">Capstone Project</option>
+                <option value="Assignment">Assignment</option>
               </select>
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                for='numOfPages'
-                class='h5 normal-weight text-muted mt-3'
+                for="numOfPages"
+                class="h5 normal-weight text-muted mt-3"
               >Pages</label>
-              <div class='number'>
+              <div class="number">
 
-                <span class='minus'>-</span>
+                <span class="minus">-</span>
                 <input
-                  id='numOfPages'
-                  name='numOfPages'
-                  type='text'
-                  value='1'
-                  maxlength='3'
+                  id="numOfPages"
+                  name="numOfPages"
+                  type="text"
+                  value="1"
+                  maxlength="3"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                 />
-                <span class='plus'>+</span>
+                <span class="plus">+</span>
 
               </div>
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                for='academicLevel'
-                class='h5 normal-weight text-muted mt-3'
+                for="academicLevel"
+                class="h5 normal-weight text-muted mt-3"
               >Academic Level</label>
 
               <select
-                class='form-select inp-shadow'
-                name='academicLevel'
-                id='academicLevel'
+                class="form-select inp-shadow"
+                name="academicLevel"
+                id="academicLevel"
               >
-                <option value='high-school' selected>High School</option>
-                <option value='freshman'>Freshman &#40; College 1st year &#41;
+                <option value="High School" selected>High School</option>
+                <option value="Freshman">Freshman &#40; College 1st year &#41;
                 </option>
-                <option value='sophomore'>Sophomore &#40; College 2nd year &#41;
+                <option value="Sophomore">Sophomore &#40; College 2nd year &#41;
                 </option>
-                <option value='junior'>Junior &#40; College 3rd year &#41;
+                <option value="Junior">Junior &#40; College 3rd year &#41;
                 </option>
-                <option value='senior'>Senior &#40; College 4th year &#41;</option>
-                <option value='master'>Master's</option>
-                <option value='doctoral'>Doctoral</option>
+                <option value="Senior">Senior &#40; College 4th year &#41;</option>
+                <option value="Master">Master's</option>
+                <option value="Doctoral">Doctoral</option>
               </select>
 
             </div>
@@ -232,8 +226,8 @@
             {{!-- {{! <div class='wrapper-p'> }} --}}
             {{! <div class='wrapper-p'> }}
 
-            <div class='mt-3 services-radio-table'>
-              <table class='table' id='table'>
+            <div class="mt-3 services-radio-table">
+              <table class="table" id="table">
                 <thead>
                   <tr>
                     <th></th>
@@ -244,82 +238,82 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class='radio-td'><input
-                        type='radio'
-                        value='3'
-                        id='0'
-                        name='urgency'
+                    <td class="radio-td"><input
+                        type="radio"
+                        value="3"
+                        id="0"
+                        name="urgency"
                         checked
                       /></td>
-                    <td><label for='0'>3 days</label></td>
-                    <td><label for='0'>$21.99/page</label></td>
-                    <td><label for='0'>07/02/2023</label></td>
+                    <td><label for="0">3 days</label></td>
+                    <td><label for="0">$21.99/page</label></td>
+                    <td><label for="0">07/02/2023</label></td>
                   </tr>
                   <tr>
-                    <td class='radio-td'><input
-                        type='radio'
-                        value='5'
-                        id='1'
-                        name='urgency'
+                    <td class="radio-td"><input
+                        type="radio"
+                        value="5"
+                        id="1"
+                        name="urgency"
                       /></td>
-                    <td><label for='1'>5 days</label></td>
-                    <td><label for='1'>$21.99/page</label></td>
-                    <td><label for='1'>07/02/2023</label></td>
+                    <td><label for="1">5 days</label></td>
+                    <td><label for="1">$21.99/page</label></td>
+                    <td><label for="1">07/02/2023</label></td>
                   </tr>
                   <tr>
-                    <td class='radio-td'><input
-                        type='radio'
-                        value='7'
-                        id='2'
-                        name='urgency'
+                    <td class="radio-td"><input
+                        type="radio"
+                        value="7"
+                        id="2"
+                        name="urgency"
                       /></td>
-                    <td><label for='2'>7 days</label></td>
-                    <td><label for='2'>$21.99/page</label></td>
-                    <td><label for='2'>07/02/2023</label></td>
+                    <td><label for="2">7 days</label></td>
+                    <td><label for="2">$21.99/page</label></td>
+                    <td><label for="2">07/02/2023</label></td>
                   </tr>
                   <tr>
-                    <td class='radio-td'><input
-                        type='radio'
-                        value='14'
-                        id='3'
-                        name='urgency'
+                    <td class="radio-td"><input
+                        type="radio"
+                        value="13"
+                        id="3"
+                        name="urgency"
                       /></td>
-                    <td><label for='3'>13 days</label></td>
-                    <td><label for='3'>$21.99/page</label></td>
-                    <td><label for='3'>07/02/2023</label></td>
+                    <td><label for="3">13 days</label></td>
+                    <td><label for="3">$21.99/page</label></td>
+                    <td><label for="3">07/02/2023</label></td>
                   </tr>
                   <tr>
-                    <td class='radio-td'><input
-                        type='radio'
-                        value='17'
-                        id='4'
-                        name='urgency'
+                    <td class="radio-td"><input
+                        type="radio"
+                        value="17"
+                        id="4"
+                        name="urgency"
                       /></td>
-                    <td><label for='4'>17 days</label></td>
-                    <td><label for='4'>$21.99/page</label></td>
-                    <td><label for='4'>07/02/2023</label></td>
+                    <td><label for="4">17 days</label></td>
+                    <td><label for="4">$21.99/page</label></td>
+                    <td><label for="4">07/02/2023</label></td>
                   </tr>
                   <tr>
-                    <td class='radio-td'><input
-                        type='radio'
-                        value='30'
-                        id='5'
-                        name='urgency'
+                    <td class="radio-td"><input
+                        type="radio"
+                        value="30"
+                        id="5"
+                        name="urgency"
                       /></td>
-                    <td><label for='5'>30 days</label></td>
-                    <td><label for='5'>$21.99/page</label></td>
-                    <td><label for='5'>07/02/2023</label></td>
+                    <td><label for="5">30 days</label></td>
+                    <td><label for="5">$21.99/page</label></td>
+                    <td><label for="5">07/02/2023</label></td>
                   </tr>
                   <tr>
-                    <td class='radio-td'><input
-                        type='radio'
-                        value='40'
-                        id='6'
-                        name='urgency'
+                    <td class="radio-td"><input
+                        type="radio"
+                        value="40"
+                        id="6"
+                        name="urgency"
                       /></td>
-                    <td><label for='6'>40 days</label></td>
-                    <td><label for='6'>$21.99/page</label></td>
-                    <td><label for='6'>07/02/2023</label></td>
+                    <td><label for="6">40 days</label></td>
+                    <td><label for="6">$21.99/page</label></td>
+                    <td><label for="6">07/02/2023</label></td>
                   </tr>
                 </tbody>
               </table>
@@ -327,78 +321,78 @@
             </div>
             {{! </div> }}
             {{! </div> }}
-            <div class='form-label-group'>
+            <div class="form-label-group">
 
-              <div class='next-button'>
+              <div class="next-button">
                 <button
-                  class='button btn-navigate-form-step fw-boldish'
-                  type='button'
-                  step_number='2'
-                  id='nextButton'
+                  class="button btn-navigate-form-step fw-boldish"
+                  type="button"
+                  step_number="2"
+                  id="nextButton"
                 >
                   Next
                 </button>
               </div>
 
             </div>
-            <div class='text-center small mt-1 mb-5'>All these selections can be
+            <div class="text-center small mt-1 mb-5">All these selections can be
               changed by emailing us at academicwriting@gmail.com</div>
 
           </section>
 
-          <section id='step-2' class='card form-step d-none'>
-            <div class='h4 onyx'>Select Services</div>
+          <section id="step-2" class="card form-step d-none">
+            <div class="h4 onyx">Select Services</div>
             <hr />
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                for='radioPaaperFormat'
-                class='h5 normal-weight text-muted mt-3'
+                for="radioPaaperFormat"
+                class="h5 normal-weight text-muted mt-3"
               >Paper Format</label>
               <div
-                id='radioPaperFormat'
-                name='radioPaperFormat'
-                class='radio smaller'
+                id="radioPaperFormat"
+                name="radioPaperFormat"
+                class="radio smaller"
               >
                 <input
-                  label='MLA'
-                  type='radio'
-                  id='MLA'
-                  name='paperFormat'
-                  value='MLA'
+                  label="MLA"
+                  type="radio"
+                  id="MLA"
+                  name="paperFormat"
+                  value="MLA"
                   checked
-                  {{!-- required --}}
+                  {{! required }}
                 />
                 <input
-                  label='APA'
-                  type='radio'
-                  id='APA'
-                  name='paperFormat'
-                  value='APA'
-                  {{!-- required --}}
+                  label="APA"
+                  type="radio"
+                  id="APA"
+                  name="paperFormat"
+                  value="APA"
+                  {{! required }}
                 />
                 <input
-                  label='Chicago'
-                  type='radio'
-                  id='Chicago'
-                  name='paperFormat'
-                  value='Chicago'
-                  {{!-- required --}}
+                  label="Chicago"
+                  type="radio"
+                  id="Chicago"
+                  name="paperFormat"
+                  value="Chicago"
+                  {{! required }}
                 />
                 <input
-                  label='Harvard'
-                  type='radio'
-                  id='Harvard'
-                  name='paperFormat'
-                  value='Harvard'
-                  {{!-- required --}}
+                  label="Harvard"
+                  type="radio"
+                  id="Harvard"
+                  name="paperFormat"
+                  value="Harvard"
+                  {{! required }}
                 />
                 <input
-                  label='OSCOLA'
-                  type='radio'
-                  id='OSCOAL'
-                  name='paperFormat'
-                  value='OSCOLA'
-                  {{!-- required --}}
+                  label="OSCOLA"
+                  type="radio"
+                  id="OSCOAL"
+                  name="paperFormat"
+                  value="OSCOLA"
+                  {{! required }}
                 />
               </div>
             </div>
@@ -410,253 +404,255 @@
                   https://academized.com/account/orders/new?assignment_type=1&words=275&academic_level=1&urgency=1
                 </div> }}
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
 
               <label
-                for='subjectArea'
-                class='h5 normal-weight text-muted mt-3'
+                for="subjectArea"
+                class="h5 normal-weight text-muted mt-3"
               >Subject Area</label>
               <select
-                class='form-select inp-shadow'
-                name='subjectArea'
-                id='subjectArea'
+                class="form-select inp-shadow"
+                name="subjectArea"
+                id="subjectArea"
               >
-                <option value='art'>
+                <option value="Art">
                   Art</option>
-                <option value='Movies'>
+                <option value="Movies">
                   Movies</option>
-                <option value='Music'>
+                <option value="Music">
                   Music</option>
-                <option value='Paintings'>
+                <option value="Paintings">
                   Paintings</option>
-                <option value='Theatre'>
+                <option value="Theatre">
                   Theatre</option>
-                <option value='Arhitecture'>
+                <option value="Arhitecture">
                   Arhitecture</option>
-                <option value='Business'>
+                <option value="Business">
                   Business</option>
-                <option value='Comm. & Media'>
+                <option value="Comm. & Media">
                   Communications & Media</option>
-                <option value='Journalism'>
+                <option value="Journalism">
                   Journalism</option>
-                <option value='Advertising'>
+                <option value="Advertising">
                   Advertising</option>
-                <option value='Public Relations'>
+                <option value="Public Relations">
                   Public Relations</option>
-                <option value='Comm. Strategies'>
+                <option value="Comm. Strategies">
                   Communication Strategies</option>
-                <option value='Economics'>
+                <option value="Economics">
                   Economics</option>
-                <option value='Logistics'>
+                <option value="Logistics">
                   Logistics</option>
-                <option value='Trade'>
+                <option value="Trade">
                   Trade</option>
-                <option value='E-commerce'>
+                <option value="E-commerce">
                   E-commerce</option>
-                <option value='Social Work'>
+                <option value="Social Work">
                   Social Work</option>
-                <option value='Political Science'>
+                <option value="Political Science">
                   Political Science</option>
-                <option value='Sociology'>
+                <option value="Sociology">
                   Sociology</option>
-                <option value='Finance'>
+                <option value="Finance">
                   Finance</option>
-                <option value='Physical Studies'>
+                <option value="Physical Studies">
                   Physical Studies</option>
-                <option value='Accounting'>
+                <option value="Accounting">
                   Accounting</option>
-                <option value='Investment'>
+                <option value="Investment">
                   Investment</option>
-                <option value='Engineering'>
+                <option value="Engineering">
                   Engineering</option>
-                <option value='English'>
+                <option value="English">
                   English</option>
-                <option value='Healthcare & Medicine'>
+                <option value="Healthcare & Medicine">
                   Healthcare & Medicine</option>
-                <option value='Medicine & Dentistry'>
+                <option value="Medicine & Dentistry">
                   Medicine & Dentistry</option>
-                <option value='Nursing'>
+                <option value="Nursing">
                   Nursing</option>
-                <option value='Phatogenesis of Disease'>
+                <option value="Phatogenesis of Disease">
                   Phatogenesis of disease</option>
-                <option value='History'>
+                <option value="History">
                   History</option>
-                <option value='IT & Technology'>
+                <option value="IT & Technology">
                   IT & Technology</option>
-                <option value='Law'>
+                <option value="Law">
                   Law</option>
-                <option value='Literature'>
+                <option value="Literature">
                   Literature</option>
-                <option value='Management'>
+                <option value="Management">
                   Management</option>
-                <option value='Sports'>
+                <option value="Sports">
                   Sports</option>
-                <option value='Marketing'>
+                <option value="Marketing">
                   Marketing</option>
-                <option value='Int. Relations'>
+                <option value="Int. Relations">
                   International Relations</option>
-                <option value='Public Health'>
+                <option value="Public Health">
                   Public Health</option>
-                <option value='Linguistics'>
+                <option value="Linguistics">
                   Linguistics</option>
-                <option value='Mathematics'>
+                <option value="Mathematics">
                   Mathematics</option>
-                <option value='Natural Science'>
+                <option value="Natural Science">
                   Natural Science</option>
-                <option value='Agriculture'>
+                <option value="Agriculture">
                   Agriculture</option>
-                <option value='Env. Science'>
+                <option value="Env. Science">
                   Enviromental Science</option>
-                <option value='Anthropology'>
+                <option value="Anthropology">
                   Anthropology</option>
-                <option value='Chemistry'>
+                <option value="Chemistry">
                   Chemistry</option>
-                <option value='Astronomy'>
+                <option value="Astronomy">
                   Astronomy</option>
-                <option value='Geology'>
+                <option value="Geology">
                   Geology</option>
-                <option value='Geography'>
+                <option value="Geography">
                   Geography</option>
-                <option value='Biology'>
+                <option value="Biology">
                   Biology</option>
-                <option value='Physics'>
+                <option value="Physics">
                   Physics</option>
-                <option value='Pedagogy'>
+                <option value="Pedagogy">
                   Pedagogy</option>
-                <option value='Philosophy'>
+                <option value="Philosophy">
                   Philosophy</option>
-                <option value='Psychology'>
+                <option value="Psychology">
                   Psychology</option>
-                <option value='Statistics'>
+                <option value="Statistics">
                   Statistics</option>
-                <option value='Other'>
+                <option value="Other">
                   Other</option>
-                <option value='Religion & Theology'>
+                <option value="Religion & Theology">
                   Religion & Theology</option>
-                <option value='Tourism'>
+                <option value="Tourism">
                   Tourism</option>
-                <option value='Education'>
+                <option value="Education">
                   Education</option>
-                <option value='Nutrition'>
+                <option value="Nutrition">
                   Nutrition</option>
-                <option value='Criminal Justice'>
+                <option value="Criminal Justice">
                   Criminal Justice</option>
-                <option value='Property/Real Estate'>
+                <option value="Property/Real Estate">
                   Property/Real Estate</option>
               </select>
 
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                for='numOfResouces'
-                class='h5 normal-weight text-muted mt-3'
+                for="numOfResouces"
+                class="h5 normal-weight text-muted mt-3"
               >Num. of Sources </label>
-              <div class='number'>
-                <span class='minus-r'>-</span>
+              <div class="number">
+                <span class="minus-r">-</span>
                 <input
-                  id='numOfResouces'
-                  name='numOfResources'
-                  type='text'
-                  value='1'
-                  maxlength='3'
+                  id="numOfResouces"
+                  name="numOfResources"
+                  type="text"
+                  value="1"
+                  maxlength="3"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                 />
-                <span class='plus-r'>+</span>
+                <span class="plus-r">+</span>
               </div>
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                for='topic'
-                class='h5 normal-weight text-muted mt-3'
+                for="topic"
+                class="h5 normal-weight text-muted mt-3"
               >Topic</label>
               <input
-                class='inp-shadow2'
-                id='topic'
-                name='topic'
-                type='text'
-                maxlength='300'
-                placeholder='max 300 characters'
+                class="inp-shadow2"
+                id="topic"
+                name="topic"
+                type="text"
+                maxlength="300"
+                placeholder="max 300 characters"
+                required
               />
             </div>
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                for='paperDetails'
-                class='h5 normal-weight text-muted mt-3'
+                for="paperDetails"
+                class="h5 normal-weight text-muted mt-3"
               >Paper Details</label>
 
               <textarea
-                class='inp-shadow3'
-                id='paperDetails'
-                name='paperDetails'
-                rows='3'
-                placeholder='max 3000 characters'
-                maxlength='3000'
+                class="inp-shadow3"
+                id="paperDetails"
+                name="paperDetails"
+                rows="3"
+                placeholder="max 3000 characters"
+                maxlength="3000"
+                wrap="soft"
               ></textarea>
             </div>
 
             {{#if authorised}}
 
-              <div class='form-label-group2'>
+              <div class="form-label-group2">
 
                 <button
-                  class='button btn-navigate-form-step prev fw-boldish'
-                  type='button'
-                  step_number='1'
-                  id='prevButton'
+                  class="button btn-navigate-form-step prev fw-boldish"
+                  type="button"
+                  step_number="1"
+                  id="prevButton"
                 >
                   Prev
                 </button>
 
                 <button
                   id="submit-btn"
-                  class='button submit-btn fw-boldish'
-                  {{!-- type='submit' --}}
+                  class="button submit-btn fw-boldish"
+                  {{! type='submit' }}
                 >Next</button>
 
               </div>
             {{else}}
-              <div class='form-label-group2'>
+              <div class="form-label-group2">
 
-                <div class='not-authenticated w-100'>
+                <div class="not-authenticated w-100">
                   <div>You need to authenticate first</div>
                   <a
-                    class='button btn-navigate-form-step text-white log-in-link fw-boldish'
-                    href='/login'
+                    class="button btn-navigate-form-step text-white log-in-link fw-boldish"
+                    href="/login"
                   >Log-in</a>
                   <a
-                    class='button btn-navigate-form-step text-white register-link fw-boldish'
-                    href='/register'
+                    class="button btn-navigate-form-step text-white register-link fw-boldish"
+                    href="/register"
                   >Register</a>
 
                 </div>
               </div>
 
-              <div class='d-flex justify-start p-4'>
+              <div class="d-flex justify-start p-4">
                 <div
-                  class='btn-navigate-form-step2 go-back'
-                  step_number='1'
-                  id='prevButton'
+                  class="btn-navigate-form-step2 go-back"
+                  step_number="1"
+                  id="prevButton"
                 >
                   <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='20'
-                    height='20'
-                    fill='currentColor'
-                    class='bi bi-arrow-right-circle-fill'
-                    viewBox='0 0 16 16'
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    class="bi bi-arrow-right-circle-fill"
+                    viewBox="0 0 16 16"
                   >
                     <path
-                      d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z'
+                      d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
                     ></path>
                   </svg>
                   <span>Step 1</span>
                 </div>
               </div>
             {{/if}}
-            <div class='text-center small mt-1 mb-3'>All these selections can be
-              changed by emailing us at academicwriting@gmail.com</div>
+            <div class="text-center small mt-1 mb-5 pb-2">All these selections
+              can be changed by emailing us at academicwriting@gmail.com</div>
 
             {{! <div class='mt-3 final-buttons'>
                   <button
@@ -669,31 +665,31 @@
                   <button class='button submit-btn' type='submit'>Save</button>
                 </div> }}
           </section>
-        {{!-- </form> --}}
+          {{! </form> }}
         </div>
       </div>
       {{! </div> }}
 
     </div>
-    <div class='col col-lg-4'>
+    <div class="col col-lg-4">
 
-      <div class='card mini-summary'>
-        <div class='h4'>Summary</div>
-        <hr class='mb-0' />
-        <div class='zig-zag-bottom'></div>
-        <div class='row'>
-          <div class='col-5 h-30 d-flex align-items-center no-break'>
+      <div class="card mini-summary">
+        <div class="h4">Summary</div>
+        <hr class="mb-0" />
+        <div class="zig-zag-bottom"></div>
+        <div class="row">
+          <div class="col-5 h-30 d-flex align-items-center no-break">
             Title page
           </div>
           <div
-            class='col-4 d-flex justify-content-end align-items-center gap-2'
+            class="col-4 d-flex justify-content-end align-items-center gap-2"
           >
             for
-            <span class='line-through'>$4.99</span>
+            <span class="line-through">$4.99</span>
           </div>
 
-          <div class='col-3 d-flex justify-content-end align-items-center'><span
-              class='free'
+          <div class="col-3 d-flex justify-content-end align-items-center"><span
+              class="free"
             >
               FREE
 
@@ -702,73 +698,73 @@
 
         </div>
 
-        <hr class='my-0' />
-        <div class='row'>
-          <div class='col-5 h-30 d-flex align-items-center no-break'>
+        <hr class="my-0" />
+        <div class="row">
+          <div class="col-5 h-30 d-flex align-items-center no-break">
             Formatting
           </div>
           <div
-            class='col-4 d-flex justify-content-end align-items-center gap-2'
+            class="col-4 d-flex justify-content-end align-items-center gap-2"
           >
             for
-            <span class='line-through'>$4.99</span>
+            <span class="line-through">$4.99</span>
           </div>
-          <div class='col-3 d-flex justify-content-end align-items-center'><span
-              class='free'
+          <div class="col-3 d-flex justify-content-end align-items-center"><span
+              class="free"
             >
               FREE
             </span>
           </div>
         </div>
-        <hr class='my-0' />
-        <div class='row'>
-          <div class='col-5 h-30 d-flex align-items-center no-break'>
+        <hr class="my-0" />
+        <div class="row">
+          <div class="col-5 h-30 d-flex align-items-center no-break">
             Title page
           </div>
           <div
-            class='col-4 d-flex justify-content-end align-items-center gap-2'
+            class="col-4 d-flex justify-content-end align-items-center gap-2"
           >
             for
-            <span class='line-through'>$4.99</span>
+            <span class="line-through">$4.99</span>
           </div>
-          <div class='col-3 d-flex justify-content-end align-items-center'><span
-              class='free'
+          <div class="col-3 d-flex justify-content-end align-items-center"><span
+              class="free"
             >
               FREE
             </span>
           </div>
         </div>
-        <hr class='my-0' />
-        <div class='row'>
-          <div class='col-5 h-30 d-flex align-items-center no-break'>
+        <hr class="my-0" />
+        <div class="row">
+          <div class="col-5 h-30 d-flex align-items-center no-break">
             Title page
           </div>
           <div
-            class='col-4 d-flex justify-content-end align-items-center gap-2'
+            class="col-4 d-flex justify-content-end align-items-center gap-2"
           >
             for
-            <span class='line-through'>$4.99</span>
+            <span class="line-through">$4.99</span>
           </div>
-          <div class='col-3 d-flex justify-content-end align-items-center'><span
-              class='free'
+          <div class="col-3 d-flex justify-content-end align-items-center"><span
+              class="free"
             >
               FREE
             </span>
           </div>
         </div>
 
-        <div id='currencyMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="currencyMiniBig" style="display: none;">
+          <hr class="my-0" />
+          <div class="row">
+            <div class="col-5 h-30 d-flex align-items-center">
               Currency
             </div>
             <div
-              class='col-5 d-flex justify-content-center align-items-center'
-              id='currencyMiniVal'
+              class="col-5 d-flex justify-content-center align-items-center"
+              id="currencyMiniVal"
             >
             </div>
-            <div
+            {{! <div
               class='checked col-2 d-flex justify-content-center align-items-center'
             >
               <svg
@@ -786,280 +782,232 @@
                   d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
                 ></path>
               </svg>
-            </div>
+            </div> }}
           </div>
         </div>
 
-        <div id='typeServiceMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="typeServiceMiniBig" class="me-3" style="display: none;">
+          <hr class="my-0" />
+          <div class="row">
+            <div class="col-5 h-30 d-flex align-items-center">
               Service
             </div>
             <div
-              class='col-5 d-flex justify-content-start align-items-center'
-              id='typeServiceMiniVal'
+              id="typeServiceMiniVal"
+              class="col-5 d-flex justify-content-start align-items-center text-center"
             >
             </div>
             <div
-              class='checked col-2 d-flex justify-content-center align-items-center'
-            ><svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
-                fill='currentColor'
-                class='bi bi-check2-circle'
-                viewBox='0 0 16 16'
-              >
-                <path
-                  d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
-                ></path>
-                <path
-                  d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
-                ></path>
-              </svg>
+              id="typeServiceMiniValPrice"
+              name="itemVal"
+              class="col-1 d-flex align-items-center ps-0"
+            >
             </div>
+            <div
+              id="typeServiceMiniValPriceCurr"
+              class="col-1 d-flex align-items-center ps-0"
+            ></div>
+
           </div>
         </div>
 
-        <div id='typePaperMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row' class='w-100'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="typePaperMiniBig" class="me-3" style="display: none;">
+          <hr class="my-0" />
+          <div class="row" class="w-100">
+            <div class="col-5 h-30 d-flex align-items-center">
               Paper
             </div>
             <div
-              class='col-5 d-flex justify-content-center align-items-center text-center'
-              id='typePaperMiniVal'
+              id="typePaperMiniVal"
+              class="col-5 d-flex justify-content-center align-items-center text-center"
             >
 
             </div>
             <div
-              class='checked col-2 d-flex justify-content-center align-items-center'
+              id="typePaperMiniValPrice"
+              name="itemVal"
+              class="col-1 d-flex align-items-center ps-0"
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
-                fill='currentColor'
-                class='bi bi-check2-circle'
-                viewBox='0 0 16 16'
-              >
-                <path
-                  d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
-                ></path>
-                <path
-                  d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
-                ></path>
-              </svg>
+
             </div>
-            {{! <div class='col-4 d-flex align-items-center'>
-                    
-                  </div>
-                  <div class='d-flex'>
-                    <div >
-                    </div>
-                    <div class=''>
-                    </div>
-                  </div> }}
+
+            <div
+              id="typePaperMiniValPriceCurr"
+              class="col-1 d-flex align-items-center ps-0"
+            ></div>
+
           </div>
         </div>
 
-        <div id='numOfPagesMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="numOfPagesMiniBig" class="me-3" style="display: none;">
+          <hr class="my-0" />
+          <div class="row">
+            <div class="col-5 h-30 d-flex align-items-center">
               Number of Pages
             </div>
             <div
-              id='numOfPagesMiniVal'
-              class='col-5 d-flex justify-content-center align-items-center'
+              id="numOfPagesMiniVal"
+              class="col-5 d-flex justify-content-center align-items-center"
             >
             </div>
+
             <div
-              class='checked col-2 d-flex justify-content-center align-items-center'
+              id="numOfPagesMiniValPrice"
+              name="itemVal"
+              class="col-1 d-flex align-items-center ps-0"
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
-                fill='currentColor'
-                class='bi bi-check2-circle'
-                viewBox='0 0 16 16'
-              >
-                <path
-                  d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
-                ></path>
-                <path
-                  d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
-                ></path>
-              </svg>
             </div>
+
+            <div
+              class="col-1 d-flex align-items-center ps-0"
+              id="numOfPagesMiniValPriceCurr"
+            ></div>
+
           </div>
         </div>
 
-        <div id='academicLevelMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="academicLevelMiniBig" class="me-3" style="display: none;">
+          <hr class="my-0" />
+          <div class="row">
+            <div class="col-5 h-30 d-flex align-items-center">
               Level
             </div>
             <div
-              id='academicLevelMiniVal'
-              class='col-5 d-flex justify-content-center align-items-center text-center'
+              id="academicLevelMiniVal"
+              class="col-5 d-flex justify-content-center align-items-center text-center"
             >
             </div>
             <div
-              class='checked col-2 d-flex justify-content-center align-items-center text-center'
-            ><svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
-                fill='currentColor'
-                class='bi bi-check2-circle'
-                viewBox='0 0 16 16'
-              >
-                <path
-                  d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
-                ></path>
-                <path
-                  d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
-                ></path>
-              </svg>
+              id="academicLevelMiniValPrice"
+              name="itemVal"
+              class="col-1 d-flex align-items-center ps-0"
+            >
             </div>
+            <div
+              class="col-1 d-flex align-items-center ps-0"
+              id="academicLevelMiniValPriceCurr"
+            ></div>
+
           </div>
         </div>
 
-        <div id='urgencyMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="urgencyMiniBig" class="me-3" style="display: none;">
+          <hr class="my-0" />
+          <div class="row">
+            <div class="col-5 h-30 d-flex align-items-center">
               Urgency
             </div>
             <div
-              id='urgencyMiniVal'
-              class='col-5 d-flex justify-content-center align-items-center text-center'
+              id="urgencyMiniVal"
+              class="col-5 d-flex justify-content-center align-items-center text-center"
             >
             </div>
             <div
-              class='checked col-2 d-flex justify-content-center align-items-center text-center'
-            ><svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
-                fill='currentColor'
-                class='bi bi-check2-circle'
-                viewBox='0 0 16 16'
-              >
-                <path
-                  d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
-                ></path>
-                <path
-                  d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
-                ></path>
-              </svg>
+              id="urgencyMiniValPrice"
+              name="itemVal"
+              class="col-1 d-flex align-items-center ps-0"
+            >
             </div>
+
+            <div
+              class="col-1 d-flex align-items-center ps-0"
+              id="urgencyMiniValPriceCurr"
+            ></div>
+
           </div>
         </div>
 
-        <div id='paperFormatMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="paperFormatMiniBig" class="me-3" style="display: none;">
+          <hr class="my-0" />
+          <div class="row">
+            <div class="col-5 h-30 d-flex align-items-center">
               Format
             </div>
             <div
-              id='paperFormatMiniVal'
-              class='col-5 d-flex justify-content-center align-items-center text-center'
+              id="paperFormatMiniVal"
+              class="col-5 d-flex justify-content-center align-items-center text-center"
             >
             </div>
             <div
-              class='checked col-2 d-flex justify-content-center align-items-center text-center'
-            ><svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
-                fill='currentColor'
-                class='bi bi-check2-circle'
-                viewBox='0 0 16 16'
-              >
-                <path
-                  d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
-                ></path>
-                <path
-                  d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
-                ></path>
-              </svg>
+              id="paperFormatMiniValPrice"
+              name="itemVal"
+              class="col-1 d-flex align-items-center ps-0"
+            >
             </div>
+
+            <div
+              class="col-1 d-flex align-items-center ps-0"
+              id="paperFormatMiniValPriceCurr"
+            ></div>
+
           </div>
         </div>
 
-        <div id='subjectAreaMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="subjectAreaMiniBig" class="me-3" style="display: none;">
+          <hr class="my-0" />
+          <div class="row">
+            <div class="col-5 h-30 d-flex align-items-center">
               Area
             </div>
             <div
-              id='subjectAreaMiniVal'
-              class='col-5 d-flex justify-content-center align-items-center text-center'
+              id="subjectAreaMiniVal"
+              class="col-5 d-flex justify-content-center align-items-center text-center"
             >
             </div>
             <div
-              class='checked col-2 d-flex justify-content-center align-items-center text-center'
-            ><svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
-                fill='currentColor'
-                class='bi bi-check2-circle'
-                viewBox='0 0 16 16'
-              >
-                <path
-                  d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
-                ></path>
-                <path
-                  d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
-                ></path>
-              </svg>
+              id="subjectAreaMiniValPrice"
+              name="itemVal"
+              class="col-1 d-flex align-items-center ps-0"
+            >
             </div>
+            <div
+              class="col-1 d-flex align-items-center ps-0"
+              id="subjectAreaMiniValPriceCurr"
+            ></div>
+
           </div>
         </div>
 
-        <div id='numberOfResourcesMiniBig' style='display: none;'>
-          <hr class='my-0' />
-          <div class='row'>
-            <div class='col-5 h-30 d-flex align-items-center'>
+        <div id="numberOfResourcesMiniBig" class="me-3" style="display: none;">
+          <hr class="my-0" />
+          <div class="row">
+            <div class="col-5 h-30 d-flex align-items-center">
               Num. Sources
             </div>
             <div
-              id='numberOfResourcesMiniVal'
-              class='col-5 d-flex justify-content-center align-items-center text-center'
+              id="numberOfResourcesMiniVal"
+              class="col-5 d-flex justify-content-center align-items-center text-center"
             >
             </div>
             <div
-              class='checked col-2 d-flex justify-content-center align-items-center text-center'
-            ><svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
-                fill='currentColor'
-                class='bi bi-check2-circle'
-                viewBox='0 0 16 16'
-              >
-                <path
-                  d='M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z'
-                ></path>
-                <path
-                  d='M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z'
-                ></path>
-              </svg>
+              id="numberOfResourcesMiniValPrice"
+              name="itemVal"
+              class="col-1 d-flex justify-content-center align-items-center text-center"
+            >
             </div>
+            <div
+              class="col-1 d-flex align-items-center ps-0"
+              id="numberOfResourcesMiniValPriceCurr"
+            ></div>
+
           </div>
         </div>
 
         <br />
+        <div class="zig-zag-top"></div>
+        <hr class="m-0 mb-4 p-0" />
+        <div class="row">
 
+          <div class="col-6 h5">Total: </div>
+          <div
+            class="col-5 h5 d-flex justify-content-end pe-3"
+            id="total"
+          ></div>
+          <div
+            class="col-1 d-flex align-items-center ps-0"
+            id="numberOfResourcesMiniValPriceCurr"
+          ></div>
+        </div>
       </div>
 
     </div>

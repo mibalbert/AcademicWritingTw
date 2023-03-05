@@ -3,36 +3,125 @@
 window.addEventListener("DOMContentLoaded", () => {
   console.log("DOMContentLoaded");
 
-  const typeOfServiceData = new Map([
+  const itemsData = new Map([
     [{ name: "Academic Paper Writing" }, { price: 10 }],
-    [{ name: "Disertation Services"}, { price: 11}],
-    [{ name: "Writing Incl. Calculations"}, { price: 9.2}],
-    [{ name: "Admission Services"},{ price: 10}],
-    [{ name: "Math/Physic/Economic/Statistic Problems"}, { price: 40}],
-    ["Multiple Choice Questions", { 12}],
-    ["Editing", 12],
-    ["Proofreading", 12],
-    ["Rewriting", 44],
-    ["Copywriting", 9],
-    ["Resume/CV services", 10],
-    ["Rewriting", 12],
+    [{ name: "Disertation Services" }, { price: 11 }],
+    [{ name: "Writing Incl. Calculations" }, { price: 9 }],
+    [{ name: "Admission Services" }, { price: 10 }],
+    [{ name: "Math/Physic/Economic/Statistic Problems" }, { price: 40 }],
+    [{ name: "Multiple Choice Questions" }, { price: 12 }],
+    [{ name: "Editing" }, { price: 12 }],
+    [{ name: "Proofreading" }, { price: 12 }],
+    [{ name: "Rewriting" }, { price: 44 }],
+    [{ name: "Copywriting" }, { price: 9 }],
+    [{ name: "Resume/CV Services" }, { price: 10 }],
+    [{ name: "Rewriting" }, { price: 12 }],
+    [{ name: "Essay" }, { price: 12 }],
+    [{ name: "Coursework" }, { price: 4 }],
+    [{ name: "Research Paper" }, { price: 4 }],
+    [{ name: "Term-paper" }, { price: 6 }],
+    [{ name: "Case Study" }, { price: 54 }],
+    [{ name: "Capstone Project" }, { price: 12 }],
+    [{ name: "Assignment" }, { price: 43 }],
+    [{ name: "Num. of Pages" }, { price: 43 }],
+    [{ name: "Freshman" }, { price: 43 }],
+    [{ name: "Sophomore" }, { price: 43 }],
+    [{ name: "Junior" }, { price: 43 }],
+    [{ name: "Senior" }, { price: 43 }],
+    [{ name: "Master" }, { price: 43 }],
+    [{ name: "Doctoral" }, { price: 43 }],
+    [{ name: "3 Days" }, { price: 43 }],
+    [{ name: "5 Days" }, { price: 43 }],
+    [{ name: "7 Days" }, { price: 43 }],
+    [{ name: "14 Days" }, { price: 43 }],
+    [{ name: "17 Days" }, { price: 43 }],
+    [{ name: "30 Days" }, { price: 43 }],
+    [{ name: "40 Days" }, { price: 43 }],
+    [{ name: "MLA" }, { price: 43 }],
+    [{ name: "APA" }, { price: 43 }],
+    [{ name: "Chicago" }, { price: 43 }],
+    [{ name: "Hardvard" }, { price: 43 }],
+    [{ name: "OSCOLA" }, { price: 43 }],
+    [{ name: "Art" }, { price: 6 }],
+    [{ name: "Music" }, { price: 8 }],
+    [{ name: "Paintings" }, { price: 5 }],
+    [{ name: "Theatre" }, { price: 5 }],
+    [{ name: "Arhitecture" }, { price: 8 }],
+    [{ name: "Business" }, { price: 7 }],
+    [{ name: "Comm. & Media" }, { price: 5 }],
+    [{ name: "Journalism" }, { price: 10 }],
+    [{ name: "Advertising" }, { price: 7 }],
+    [{ name: "Public Relations" }, { price: 10 }],
+    [{ name: "Comm. Strategies" }, { price: 10 }],
+    [{ name: "Economics" }, { price: 10 }],
+    [{ name: "Logistics" }, { price: 10 }],
+    [{ name: "Trade" }, { price: 5 }],
+    [{ name: "E-commerce" }, { price: 10 }],
+    [{ name: "Social Work" }, { price: 10 }],
+    [{ name: "Political Science" }, { price: 5 }],
+    [{ name: "Sociology" }, { price: 10 }],
+    [{ name: "Finance" }, { price: 8 }],
+    [{ name: "Physical Studies" }, { price: 5 }],
+    [{ name: "Accounting" }, { price: 8 }],
+    [{ name: "Investment" }, { price: 8 }],
+    [{ name: "Engineering" }, { price: 6 }],
+    [{ name: "English" }, { price: 7 }],
+    [{ name: "Healthcare & Medicine" }, { price: 8 }],
+    [{ name: "Medicine & Dentistry" }, { price: 10 }],
+    [{ name: "Nursing" }, { price: 6 }],
+    [{ name: "Phatogenesis of Disease" }, { price: 7 }],
+    [{ name: "History" }, { price: 6 }],
+    [{ name: "IT & Technology" }, { price: 10 }],
+    [{ name: "Law" }, { price: 7 }],
+    [{ name: "Literature" }, { price: 6 }],
+    [{ name: "Management" }, { price: 8 }],
+    [{ name: "Sports" }, { price: 6 }],
+    [{ name: "Marketing" }, { price: 6 }],
+    [{ name: "Int. Relations" }, { price: 7 }],
+    [{ name: "Public Health" }, { price: 6 }],
+    [{ name: "Linguistics" }, { price: 8 }],
+    [{ name: "Mathematics" }, { price: 10 }],
+    [{ name: "Natural Science" }, { price: 7 }],
+    [{ name: "Agriculture" }, { price: 5 }],
+    [{ name: "Env. Science" }, { price: 5 }],
+    [{ name: "Anthropology" }, { price: 5 }],
+    [{ name: "Chemistry" }, { price: 5 }],
+    [{ name: "Astronomy" }, { price: 10 }],
+    [{ name: "Geology" }, { price: 9 }],
+    [{ name: "Geography" }, { price: 5 }],
+    [{ name: "Biology" }, { price: 9 }],
+    [{ name: "Physics" }, { price: 5 }],
+    [{ name: "Pedagogy" }, { price: 7 }],
+    [{ name: "Philosophy" }, { price: 10 }],
+    [{ name: "Psychology" }, { price: 7 }],
+    [{ name: "Statistics" }, { price: 10 }],
+    [{ name: "Other" }, { price: 8 }],
+    [{ name: "Religion & Theology" }, { price: 5 }],
+    [{ name: "Tourism" }, { price: 10 }],
+    [{ name: "Education" }, { price: 8 }],
+    [{ name: "Nutrition" }, { price: 5 }],
+    [{ name: "Criminal Justice" }, { price: 6 }],
+    [{ name: "Property/Real Estate" }, { price: 8 }],
+    [{ name: "3" }, { price: 8 }],
+    [{ name: "5" }, { price: 7 }],
+    [{ name: "7" }, { price: 5 }],
+    [{ name: "13" }, { price: 5 }],
+    [{ name: "17" }, { price: 4 }],
+    [{ name: "30" }, { price: 4 }],
+    [{ name: "40" }, { price: 4 }],
   ]);
 
-  // console.log(typeOfServiceData)
-
-  const typeOfPaperData = new Map([
-    [1, "Essay", w12],
-    [2, "Coursework", 4],
-    [3, "Research Paper", 4],
-    [4, "Term-paper", 6],
-    [5, "Case Study", 54],
-    [6, "Capstone Project", 12],
-    [7, "Assignment", 43],
-  ]);
-
-  for (const det of typeOfServiceData) {
-    console.log(det);
+  function getPriceByName(name) {
+    const item = Array.from(itemsData.keys()).find((key) => key.name === name);
+    if (item) {
+      // console.log(item);
+      // console.log(itemsData.get(item).price);
+      return itemsData.get(item).price;
+    }
+    return null;
   }
+
+  // console.log(getPriceByName("Geology"));
 
   const radioGroup = document.getElementsByName("currency");
   const typeService = document.getElementById("typeService");
@@ -46,30 +135,71 @@ window.addEventListener("DOMContentLoaded", () => {
   const topic = document.getElementById("topic");
   const details = document.getElementById("paperDetails");
   const textarea = document.querySelector("textarea");
+  const table = document.querySelector("#table");
 
   const currencyMiniBig = document.getElementById("currencyMiniBig");
   const currencyMiniVal = document.getElementById("currencyMiniVal");
 
   const typeServiceMiniBig = document.getElementById("typeServiceMiniBig");
   const typeServiceMiniVal = document.getElementById("typeServiceMiniVal");
+  const typeServiceMiniValPrice = document.getElementById(
+    "typeServiceMiniValPrice"
+  );
+  const typeServiceMiniValPriceCurr = document.getElementById(
+    "typeServiceMiniValPriceCurr"
+  );
 
   const typePaperMiniBig = document.getElementById("typePaperMiniBig");
   const typePaperMiniVal = document.getElementById("typePaperMiniVal");
+  const typePaperMiniValPrice = document.getElementById(
+    "typePaperMiniValPrice"
+  );
+  const typePaperMiniValPriceCurr = document.getElementById(
+    "typePaperMiniValPriceCurr"
+  );
 
   const numOfPagesMiniBig = document.getElementById("numOfPagesMiniBig");
   const numOfPagesMiniVal = document.getElementById("numOfPagesMiniVal");
+  const numOfPagesMiniValPrice = document.getElementById(
+    "numOfPagesMiniValPrice"
+  );
+  const numOfPagesMiniValPriceCurr = document.getElementById(
+    "numOfPagesMiniValPriceCurr"
+  );
 
   const academicLevelMiniBig = document.getElementById("academicLevelMiniBig");
   const academicLevelMiniVal = document.getElementById("academicLevelMiniVal");
+  const academicLevelMiniValPrice = document.getElementById(
+    "academicLevelMiniValPrice"
+  );
+  const academicLevelMiniValPriceCurr = document.getElementById(
+    "academicLevelMiniValPriceCurr"
+  );
 
   const urgencyMiniBig = document.getElementById("urgencyMiniBig");
   const urgencyMiniVal = document.getElementById("urgencyMiniVal");
+  const urgencyMiniValPrice = document.getElementById("urgencyMiniValPrice");
+  const urgencyMiniValPriceCurr = document.getElementById(
+    "urgencyMiniValPriceCurr"
+  );
 
   const paperFormatMiniBig = document.getElementById("paperFormatMiniBig");
   const paperFormatMiniVal = document.getElementById("paperFormatMiniVal");
+  const paperFormatMiniValPrice = document.getElementById(
+    "paperFormatMiniValPrice"
+  );
+  const paperFormatMiniValPriceCurr = document.getElementById(
+    "paperFormatMiniValPriceCurr"
+  );
 
   const subjectAreaMiniBig = document.getElementById("subjectAreaMiniBig");
   const subjectAreaMiniVal = document.getElementById("subjectAreaMiniVal");
+  const subjectAreaMiniValPrice = document.getElementById(
+    "subjectAreaMiniValPrice"
+  );
+  const subjectAreaMiniValPriceCurr = document.getElementById(
+    "subjectAreaMiniValPriceCurr"
+  );
 
   const numberOfResourcesMiniBig = document.getElementById(
     "numberOfResourcesMiniBig"
@@ -78,25 +208,17 @@ window.addEventListener("DOMContentLoaded", () => {
     "numberOfResourcesMiniVal"
   );
 
-  const myDiv = document.getElementById("userMainCartForm");
-  const inputs = myDiv.querySelectorAll("input, select, text, textarea");
-  const formData = {};
-
-  inputs.forEach((input) => {
-    formData[input.name] = input.value;
-  });
-
-  // console.log(formData);
-
   const submitBtn = document.getElementById("submit-btn");
 
-  submitBtn.addEventListener("click", async function (event) {
-    if (event.keyCode === 13 && event.target.nodeName !== "TEXTAREA") {
-      event.preventDefault();
-    }
+  if (submitBtn) {
+    submitBtn.addEventListener("click", async function (event) {
+      if (event.keyCode === 13 && event.target.nodeName !== "TEXTAREA") {
+        event.preventDefault();
+      }
 
-    window.location = "/summary";
-  });
+      window.location = "/summary";
+    });
+  }
 
   let selectedValue;
   for (const radio of radioGroup) {
@@ -120,6 +242,43 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  const total = () => {
+    const totalDiv = document.getElementById("total");
+    const typeServiceSess = sessionStorage.getItem("typeService");
+    const typePaperSess = sessionStorage.getItem("typePaper");
+    const numOfPagesSess = sessionStorage.getItem("numOfPages");
+    const academicLevelSess = sessionStorage.getItem("academicLevel");
+    const urgencySess = sessionStorage.getItem("urgency");
+    const formatSess = sessionStorage.getItem("format");
+    const subjectAreaSess = sessionStorage.getItem("subjectArea");
+    const topicSess = sessionStorage.getItem("topic");
+    const detailsSess = sessionStorage.getItem("details");
+    const numOfResourcesSess = sessionStorage.getItem("numOfResources");
+
+    const totalArr = [
+      typeServiceSess,
+      typePaperSess,
+      numOfPagesSess,
+      academicLevelSess,
+      urgencySess,
+      formatSess,
+      subjectAreaSess,
+      topicSess,
+      detailsSess,
+      numOfResourcesSess,
+    ];
+    const prices = totalArr.map((el) => {
+      return getPriceByName(el);
+    });
+    const result = prices.reduce((prevVal, currVal) => {
+      return prevVal + currVal;
+    }, 0);
+
+    totalDiv.innerHTML = result;
+  };
+
+  // console.log(total(totalArr));
+
   sessionStorage.setItem("currency", selectedValue);
   sessionStorage.setItem("typeService", typeService.value);
   sessionStorage.setItem("typePaper", typePaper.value);
@@ -135,18 +294,46 @@ window.addEventListener("DOMContentLoaded", () => {
   typeService.addEventListener("click", function () {
     let tps = this.value;
     sessionStorage.setItem("typeService", tps);
-
-    // console.log(tps);
     typeServiceMiniBig.style.display = "block";
     typeServiceMiniVal.innerHTML = tps;
+    typeServiceMiniValPrice.innerHTML = getPriceByName(tps);
+    typeServiceMiniValPrice.value = getPriceByName(tps);
+    typeServiceMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+    total();
+  });
+
+  typeService.addEventListener("input", function () {
+    let tps = this.value;
+    sessionStorage.setItem("typeService", tps);
+    typeServiceMiniBig.style.display = "block";
+    typeServiceMiniVal.innerHTML = tps;
+    typeServiceMiniValPrice.innerHTML = getPriceByName(tps);
+    typeServiceMiniValPrice.value = getPriceByName(tps);
+    typeServiceMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+    total();
   });
 
   typePaper.addEventListener("click", function () {
     let tpP = this.value;
-
     sessionStorage.setItem("typePaper", tpP);
     typePaperMiniBig.style.display = "block";
     typePaperMiniVal.innerHTML = tpP;
+    typePaperMiniValPrice.innerHTML = getPriceByName(tpP);
+    typePaperMiniValPrice.value = getPriceByName(tpP);
+    typePaperMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+
+    total();
+  });
+
+  typePaper.addEventListener("input", function () {
+    let tpP = this.value;
+    sessionStorage.setItem("typePaper", tpP);
+    typePaperMiniBig.style.display = "block";
+    typePaperMiniVal.innerHTML = tpP;
+    typePaperMiniValPrice.innerHTML = getPriceByName(tpP);
+    typePaperMiniValPrice.value = getPriceByName(tpP);
+    typePaperMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+    total();
   });
 
   academicLevel.addEventListener("click", function () {
@@ -154,6 +341,22 @@ window.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("academicLevel", acdL);
     academicLevelMiniBig.style.display = "block";
     academicLevelMiniVal.innerHTML = acdL;
+    academicLevelMiniValPrice.innerHTML = getPriceByName(acdL);
+    academicLevelMiniValPrice.value = getPriceByName(acdL);
+    academicLevelMiniValPriceCurr.innerHTML =
+      sessionStorage.getItem("currency");
+    total();
+  });
+  academicLevel.addEventListener("input", function () {
+    let acdL = this.value;
+    sessionStorage.setItem("academicLevel", acdL);
+    academicLevelMiniBig.style.display = "block";
+    academicLevelMiniVal.innerHTML = acdL;
+    academicLevelMiniValPrice.innerHTML = getPriceByName(acdL);
+    academicLevelMiniValPrice.value = getPriceByName(acdL);
+    academicLevelMiniValPriceCurr.innerHTML =
+      sessionStorage.getItem("currency");
+    total();
   });
 
   subjectArea.addEventListener("click", function () {
@@ -162,6 +365,21 @@ window.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("subjectArea", sub);
     subjectAreaMiniBig.style.display = "block";
     subjectAreaMiniVal.innerHTML = sub;
+    subjectAreaMiniValPrice.innerHTML = getPriceByName(sub);
+    subjectAreaMiniValPrice.value = getPriceByName(sub);
+    subjectAreaMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+    total();
+  });
+  subjectArea.addEventListener("input", function () {
+    let sub = this.value;
+    // console.log("Selected value: " + sub);
+    sessionStorage.setItem("subjectArea", sub);
+    subjectAreaMiniBig.style.display = "block";
+    subjectAreaMiniVal.innerHTML = sub;
+    subjectAreaMiniValPrice.innerHTML = getPriceByName(sub);
+    subjectAreaMiniValPrice.value = getPriceByName(sub);
+    subjectAreaMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+    total();
   });
 
   for (let i = 0; i < radioGroup.length; i++) {
@@ -175,8 +393,18 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       }
       sessionStorage.setItem("currency", selectedValue);
+
+      localStorage.setItem("currency", selectedValue);
+
       currencyMiniBig.style.display = "block";
       currencyMiniVal.innerHTML = selectedValue.toUpperCase();
+
+      typeServiceMiniValPriceCurr.innerHTML = selectedValue.toUpperCase();
+      typePaperMiniValPriceCurr.innerHTML = selectedValue.toUpperCase();
+      academicLevelMiniValPriceCurr.innerHTML = selectedValue.toUpperCase();
+      subjectAreaMiniValPriceCurr.innerHTML = selectedValue.toUpperCase();
+      urgencyMiniValPriceCurr.innerHTML = selectedValue.toUpperCase();
+      total();
     });
   }
 
@@ -193,6 +421,10 @@ window.addEventListener("DOMContentLoaded", () => {
       sessionStorage.setItem("urgency", selectedValue);
       urgencyMiniBig.style.display = "block";
       urgencyMiniVal.innerHTML = selectedValue + " days";
+      urgencyMiniValPrice.innerHTML = getPriceByName(selectedValue);
+      urgencyMiniValPrice.value = getPriceByName(selectedValue);
+      urgencyMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+      total();
     });
   }
 
@@ -209,8 +441,24 @@ window.addEventListener("DOMContentLoaded", () => {
       sessionStorage.setItem("format", fmt);
       paperFormatMiniBig.style.display = "block";
       paperFormatMiniVal.innerHTML = fmt;
+      paperFormatMiniValPrice.innerHTML = getPriceByName(fmt);
+      paperFormatMiniValPrice.value = getPriceByName(fmt);
+      paperFormatMiniValPriceCurr.innerHTML =
+        sessionStorage.getItem("currency");
+      total();
     });
   }
+
+  table.addEventListener("click", function (event) {
+    const target = event.target;
+    if (target.tagName === "TD") {
+      const radio = target.parentNode.firstChild.firstChild;
+      if (radio) {
+        radio.checked = true;
+        total();
+      }
+    }
+  });
 
   topic.addEventListener("input", function () {
     // console.log(this.value);
@@ -236,6 +484,9 @@ window.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("numOfPages", numOfPages.value);
     numOfPagesMiniBig.style.display = "block";
     numOfPagesMiniVal.innerHTML = numOfPages.value;
+    numOfPagesMiniValPrice.innerHTML = a * 2;
+    numOfPagesMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+    total();
   });
   minus.addEventListener("click", () => {
     if (a > 1) {
@@ -245,8 +496,13 @@ window.addEventListener("DOMContentLoaded", () => {
       sessionStorage.setItem("numOfPages", numOfPages.value);
       numOfPagesMiniBig.style.display = "block";
       numOfPagesMiniVal.innerHTML = a;
+      let newPrice = Math.max(numOfPagesMiniValPrice.innerHTML - 2, 3);
+      numOfPagesMiniValPrice.innerHTML = newPrice;
+      numOfPagesMiniValPriceCurr.innerHTML = sessionStorage.getItem("currency");
+      total();
     }
   });
+
   plusR.addEventListener("click", () => {
     a++;
     // a = a < 10 ? '0' +  a : a;
@@ -254,6 +510,7 @@ window.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("numOfResources", numOfResouces.value);
     numberOfResourcesMiniBig.style.display = "block";
     numberOfResourcesMiniVal.innerHTML = a;
+    total();
   });
   minusR.addEventListener("click", () => {
     if (a > 1) {
@@ -263,6 +520,7 @@ window.addEventListener("DOMContentLoaded", () => {
       sessionStorage.setItem("numOfResources", numOfResouces.value);
       numberOfResourcesMiniBig.style.display = "block";
       numberOfResourcesMiniVal.innerHTML = a;
+      total();
     }
   });
 
@@ -281,6 +539,7 @@ window.addEventListener("DOMContentLoaded", () => {
     a = numOfPages.value;
     numOfPagesMiniBig.style.display = "block";
     numOfPagesMiniVal.innerHTML = this.value;
+    total();
   });
 
   numOfResouces.addEventListener("input", function (event) {
@@ -288,6 +547,7 @@ window.addEventListener("DOMContentLoaded", () => {
     a = numOfResouces.value;
     numberOfResourcesMiniBig.style.display = "block";
     numberOfResourcesMiniVal.innerHTML = a;
+    total();
   });
 
   textarea.addEventListener("keydown", autosize);
@@ -371,6 +631,11 @@ window.addEventListener("DOMContentLoaded", () => {
         );
         formStepCircle.classList.add("form-stepper-completed");
       }
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -406,15 +671,4 @@ window.addEventListener("DOMContentLoaded", () => {
         navigateToFormStep(stepNumber);
       });
     });
-
-  const table = document.querySelector("#table");
-  table.addEventListener("click", function (event) {
-    const target = event.target;
-    if (target.tagName === "TD") {
-      const radio = target.parentNode.firstChild.firstChild;
-      if (radio) {
-        radio.checked = true;
-      }
-    }
-  });
 });

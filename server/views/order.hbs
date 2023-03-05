@@ -1,124 +1,187 @@
-{{!-- <script src='../js/testing.js' type='text/javascript' defer></script> --}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+{{! <script src='../js/testing.js' type='text/javascript' defer></script> }}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+/>
 <title>Academic Writing - Order</title>
 
 {{> user-header}}
 
-<div class='container container3'>
+<div class="container container3">
 </div>
 <br />
-<section class='container mh'>
-        <div class='card-header order-title-id'><i class="bi bi-hash"></i>ID : {{rows.uuid}}</div>
-  <div class='row'>
-    <div class='col-lg-8 mb-md-5'>
+<section class="container mh">
+  <div class="card-header order-title-id"><i class="bi bi-hash"></i>ID :
+    {{rows.uuid}}</div>
+  <div class="row">
+    <div class="col-lg-8 mb-10rem">
 
-      <div class='card mb-4'>
-        {{!-- <div class='card-header text-center pt-5 boldish font-36'>Order Details</div> --}}
-        
-        <div class="card-body p-4 p-md-5 m-md-3 mb-md-2 pt-md-2 d-flex flex-column gap-15">
+      <div class="card mb-4">
+        {{! <div class='card-header text-center pt-5 boldish font-36'>Order Details</div> }}
+
+        <div
+          class="card-body p-4 p-md-5 m-md-3 mb-md-2 pt-md-2 d-flex flex-column gap-15"
+        >
           {{!-- <div class="list-choices"><i class="bi bi-fonts"></i> Title: <div>{{rows.title}} </div> </div> --}}
           {{!-- {{!-- <div class="list-choices"><i class="bi bi-type"></i> Type Service: <div>{{rows.type_service}} </div> </div> --}}
-          {{!-- {{!-- <div class="list-choices"><i class="bi bi-paperclip"></i> Type Paper: <div> {{rows.type_paper}} </div></div> --}} 
+          {{!-- {{!-- <div class="list-choices"><i class="bi bi-paperclip"></i> Type Paper: <div> {{rows.type_paper}} </div></div> --}}
           {{!-- {{!-- <div class="list-choices"><i class="bi bi-mortarboard"></i> Academic Level: <div> {{rows.academic_level}} </div></div> --}}
-          {{!-- {{!-- <div class="list-choices"><i class="bi bi-file-earmark-plus"></i> Number of Pages: <div> {{rows.number_of_pages}} </div></div> --}} 
-          {{!-- {{!-- <div class="list-choices"><i class="bi bi-shield-check"></i> Number of Resources: <div> {{rows.number_of_resources}} </div> </div> --}} 
+          {{!-- {{!-- <div class="list-choices"><i class="bi bi-file-earmark-plus"></i> Number of Pages: <div> {{rows.number_of_pages}} </div></div> --}}
+          {{!-- {{!-- <div class="list-choices"><i class="bi bi-shield-check"></i> Number of Resources: <div> {{rows.number_of_resources}} </div> </div> --}}
           {{!-- {{!-- <div class="list-choices"><i class="bi bi-clock"></i> Urgency: <div> {{rows.urgency}} </div></div> --}}
           {{!-- {{!-- <div class="list-choices"><i class="bi bi-calendar-plus"></i> Date of creation: <div> {{rows.date_time_created}} </div></div> --}}
-          {{!-- {{!-- <div class="list-choices"><i class="bi bi-justify-left"></i> Details: <div> {{rows.description}} </div> </div> --}} 
-           <div class="list-choices"><div class="list-choices-title text-center p2-4 pt-4 mt-2 font-32"> Order Details</div> </div> 
-           <hr class="mb-4 p-0">
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-fonts pe-2"></i> Topic: </div> <div class="list-choices-more" >{{rows.title}} </div> </div> 
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-type pe-2"></i> Type Service: </div><div class="list-choices-more" >{{rows.type_service}} </div> </div>
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-paperclip pe-2"></i> Type Paper: </div><div class="list-choices-more" >  {{rows.type_paper}} </div></div> 
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-mortarboard pe-2"></i> Academic Level: </div><div class="list-choices-more" >  {{rows.academic_level}} </div></div> 
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-file-earmark-plus pe-2"></i> Number of Pages: </div><div class="list-choices-more" >  {{rows.number_of_pages}} </div></div> 
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-shield-check pe-2"></i> Number of Resources: </div><div class="list-choices-more" >  {{rows.number_of_resources}} </div> </div>
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-clock pe-2"></i> Urgency: </div><div class="list-choices-more" >  {{rows.urgency}} </div></div>
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-calendar-plus pe-2"></i> Date of creation: </div><div class="list-choices-more" >  {{rows.date_time_created}} </div></div>
-           <div class="list-choices"><div class="list-choices-title"><i class="bi bi-justify-left pe-2"></i> Details: </div><div class="list-choices-more" >  {{rows.description}} </div> </div>
-           
-           <hr class="mt-4 p-0 ">
+          {{!-- {{!-- <div class="list-choices"><i class="bi bi-justify-left"></i> Details: <div> {{rows.description}} </div> </div> --}}
+          <div class="list-choices"><div
+              class="list-choices-title text-center p2-4 pt-4 mt-2 font-32"
+            > Order Details</div>
+          </div>
+          <hr class="mb-4 p-0" />
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-fonts pe-2"
+              ></i>
+              Topic:
+            </div>
+            <div class="list-choices-more">{{rows.title}} </div>
+          </div>
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-type pe-2"
+              ></i>
+              Type Service:
+            </div><div class="list-choices-more">{{rows.type_service}} </div>
+          </div>
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-paperclip pe-2"
+              ></i>
+              Type Paper:
+            </div><div class="list-choices-more">
+              {{rows.type_paper}}
+            </div></div>
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-mortarboard pe-2"
+              ></i>
+              Academic Level:
+            </div><div class="list-choices-more">
+              {{rows.academic_level}}
+            </div></div>
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-file-earmark-plus pe-2"
+              ></i>
+              Number of Pages:
+            </div><div class="list-choices-more">
+              {{rows.number_of_pages}}
+            </div></div>
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-shield-check pe-2"
+              ></i>
+              Number of Resources:
+            </div><div class="list-choices-more">
+              {{rows.number_of_resources}}
+            </div>
+          </div>
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-clock pe-2"
+              ></i>
+              Urgency:
+            </div><div class="list-choices-more"> {{rows.urgency}} </div></div>
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-calendar-plus pe-2"
+              ></i>
+              Date of creation:
+            </div><div class="list-choices-more">
+              {{rows.date_time_created}}
+            </div></div>
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-justify-left pe-2"
+              ></i>
+              Details:
+            </div><div class="list-choices-more"> {{rows.description}} </div>
+          </div>
+
+          <hr class="mt-4 p-0" />
+          <div class="list-choices"><div class="list-choices-title"><i
+                class="bi bi-info-lg pe-2"
+              ></i>
+              Status:
+            </div><div class="list-choices-more"> {{rows.status}} </div>
+          </div>
         </div>
-           <div class='text-center small pt-3 px-4 mt-1 mb-5'>All these selections can be
-              changed by emailing us at academicwriting@gmail.com</div>
+        <div class="text-center small pt-3 px-4 mt-1 mb-5">All these selections
+          can be changed by emailing us at academicwriting@gmail.com</div>
 
       </div>
 
-      {{!-- <div class='card mb-4'>
+      {{! <div class='card mb-4'>
         <div class='card-body'>
         <div class='card-header'>Security Preferences</div>
           <div>Card Body</div>
         </div>
-      </div> --}}
+      </div> }}
     </div>
 
-
-
-    <div class='col-lg-4'>
-          <div class=''>
-        <div class='card mini-summary2 mb-5'>
-          <div class='h5'>Amazing things for FREE</div>
-          <hr class='mb-0' />
-          <ul id='mini-ul2'>
+    <div class="col-lg-4">
+      <div class="">
+        <div class="card mini-summary2 mb-5">
+          <div class="h5">Amazing things for FREE</div>
+          <hr class="mb-0" />
+          <ul id="mini-ul2">
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
-            <hr class='my-0' />
+            <hr class="my-0" />
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Formating
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$7.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
-            <hr class='my-0' />
+            <hr class="my-0" />
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
-            <hr class='my-0' />
+            <hr class="my-0" />
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
           </ul>
           <a
-            href='/pricing'
-            class='btn bg-orange text-white enjoy-button'
+            href="/pricing"
+            class="btn bg-orange text-white enjoy-button"
           >Enjoy</a>
         </div>
       </div>
 
-
-      {{!-- <div class=''>
+      {{! <div class=''>
       </div>
       <div class='card mb-4 p-4'>
         <div class='card-header'>Order Status</div>
@@ -130,7 +193,7 @@
           >Enjoy</a>
           
         </div>
-       </div> --}}
+       </div> }}
     </div>
   </div>
 

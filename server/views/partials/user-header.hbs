@@ -1,130 +1,127 @@
-<div class='empty-space'></div>
+<div class="empty-space"></div>
 
-<div class='container mt-3'>
-  <nav class='navbar navbar-expand-lg navbar-light'>
-    <div class='container-fluid'>
+<div class="container mt-3">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
       <button
-        class='navbar-toggler'
-        type='button'
-        data-bs-toggle='collapse'
-        data-bs-target='#navbarTogglerDemo01'
-        aria-controls='navbarTogglerDemo01'
-        aria-expanded='false'
-        aria-label='Toggle navigation'
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <span class='navbar-toggler-icon'></span>
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div class='collapse navbar-collapse' id='navbarTogglerDemo01'>
-        <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {{#if activeHome}}
-            <li class='nav-item'>
+            <li class="nav-item">
               <a
-                class='nav-link active ms-0 org-col-imp'
-                aria-current='page'
-                href='/customer-home'
+                class="nav-link active ms-0 org-col-imp"
+                aria-current="page"
+                href="/customer-home"
               >Home</a>
             </li>
           {{else}}
-            <li class='nav-item'>
+            <li class="nav-item">
               <a
-                class='nav-link active ms-0'
-                aria-current='page'
-                href='/customer-home'
+                class="nav-link active ms-0"
+                aria-current="page"
+                href="/customer-home"
               >Home</a>
             </li>
           {{/if}}
           {{#if activePricing}}
-            <li class='nav-item'>
-              <a class='nav-link active org-col-imp' href='/pricing'>New Order</a>
+            <li class="nav-item">
+              <a class="nav-link active org-col-imp" href="/pricing">New Order</a>
             </li>
           {{else}}
-            <li class='nav-item'>
-              <a class='nav-link active' href='/pricing'>New Order</a>
+            <li class="nav-item">
+              <a class="nav-link active" href="/pricing">New Order</a>
             </li>
           {{/if}}
           {{#if activeCustomerOrders}}
-            <li class='nav-item'>
+            <li class="nav-item">
               <a
-                class='nav-link active org-col-imp'
-                href='/customer-orders'
+                class="nav-link active org-col-imp"
+                href="/customer-orders"
               >Orders</a>
             </li>
           {{else}}
-            <li class='nav-item'>
-              <a class='nav-link active' href='/customer-orders'>Orders</a>
+            <li class="nav-item">
+              <a class="nav-link active" href="/customer-orders">Orders</a>
             </li>
           {{/if}}
         </ul>
         {{#if all}}
-          <div class='dropdown'>
+          <div class="dropdown">
             <button
-              class='btn btn-outline-secondary dropdown-toggle org-col-imp'
-              type='button'
-              id='dropdownMenuButton1'
-              data-bs-toggle='dropdown'
-              aria-expanded='false'
+              class="btn btn-outline-secondary dropdown-toggle org-col-imp"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
               Account
             </button>
-            <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               {{#if activeProfile}}
                 <li><a
-                    class='dropdown-item org-col-imp'
-                    href='/profile'
+                    class="dropdown-item org-col-imp"
+                    href="/profile"
                   >Profile</a></li>
               {{else}}
-                <li><a class='dropdown-item' href='/profile'>Profile</a></li>
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
               {{/if}}
               {{#if activeBilling}}
                 <li><a
-                    class='dropdown-item org-col-imp'
-                    href='/billing'
+                    class="dropdown-item org-col-imp"
+                    href="/billing"
                   >Billing</a></li>
               {{else}}
-                <li><a class='dropdown-item' href='/billing'>Billing</a></li>
+                <li><a class="dropdown-item" href="/billing">Billing</a></li>
               {{/if}}
               {{#if activeSecurity}}
                 <li><a
-                    class='dropdown-item org-col-imp'
-                    href='/security'
+                    class="dropdown-item org-col-imp"
+                    href="/security"
                   >Security</a></li>
               {{else}}
-                <li><a class='dropdown-item' href='/security'>Security</a></li>
+                <li><a class="dropdown-item" href="/security">Security</a></li>
               {{/if}}
               {{#if activeNotifications}}
                 <li><a
-                    class='dropdown-item org-col-imp'
-                    href='/notifications-settings'
+                    class="dropdown-item org-col-imp"
+                    href="/notifications-settings"
                   >Notifications</a></li>
               {{else}}
                 <li><a
-                    class='dropdown-item'
-                    href='/notifications-settings'
+                    class="dropdown-item"
+                    href="/notifications-settings"
                   >Notifications</a></li>
               {{/if}}
             </ul>
           </div>
         {{else}}
-          <div class='dropdown'>
+          <div class="dropdown">
             <button
-              class='btn btn-outline-secondary dropdown-toggle'
-              type='button'
-              id='dropdownMenuButton1'
-              data-bs-toggle='dropdown'
-              aria-expanded='false'
+              class="btn btn-outline-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
               Account
             </button>
-            <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-              <li><a class='dropdown-item' href='/profile'>Profile</a></li>
-              <li><a class='dropdown-item' href='/billing'>Billing</a></li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="/billing">Billing</a></li>
+              <li><a class="dropdown-item" href="/security">Security</a></li>
               <li><a
-                  class='dropdown-item'
-                  href='/security'
-                >Security</a></li>
-              <li><a
-                  class='dropdown-item'
-                  href='/notifications-settings'
+                  class="dropdown-item"
+                  href="/notifications-settings"
                 >Notifications</a></li>
             </ul>
           </div>
@@ -134,4 +131,4 @@
   </nav>
 </div>
 
-<hr class='mt-0 mb-4' />
+<hr class="mt-0 mb-4" />
