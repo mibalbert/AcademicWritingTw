@@ -9,6 +9,8 @@ const bcrypt = require("bcrypt");
 const flash = require("express-flash");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
+const dateNow = new Date();
+
 const {
   createCustomerOrder,
   generateProductId,
@@ -39,7 +41,9 @@ exports.homeGET = (req, res) => {
 // Login Users
 exports.loginGET = (req, res) => {
   console.log("GET /login");
+  const authorised = req.cookies["_aut121421"];
   res.render("login", {
+    authorised: authorised,
     emailError: req.flash("emailError"),
     emailError: req.flash("systemError"),
     passError: req.flash("passError"),
@@ -93,12 +97,15 @@ exports.loginPOST = async (req, res) => {
 // Register
 exports.registerGET = (req, res) => {
   console.log("GET /register");
+  const authorised = req.cookies["_aut121421"];
   res.render("register", {
+    authorised: authorised,
     error: req.flash("error"),
   });
 };
 exports.registerPOST = async (req, res) => {
   console.log("POST /register");
+  const authorised = req.cookies["_aut121421"];
   const data = req.body;
 
   const conn = await db.getConnection();
@@ -162,29 +169,28 @@ exports.customerHomeGET = async (req, res) => {
 
   if (!authorised) {
     res.redirect("/login");
-  } else {
-    const conn = await db.getConnection();
-    try {
-      const [rows] = await db.execute(
-        "SELECT * FROM orders WHERE user_email = ? LIMIT 3",
-        [authorised]
-      );
+  }
+  const conn = await db.getConnection();
+  try {
+    const [rows] = await db.execute(
+      "SELECT * FROM orders WHERE user_email = ? LIMIT 3",
+      [authorised]
+    );
 
-      res.render("customer-home", {
-        rows,
-        authorised,
-        userFirstName,
-        roleCustomer,
-        success: req.flash("success"),
-        registered: req.flash("registered"),
-        activeHome,
-      });
-    } catch (err) {
-      console.log(err);
-      res.redirect("/customer-home");
-    } finally {
-      conn.release();
-    }
+    res.render("customer-home", {
+      rows,
+      authorised,
+      userFirstName,
+      roleCustomer,
+      success: req.flash("success"),
+      registered: req.flash("registered"),
+      activeHome,
+    });
+  } catch (err) {
+    console.log("THE FUCKING ERROR FROM CUSTOMER HOME", err);
+    res.redirect("/customer-home");
+  } finally {
+    conn.release();
   }
 };
 
@@ -516,8 +522,35 @@ exports.webhookPOST = async (req, res) => {
     // Fulfill any orders, e-mail receipts, etc
     // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
     console.log("💰 Payment captured!");
+    console.log(data);
+
+    // try {
+    //   const result = await db.qury(
+    //     `INSERT INTO payments (user_email, amount, date, transaction_id, payment_method, status)
+    //         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    //     [
+    //       123,
+    //       50.0,
+    //       dateNow(),
+    //       "ABC123XYZ",
+    //       "Credit Card",
+    //       "Successful",
+    //     ]
+    //   );
+
+    //   // const [data] = await db.query(`SELECT * FROM accounts`);
+    //   console.log(data);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   } else if (eventType === "payment_intent.payment_failed") {
     console.log("❌ Payment failed.");
+    try {
+      const [data] = await db.query(`SELECT * FROM accounts`);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
   res.sendStatus(200);
 };

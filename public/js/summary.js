@@ -267,6 +267,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     addMessage(`Client secret returned.`);
 
     const nameInput = document.querySelector("#name");
+    const emailInput = document.querySelector("#email");
 
     // Confirm the card payment given the clientSecret
     // from the payment intent that was just created on
@@ -277,6 +278,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           card: card,
           billing_details: {
             name: nameInput.value,
+            email: emailInput.value,
           },
         },
       });
@@ -287,10 +289,16 @@ window.addEventListener("DOMContentLoaded", async () => {
       // reenable the form.
       submitted = false;
       form.querySelector("button").disabled = false;
+      setTimeout(() => {
+        removeAddMessage();
+      }, 2000);
       return;
     }
     window.location.href = "/customer-home";
-    addMessage(`Payment ${paymentIntent.status}: ${paymentIntent.id}`);
+    // addMessage(`Payment ${paymentIntent.status}: ${paymentIntent.id}`);
+    // setTimeout(() => {
+    //   removeAddMessage();
+    // }, 2000);
   });
 
   const addMessage = (message) => {
@@ -299,6 +307,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     const messageWithLinks = addDashboardLinks(message);
     messagesDiv.innerHTML += `> ${messageWithLinks}<br>`;
     console.log(`Debug: ${message}`);
+  };
+  const removeAddMessage = () => {
+    const messagesDiv = document.querySelector("#messages");
+    messagesDiv.style.display = "none";
   };
   const addDashboardLinks = (message) => {
     const piDashboardBase = "https://dashboard.stripe.com/test/payments";

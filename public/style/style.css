@@ -53,9 +53,10 @@ body {
 }
 
 .font-12 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   gap: 12px;
 }
+
 
 .dark-bg {
   background-color: #000000;
@@ -3323,6 +3324,10 @@ background: linear-gradient(to right, #8DC26F, #76b852);  */
 
 .org-col-imp {
   font-weight: 600;
+  color: #fc8433 !important;
+}
+.org-col-imp2 {
+  /* font-weight: 600; */
   color: #fc8433 !important;
 }
 

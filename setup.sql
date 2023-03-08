@@ -218,8 +218,103 @@ Overall, Examining the Relationship between Income Inequality and Health Outcome
 
 
 
+CREATE TABLE items (
+  name VARCHAR(255),
+  price INT
+);
+
+INSERT INTO items (name, price)
+VALUES 
+  ('Academic Paper Writing', 10),
+  ('Disertation Services', 11),
+  ('Writing Incl. Calculations', 9),
+  ('Admission Services', 10),
+  ('Math/Physic/Economic/Statistic Problems', 40),
+  ('Multiple Choice Questions', 12),
+  ('Editing', 12),
+  ('Proofreading', 12),
+  ('Rewriting', 44),
+  ('Copywriting', 9),
+  ('Resume/CV Services', 10),
+  ('Essay', 12),
+  ('Coursework', 4),
+  ('Research Paper', 4),
+  ('Term-paper', 6),
+  ('Case Study', 54),
+  ('Capstone Project', 12),
+  ('Assignment', 43),
+  ('Num. of Pages', 43),
+  ('Freshman', 43),
+  ('High School', 43),
+  ('Sophomore', 43),
+  ('Junior', 23),
+  ('Senior', 13),
+  ('Master', 3),
+  ('Doctoral', 53),
+  ('3 Days', 4),
+  ('5 Days', 3),
+  ('7 Days', 10),
+  ('14 Days', 5),
+  ('17 Days', 6),
+  ('30 Days', 4),
+  ('40 Days', 80),
+  ('MLA', 43),
+  ('APA', 43),
+  ('Chicago', 43),
+  ('Harvard', 43),
+  ('OSCOLA', 43),
+  ('Art', 6),
+  ('Music', 8),
+  ('Paintings', 5),
+  ('Theatre', 5),
+  ('Arhitecture', 8),
+  ('Business', 7),
+  ('Comm. & Media', 5),
+  ('Journalism', 10),
+  ('Advertising', 7),
+  ('Public Relations', 10),
+  ('Comm. Strategies', 10),
+  ('Economics', 10),
+  ('Logistics', 10),
+  ('Trade', 5),
+  ('E-commerce', 10),
+  ('Social Work', 10),
+  ('Political Science', 5),
+  ('Sociology', 10),
+  ('Finance', 8),
+  ('Physical Studies', 5),
+  ('Accounting', 8),
+  ('Investment', 8),
+  ('Engineering', 6),
+  ('English', 7),
+  ('Healthcare & Medicine', 8),
+  ('Medicine & Dentistry', 10),
+  ('Nursing', 6),
+  ('Phatogenesis of Disease', 7),
+  ('History', 6),
+  ('IT & Technology', 10),
+  ('Law', 7),
+  ('Literature', 6),
+  ('Management', 8),
+  ('Sports', 6),
+  ('Marketing', 6),
+  ('Int. Relations', 7),
+  ('Public Health', 6),
+  ('Linguistics', 8);
 
 
+  
+
+CREATE TABLE payments (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  customer_id INT NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  date DATETIME NOT NULL,
+  transaction_id VARCHAR(255) NOT NULL,
+  payment_method VARCHAR(50) NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 
 
