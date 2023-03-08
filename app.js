@@ -1,13 +1,14 @@
 /** app.js */
 
-const express = require('express');
-const exphbs = require('express-handlebars');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const flash = require('connect-flash');
+const express = require("express");
+const exphbs = require("express-handlebars");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const flash = require("connect-flash");
+const cors = require("cors");
 
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -17,10 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cookieParser('NotSoSecret'));
+app.use(cookieParser("NotSoSecret"));
 app.use(
   session({
-    secret: 'something',
+    secret: "something",
     cookie: { maxAge: 60000 },
     resave: true,
     saveUninitialized: true,
@@ -29,11 +30,23 @@ app.use(
 app.use(flash());
 
 // Static Files
-app.use(express.static('public'));
+app.use(express.static("public"));
+
+app.use(
+  bodyParser.json({
+    // Because Stripe needs the raw body, we compute it but only when hitting the Stripe callback URL.
+    verify: function (req, res, buf) {
+      var url = req.originalUrl;
+      if (url.startsWith("/stripe-webhooks")) {
+        req.rawBody = buf.toString();
+      }
+    },
+  })
+);
 
 // Templating Engine
 const handlebars = exphbs.create({
-  extname: '.hbs',
+  extname: ".hbs",
   helpers: {
     // capitalize: (str) => {
     //   return str.toUpperCase() + str.slice(1);
@@ -48,14 +61,14 @@ const handlebars = exphbs.create({
     //   if(str === 'in-progress') return true
     //   return false
     // }
-  }
+  },
 });
 
-app.engine('.hbs', handlebars.engine);
-app.set('view engine', '.hbs');
-app.set('views', 'server/views');
+app.engine(".hbs", handlebars.engine);
+app.set("view engine", ".hbs");
+app.set("views", "server/views");
 
-const routes = require('./server/routes/router');
-app.use('/', routes);
+const routes = require("./server/routes/router");
+app.use("/", routes);
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));

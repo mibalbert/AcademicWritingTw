@@ -1,6 +1,6 @@
 /* orders.js */
 
-const db = require('./db.js');
+const db = require("./db.js");
 
 function getSlickOrders(email) {
   return new Promise(async (resolve, reject) => {
@@ -9,10 +9,10 @@ function getSlickOrders(email) {
       [email],
       (err, records) => {
         if (!records) {
-          console.log(records)
-          resolve({message:'Found some records', records: records});
+          console.log(records);
+          resolve({ message: "Found some records", records: records });
         } else {
-          reject({message:'No records found'});
+          reject({ message: "No records found" });
         }
       }
     );
@@ -85,11 +85,12 @@ const dateTimeCreated = new Date();
  * @returns {bool} returns bool
  */
 
-function createCustomerOrder(data, authorised) {
+exports.createCustomerOrder = async (data, authorised) => {
   const uuid = generateProductId();
 
+  console.log("THE DATA FROM THE CREATE");
   try {
-    db.query(
+    await db.query(
       `INSERT INTO orders          \
 			(	
 				user_email VARCHAR(255) NOT NULL,\
@@ -127,17 +128,17 @@ function createCustomerOrder(data, authorised) {
         } else {
           console.log(err);
         }
-        console.log('The data from post order: \n', result);
+        console.log("The data from post order: \n", result);
       };
   } catch (err) {
     console.log(err);
   }
-}
+};
 
-function generateProductId() {
+exports.generateProductId = () => {
   const characters =
-    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let productId = '';
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let productId = "";
   for (let i = 0; i < 7; i++) {
     productId += characters.charAt(
       Math.floor(Math.random() * characters.length)
@@ -145,11 +146,11 @@ function generateProductId() {
   }
   console.log(productId);
   return productId;
-}
-
-module.exports = {
-  getSlickOrders,
-  getUserOrders,
-  getOrderDetails,
-  createCustomerOrder,
 };
+
+// module.exports = {
+//   getSlickOrders,
+//   getUserOrders,
+//   getOrderDetails,
+//   createCustomerOrder,
+// };

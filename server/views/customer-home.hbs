@@ -64,7 +64,7 @@
 {{> user-header}}
 
 <div class='container'>
-  <div class='h4 py-2'>
+  <div class='h4 py-2 onyx'>
     {{#if userFirstName}}
       Hi there
       {{userFirstName}}
@@ -86,17 +86,62 @@
                 <div class='ord-prew'>
                   {{!-- <div class='book-min-title'>Title:<br />{{this.title}}</div> --}}
                   <div class='book-min-title'>{{this.title}}</div>
-                  <div class='book-min-aut'>Academic Writing </div>
+                  <div class='book-min-aut green'>Academic Writing </div>
                 </div>
               </div>
-              <div class='ord-content ps-5 py-3'>
-                <div class='ord-text'>
-                  <div class='ord-uuid'>ID -
-                    <span class='fw-boldish'>
+              {{!-- <div class='ord-content ps-5 py-3'> --}}
+              <div class='ord-content ps-4 rem py-3'>
+                <div class='ord-text ps-2rem'>
+                  {{!-- <div class='ord-uuid'> --}}
+                  <div class='row '>
+                    <div class="col-5 ">
+                    ID:
+                    </div>
+                    <div class='col-7  ord-uuid'>
                       {{this.uuid}}
-                    </span>
+                    </div>
                   </div>
-                  <div class='ord-type-paper'>Type -
+                  {{!-- <div class='row '>
+                    <div class="col-5 ">
+                    Service:
+                    </div>
+                    <div class='col-7 fw-boldish ord-uuid'>
+                      {{this.type_service}}
+                    </div>
+                  </div> --}}
+                  <div class='row '>
+                    <div class="col-5 ">
+                    Type Paper:
+                    </div>
+                    <div class='col-7  ord-uuid'>
+                      {{this.type_paper}}
+                    </div>
+                  </div>
+                  <div class='row '>
+                    <div class="col-5 ">
+                    Num. of Pages:
+                    </div>
+                    <div class='col-7  ord-uuid'>
+                      {{this.number_of_pages}}
+                    </div>
+                  </div>
+                  <div class='row '>
+                    <div class="col-5 ">
+                    Created:
+                    </div>
+                    <div class='col-7  ord-uuid'>
+                      {{this.date_time_created}}
+                    </div>
+                  </div>
+                  <div class='row '>
+                    <div class="col-5 ">
+                    Status:
+                    </div>
+                    <div class='col-7 fw-boldish onyx ord-uuid'>
+                      {{this.status}}
+                    </div>
+                  </div>
+                  {{!-- <div class='ord-type-paper'>Type -
                     <span class='fw-boldish'>
                       {{this.type_paper}}
                     </span>
@@ -125,7 +170,7 @@
                     <span class='text-primary fw-boldish'>
                       {{this.status}}
                     </span>
-                  </div>
+                  </div> --}}
                 </div>
                 {{! <div>
                       <div class='ord-see pb-3'><svg
@@ -233,7 +278,7 @@
       <div class=''>
 
         <div class='card mini-summary2'>
-          <div class='h5'>Amazing things for FREE</div>
+          <div class='h5 onyx'>Amazing things for FREE</div>
           <hr class='mb-0' />
           <ul id='mini-ul2'>
             <li>

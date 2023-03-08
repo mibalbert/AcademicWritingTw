@@ -9,6 +9,11 @@ const bcrypt = require("bcrypt");
 const flash = require("express-flash");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
+const {
+  createCustomerOrder,
+  generateProductId,
+} = require("../modules/orders.js");
+
 const SALTROUNDS = 10;
 
 // Home
@@ -224,65 +229,6 @@ exports.pricingGET = (req, res) => {
   });
 };
 
-// const storeItems = new Map([
-//   // [1, {currency: 'cad'},]
-
-//   // typeService: 'Academic Paper Writing ',
-//   // typePaper: 'essay',
-//   // numOfPages: '1',
-//   // academicLevel: 'high-school',
-//   // urgency: '40',
-//   // paperFormat: 'OSCOLA',
-//   // subjectArea: 'art',
-//   // numOfResources: '1',
-//   // topic: '',
-//   // paperDetails: ''
-
-//   [1, { priceInCents: 10000, name: 'Learn React Today', type: 'some Type' }],
-//   [2, { priceInCents: 20000, name: 'Learn CSS Today', type: 'some Type' }],
-// ]);
-
-// exports.createCheckoutSessionsPOST = async (req, res) => {
-//   console.log('GET /Create checkout session');
-//   try {
-//     // let result = req.body.items.map((item) => {
-//     //   const storeItem = storeItems.get(item.id);
-//     //   return {
-//     //     name: storeItem.name,
-//     //     name2: item.name,
-//     //     type: storeItem.type,
-//     //     value: item.value,
-//     //   };
-//     // });
-//     // console.log("The result", result)
-//     // console.log(req.body.items[0].currency)
-//     const session = await stripe.checkout.sessions.create({
-//       payment_method_types: ['card'],
-//       mode: 'payment',
-//       line_items: req.body.items.map((item) => {
-//         const storeItem = storeItems.get(item.id);
-//         return {
-//           price_data: {
-//             currency: 'usd',
-//             product_data: {
-//               name: storeItem.name,
-//             },
-//             unit_amount: storeItem.priceInCents,
-//           },
-//           quantity: item.quantity,
-//         };
-//       }),
-//       // success_url: `${process.env.CLIENT_URL}/success.html`,
-//       // cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
-//       success_url: `http://localhost:8080/`,
-//       cancel_url: `http://localhost:8080/pricing`,
-//     });
-//     res.json({ url: session.url });
-//   } catch (e) {
-//     res.status(500).json({ error: e.message });
-//   }
-// };
-
 exports.orderID = async (req, res) => {
   console.log("/GET /order/:uuid");
   try {
@@ -457,47 +403,121 @@ exports.configGET = (req, res) => {
   });
 };
 
-const calculateOrderAmount = (items) => {
-  items.forEach(async (item) => {
-    const name = item.name;
-    const quantity = item.quantity;
-    // const {id} = await db.query('SELECT price FROM items WHERE name = ?', [name])
-    const { id, user_email } = await db.query("SELECT * FROM accounts");
-  });
-
-  return 1400;
-};
-
 exports.createPaymentIntentPOST = async (req, res) => {
-  const { items } = req.body;
-  console.log(items);
+  // const {paymentMethodType, currency,paymentMethodOptions} = req.body;
 
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    // amount: calculateOrderAmount(items),
-    amount: "1222",
-    currency: items[0].currency,
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
-  // console.log(paymentIntent);
-  if (paymentIntent.status === "succeeded") {
-    console.log("IT WORKED");
-    // Save the metadata to your server
-    // For example, you could save it to a database or send it in an email
+  let currency = "eur";
+  // Each payment method type has support for different currencies. In order to
+  // support many payment method types and several currencies, this server
+  // endpoint accepts both the payment method type and the currency as
+  // parameters. To get compatible payment method types, pass
+  // `automatic_payment_methods[enabled]=true` and enable types in your dashboard
+  // at https://dashboard.stripe.com/settings/payment_methods.
+  //
+  // Some example payment method types include `card`, `ideal`, and `link`.
+  const params = {
+    payment_method_types: ["card"],
+    amount: 5999,
+    currency: currency,
+  };
+
+  // If this is for an ACSS payment, we add payment_method_options to create
+  // the Mandate.
+  // if (paymentMethodType === "acss_debit") {
+  //   params.payment_method_options = {
+  //     acss_debit: {
+  //       mandate_options: {
+  //         payment_schedule: "sporadic",
+  //         transaction_type: "personal",
+  //       },
+  //     },
+  //   };
+  // } else if (paymentMethodType === "konbini") {
+  //   /**
+  //    * Default value of the payment_method_options
+  //    */
+  //   params.payment_method_options = {
+  //     konbini: {
+  //       product_description: "Tシャツ",
+  //       expires_after_days: 3,
+  //     },
+  //   };
+  // } else if (paymentMethodType === "customer_balance") {
+  //   params.payment_method_data = {
+  //     type: "customer_balance",
+  //   };
+  //   params.confirm = true;
+  //   params.customer =
+  //     req.body.customerId ||
+  //     (await stripe.customers.create().then((data) => data.id));
+  // }
+
+  /**
+   * If API given this data, we can overwride it
+   */
+  // if (paymentMethodOptions) {
+  //   params.payment_method_options = paymentMethodOptions;
+  // }
+
+  // Create a PaymentIntent with the amount, currency, and a payment method type.
+  //
+  // See the documentation [0] for the full list of supported parameters.
+  //
+  // [0] https://stripe.com/docs/api/payment_intents/create
+  try {
+    const paymentIntent = await stripe.paymentIntents.create(params);
+
+    // Send publishable key and PaymentIntent details to client
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+      nextAction: paymentIntent.next_action,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      error: {
+        message: e.message,
+      },
+    });
   }
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
 };
 
-exports.testingPOST = (req, res) => {
-  console.log("POST /testing");
+// Expose a endpoint as a webhook handler for asynchronous events.
+// Configure your webhook in the stripe developer dashboard
+// https://dashboard.stripe.com/test/webhooks
+exports.webhookPOST = async (req, res) => {
+  let data, eventType;
 
-  const data = req.body;
+  // Check if webhook signing is configured.
+  if (process.env.STRIPE_WEBHOOK_SECRET) {
+    // Retrieve the event by verifying the signature using the raw body and secret.
+    let event;
+    let signature = req.headers["stripe-signature"];
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.rawBody,
+        signature,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      console.log(`⚠️  Webhook signature verification failed.`);
+      return res.sendStatus(400);
+    }
+    data = event.data;
+    eventType = event.type;
+  } else {
+    // Webhook signing is recommended, but if the secret is not configured in `config.js`,
+    // we can retrieve the event data directly from the request body.
+    data = req.body.data;
+    eventType = req.body.type;
+  }
 
-  console.log(data);
-
-  res.render("tst");
+  if (eventType === "payment_intent.succeeded") {
+    // Funds have been captured
+    // Fulfill any orders, e-mail receipts, etc
+    // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
+    console.log("💰 Payment captured!");
+  } else if (eventType === "payment_intent.payment_failed") {
+    console.log("❌ Payment failed.");
+  }
+  res.sendStatus(200);
 };

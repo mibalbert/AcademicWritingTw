@@ -10,21 +10,21 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   const clientSecret = params.get("payment_intent_client_secret");
 
-  const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+  // const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
   const payedTotal = document.getElementById("payed-total");
-  payedTotal.innerHTML = paymentIntent.amount / 100;
+  // payedTotal.innerHTML = paymentIntent.amount / 100;
 
   const payedTotalCurrency = document.getElementById("payed-total-currency");
 
-  payedTotalCurrency.innerHTML = paymentIntent.currency.toUpperCase();
+  // payedTotalCurrency.innerHTML = paymentIntent.currency.toUpperCase();
 
   //   const paymentType = document.getElementById("payment-type");
   //   paymentType.innerHTML = paymentIntent.amount;
   const paymentStatus = document.getElementById("payment-status");
-  paymentStatus.innerHTML = paymentIntent.status.toUpperCase();
+  // paymentStatus.innerHTML = paymentIntent.status.toUpperCase();
 
-  //   const paymentIntentPre = document.getElementById("payment-intent");
+  const paymentIntentPre = document.getElementById("payment-intent");
 
-  //   paymentIntentPre.innerHTML = JSON.stringify(paymentIntent, null, 2);
+  paymentIntentPre.innerHTML = JSON.stringify(paymentIntent, null, 2);
 });

@@ -1,4 +1,4 @@
-<script src="js/pricing.js" type="text/javascript" defer></script>
+<script src="js/pricing.js" type="module" defer></script>
 <title>Academic Writing - New Order</title>
 
 {{#if authorised}}
@@ -11,7 +11,7 @@
 
 {{/if}}
 
-<section class="container container-res">
+<section class="container container-res mb-0 pb-0">
 
   <div class="row">
     <div class="col-lg-8">
@@ -76,35 +76,43 @@
                   {{! required }}
                 />
                 <input
+                class="disabled-currency"
                   label="USD"
                   type="radio"
                   id="usd"
                   name="currency"
                   value="USD"
+                  disabled
                   {{! required }}
                 />
                 <input
+                class="disabled-currency"
                   label="GBP"
                   type="radio"
                   id="gbp"
                   name="currency"
                   value="GBP"
+                  disabled
                   {{! required }}
                 />
                 <input
+                class="disabled-currency"
                   label="AUD"
                   type="radio"
                   id="aud"
                   name="currency"
                   value="AUD"
+                  disabled
                   {{! required }}
                 />
                 <input
+                class="disabled-currency"
                   label="CAD"
                   type="radio"
                   id="cad"
                   name="currency"
                   value="CAD"
+                  disabled
                   {{! required }}
                 />
               </div>
@@ -678,7 +686,7 @@
         <hr class="mb-0" />
         <div class="zig-zag-bottom"></div>
         <div class="row">
-          <div class="col-5 h-30 d-flex align-items-center no-break">
+          <div class="col-4 h-30 d-flex align-items-center no-break">
             Title page
           </div>
           <div
@@ -688,7 +696,7 @@
             <span class="line-through">$4.99</span>
           </div>
 
-          <div class="col-3 d-flex justify-content-end align-items-center"><span
+          <div class="col-4 d-flex justify-content-end align-items-center"><span
               class="free"
             >
               FREE
@@ -700,7 +708,7 @@
 
         <hr class="my-0" />
         <div class="row">
-          <div class="col-5 h-30 d-flex align-items-center no-break">
+          <div class="col-4 h-30 d-flex align-items-center no-break">
             Formatting
           </div>
           <div
@@ -709,7 +717,7 @@
             for
             <span class="line-through">$4.99</span>
           </div>
-          <div class="col-3 d-flex justify-content-end align-items-center"><span
+          <div class="col-4 d-flex justify-content-end align-items-center"><span
               class="free"
             >
               FREE
@@ -718,7 +726,7 @@
         </div>
         <hr class="my-0" />
         <div class="row">
-          <div class="col-5 h-30 d-flex align-items-center no-break">
+          <div class="col-4 h-30 d-flex align-items-center no-break">
             Title page
           </div>
           <div
@@ -727,7 +735,7 @@
             for
             <span class="line-through">$4.99</span>
           </div>
-          <div class="col-3 d-flex justify-content-end align-items-center"><span
+          <div class="col-4 d-flex justify-content-end align-items-center"><span
               class="free"
             >
               FREE
@@ -736,16 +744,16 @@
         </div>
         <hr class="my-0" />
         <div class="row">
-          <div class="col-5 h-30 d-flex align-items-center no-break">
+          <div class="col-4 h-30 d-flex align-items-center no-break">
             Title page
           </div>
           <div
-            class="col-4 d-flex justify-content-end align-items-center gap-2"
+            class="col-4 d-flex justify-content-center align-items-center gap-2"
           >
             for
             <span class="line-through">$4.99</span>
           </div>
-          <div class="col-3 d-flex justify-content-end align-items-center"><span
+          <div class="col-4 d-flex justify-content-end align-items-center"><span
               class="free"
             >
               FREE
@@ -753,14 +761,15 @@
           </div>
         </div>
 
-        <div id="currencyMiniBig" style="display: none;">
+        {{!-- <div id="currencyMiniBig" style="display: none;"> --}}
           <hr class="my-0" />
+        <div id="currencyMiniBig">
           <div class="row">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Currency
             </div>
             <div
-              class="col-5 d-flex justify-content-center align-items-center"
+              class="col-6 d-flex justify-content-start align-items-center ps-2rem small"
               id="currencyMiniVal"
             >
             </div>
@@ -786,35 +795,37 @@
           </div>
         </div>
 
-        <div id="typeServiceMiniBig" class="me-3" style="display: none;">
+        {{!-- <div id="typeServiceMiniBig" class="me-3" style="display: none;"> --}}
           <hr class="my-0" />
+        <div id="typeServiceMiniBig" class="me-3" >
           <div class="row">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Service
             </div>
             <div
               id="typeServiceMiniVal"
-              class="col-5 d-flex justify-content-start align-items-center text-center"
+              class="col-5 d-flex justify-content-center align-items-center text-center"
             >
             </div>
             <div
               id="typeServiceMiniValPrice"
               name="itemVal"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-2 d-flex justify-content-end align-items-center ps-0 small"
             >
             </div>
             <div
               id="typeServiceMiniValPriceCurr"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-1 d-flex align-items-center ps-0 small"
             ></div>
 
           </div>
         </div>
 
-        <div id="typePaperMiniBig" class="me-3" style="display: none;">
+        {{!-- <div id="typePaperMiniBig" class="me-3" style="display: none;"> --}}
           <hr class="my-0" />
+        <div id="typePaperMiniBig" class="me-3" >
           <div class="row" class="w-100">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Paper
             </div>
             <div
@@ -826,23 +837,24 @@
             <div
               id="typePaperMiniValPrice"
               name="itemVal"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-2 d-flex justify-content-end  align-items-center ps-0 small"
             >
 
             </div>
 
             <div
               id="typePaperMiniValPriceCurr"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-1 d-flex align-items-center ps-0 small"
             ></div>
 
           </div>
         </div>
 
-        <div id="numOfPagesMiniBig" class="me-3" style="display: none;">
+        {{!-- <div id="numOfPagesMiniBig" class="me-3" style="display: none;"> --}}
           <hr class="my-0" />
+        <div id="numOfPagesMiniBig" class="me-3" >
           <div class="row">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Number of Pages
             </div>
             <div
@@ -854,22 +866,23 @@
             <div
               id="numOfPagesMiniValPrice"
               name="itemVal"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-2 d-flex justify-content-end align-items-center ps-0 small"
             >
             </div>
 
             <div
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-1 d-flex align-items-center ps-0 small"
               id="numOfPagesMiniValPriceCurr"
             ></div>
 
           </div>
         </div>
 
-        <div id="academicLevelMiniBig" class="me-3" style="display: none;">
+        {{!-- <div id="academicLevelMiniBig" class="me-3" style="display: none;"> --}}
           <hr class="my-0" />
+        <div id="academicLevelMiniBig" class="me-3" >
           <div class="row">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Level
             </div>
             <div
@@ -880,21 +893,22 @@
             <div
               id="academicLevelMiniValPrice"
               name="itemVal"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-2 d-flex justify-content-end align-items-center ps-0 small"
             >
             </div>
             <div
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-1 d-flex align-items-center ps-0 small"
               id="academicLevelMiniValPriceCurr"
             ></div>
 
           </div>
         </div>
 
-        <div id="urgencyMiniBig" class="me-3" style="display: none;">
+        {{!-- <div id="urgencyMiniBig" class="me-3" style="display: none;"> --}}
           <hr class="my-0" />
+        <div id="urgencyMiniBig" class="me-3" >
           <div class="row">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Urgency
             </div>
             <div
@@ -905,22 +919,23 @@
             <div
               id="urgencyMiniValPrice"
               name="itemVal"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-2 d-flex justify-content-end  align-items-center ps-0 small"
             >
             </div>
 
             <div
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-1 d-flex align-items-center ps-0 small"
               id="urgencyMiniValPriceCurr"
             ></div>
 
           </div>
         </div>
 
-        <div id="paperFormatMiniBig" class="me-3" style="display: none;">
+        {{!-- <div id="paperFormatMiniBig" class="me-3" style="display: none;"> --}}
           <hr class="my-0" />
+        <div id="paperFormatMiniBig" class="me-3" >
           <div class="row">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Format
             </div>
             <div
@@ -931,22 +946,23 @@
             <div
               id="paperFormatMiniValPrice"
               name="itemVal"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-2 d-flex justify-content-end align-items-center ps-0 small"
             >
             </div>
 
             <div
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-1 d-flex align-items-center ps-0 small"
               id="paperFormatMiniValPriceCurr"
             ></div>
 
           </div>
         </div>
 
-        <div id="subjectAreaMiniBig" class="me-3" style="display: none;">
+        {{!-- <div id="subjectAreaMiniBig" class="me-3" style="display: none;"> --}}
           <hr class="my-0" />
+        <div id="subjectAreaMiniBig" class="me-3" >
           <div class="row">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Area
             </div>
             <div
@@ -957,21 +973,22 @@
             <div
               id="subjectAreaMiniValPrice"
               name="itemVal"
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-2  d-flex justify-content-end align-items-center ps-0 small"
             >
             </div>
             <div
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-1 d-flex align-items-center ps-0 small"
               id="subjectAreaMiniValPriceCurr"
             ></div>
 
           </div>
         </div>
 
-        <div id="numberOfResourcesMiniBig" class="me-3" style="display: none;">
           <hr class="my-0" />
+        {{!-- <div id="numberOfResourcesMiniBig" class="me-3" style="display: none;"> --}}
+        <div id="numberOfResourcesMiniBig" class="me-3" >
           <div class="row">
-            <div class="col-5 h-30 d-flex align-items-center">
+            <div class="col-4 h-30 d-flex align-items-center">
               Num. Sources
             </div>
             <div
@@ -982,30 +999,32 @@
             <div
               id="numberOfResourcesMiniValPrice"
               name="itemVal"
-              class="col-1 d-flex justify-content-center align-items-center text-center"
+              class="col-2 d-flex justify-content-end align-items-center ps-0 small"
             >
             </div>
             <div
-              class="col-1 d-flex align-items-center ps-0"
+              class="col-1 d-flex align-items-center ps-0 small"
               id="numberOfResourcesMiniValPriceCurr"
             ></div>
 
           </div>
         </div>
 
-        <br />
+        {{!-- <br /> --}}
+        <div class="mb-1"></div>
         <div class="zig-zag-top"></div>
         <hr class="m-0 mb-4 p-0" />
-        <div class="row">
+        <div class="row ">
 
-          <div class="col-6 h5">Total: </div>
+          <div class="col-5 h5 text-success3 ">Total: </div>
           <div
             class="col-5 h5 d-flex justify-content-end pe-3"
             id="total"
-          ></div>
+          >
+          </div>
           <div
-            class="col-1 d-flex align-items-center ps-0"
-            id="numberOfResourcesMiniValPriceCurr"
+            class="col-1  h5 d-flex justify-content-start align-items-center ps-0 pe-3"
+            id="totalCurr"
           ></div>
         </div>
       </div>
