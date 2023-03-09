@@ -4,7 +4,7 @@ const db = require("../modules/db.js");
 require("dotenv").config();
 
 const argon2 = require("argon2");
-
+const axios = require("axios");
 const bcrypt = require("bcrypt");
 const flash = require("express-flash");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
@@ -166,6 +166,7 @@ exports.customerHomeGET = async (req, res) => {
   const roleData = req.cookies["_ro2e12s3"];
   let roleCustomer = true;
   const activeHome = true;
+  console.log("THE CUSTOMER HOME AUTHORISED", authorised);
 
   if (!authorised) {
     res.redirect("/login");
@@ -187,7 +188,7 @@ exports.customerHomeGET = async (req, res) => {
       activeHome,
     });
   } catch (err) {
-    console.log("THE FUCKING ERROR FROM CUSTOMER HOME", err);
+    console.log(err);
     res.redirect("/customer-home");
   } finally {
     conn.release();
@@ -382,6 +383,7 @@ exports.customerOrdersGET = async (req, res) => {
 exports.summaryGET = (req, res) => {
   console.log("GET /summary");
   const authorised = req.cookies["_aut121421"];
+  console.log(authorised);
   if (!authorised) {
     res.redirect("/login");
   } else {
@@ -412,7 +414,25 @@ exports.configGET = (req, res) => {
 exports.createPaymentIntentPOST = async (req, res) => {
   // const {paymentMethodType, currency,paymentMethodOptions} = req.body;
 
-  let currency = "eur";
+  // const {
+  //   currency,
+  //   typeService,
+  //   typePaper,
+  //   numOfPages,
+  //   academicLevel,
+  //   urgency,
+  //   format,
+  //   subjectArea,
+  //   numOfResources,
+  //   topic,
+  //   details,
+  // } = req.body;
+
+  const data = req.body;
+
+  const authorised = req.cookies["_aut121421"];
+  // console.log(data);
+  // let currency = "eur";
   // Each payment method type has support for different currencies. In order to
   // support many payment method types and several currencies, this server
   // endpoint accepts both the payment method type and the currency as
@@ -424,9 +444,26 @@ exports.createPaymentIntentPOST = async (req, res) => {
   const params = {
     payment_method_types: ["card"],
     amount: 5999,
-    currency: currency,
+    // currency: currency,
+    currency: "eur",
+    metadata: {
+      authorised: authorised,
+      currency: data.currency,
+      typeService: data.typeService,
+      typePaper: data.typePaper,
+      numOfPages: data.numOfPages,
+      numOfResources: data.numOfResources,
+      academicLevel: data.academicLevel,
+      urgency: data.urgency,
+      format: data.format,
+      subjectArea: data.subjectArea,
+      topic: data.topic,
+      // details: data.details,
+    },
+    // description: `${data.details}`,
   };
 
+  // console.log("THE PARAMS", params);
   // If this is for an ACSS payment, we add payment_method_options to create
   // the Mandate.
   // if (paymentMethodType === "acss_debit") {
@@ -522,35 +559,103 @@ exports.webhookPOST = async (req, res) => {
     // Fulfill any orders, e-mail receipts, etc
     // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
     console.log("💰 Payment captured!");
-    console.log(data);
 
-    // try {
-    //   const result = await db.qury(
-    //     `INSERT INTO payments (user_email, amount, date, transaction_id, payment_method, status)
-    //         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-    //     [
-    //       123,
-    //       50.0,
-    //       dateNow(),
-    //       "ABC123XYZ",
-    //       "Credit Card",
-    //       "Successful",
-    //     ]
-    //   );
-
-    //   // const [data] = await db.query(`SELECT * FROM accounts`);
-    //   console.log(data);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    console.log("THE EVENT TYPE", eventType);
   } else if (eventType === "payment_intent.payment_failed") {
     console.log("❌ Payment failed.");
-    try {
-      const [data] = await db.query(`SELECT * FROM accounts`);
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
   }
+
+  // try {
+  //   // Update the payment status in your database
+  //   await db.query(`UPDATE orders SET payment_status = ? WHERE order_id = ?`, [
+  //     paymentStatus,
+  //     orderDetails.orderId,
+  //   ]);
+  //   // Do any other database updates or actions needed for the specific payment status
+  //   // Return a 200 OK response to acknowledge receipt of the event
+
+  const paymentStatus = eventType.split(".");
+
+  try {
+    // Send a POST request to /route2 with some data
+    const response = await axios.post("http://localhost:8080/create-order", {
+      body: paymentStatus[1],
+    });
+    // Handle the response from /route2
+    // res.send(response.data);
+  } catch (error) {
+    console.error(error);
+    // res.sendStatus(500);
+  }
+
+  // console.log(paymentStatus[1]);
+
   res.sendStatus(200);
+};
+
+exports.createOrderPOST = async (req, res) => {
+  console.log("POST /profile");
+  // const authorised = req.cookies["_aut121421"];
+  const authorised = req.cookies["_aut121421"];
+  const data = req.body;
+
+  console.log(authorised);
+  console.log(data);
+
+  try {
+    const [userData] = await db.query(
+      `SELECT * FROM accounts WHERE user_email = ?`,
+      [authorised]
+    );
+    console.log(userData);
+
+    //   console.log("THE BODY DATA", data.body);
+
+    //   const [result] = await db.query(
+    //     `INSERT INTO orders          \
+    //   	(
+    //   		user_email,\
+    //   		user_first_name,\
+    //   		user_last_name,\
+    //   		user_telephone,\
+    //   		currency,\
+    //   		type_service,\
+    //   		type_paper,\
+    //   		number_of_pages,\
+    //   		number_of_resources,\
+    //   		academic_level,\
+    //   		title,\
+    //   		description,\
+    //   		urgency,\
+    //   		payment_status,\
+    //   		date_time_created,\
+    //   		uuid ) \
+    //   		VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)`[
+    //       (authorised,
+    //       userFirstName,
+    //       userLastName,
+    //       userTelephone,
+    //       data.currency,
+    //       data.typeService,
+    //       data.typePaper,
+    //       data.numOfPages,
+    //       data.numOfResources,
+    //       data.academicLevel,
+    //       data.urgency,
+    //       data.format,
+    //       data.subjectArea,
+    //       data.topic,
+    //       data.details,
+    //       paymentStatus[1],
+    //       dateNow(),
+    //       generateProductId())
+    //     ]
+    //   );
+    //   console.log(result);
+    //   res.status(200).end();
+  } catch (err) {
+    // If there was an error updating the database, return a 500 Internal Server Error response
+    console.error(err);
+    res.status(500).end();
+  }
 };

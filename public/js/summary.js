@@ -210,6 +210,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("submit").innerText =
     "Pay " + sessionStorage.getItem("total") + " " + currency;
 
+  document.getElementById("totalVal").innerHTML =
+    sessionStorage.getItem("total") + " " + currency;
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const { publishableKey } = await fetch("/config").then((r) => r.json());
@@ -249,8 +252,20 @@ window.addEventListener("DOMContentLoaded", async () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          currency: "usd",
-          paymentMethodType: "card",
+          // currency: "usd",
+          // paymentMethodType: "card",
+
+          currency: currencyDiv.innerHTML,
+          typeService: typeServiceDiv.innerHTML,
+          typePaper: typePaperDiv.innerHTML,
+          numOfPages: numOfPagesDiv.innerHTML,
+          numOfResources: numOfResoucesDiv.innerHTML,
+          academicLevel: academicLevelDiv.innerHTML,
+          urgency: urgencyDiv.innerHTML,
+          format: formatDiv.innerHTML,
+          subjectArea: subjectAreaDiv.innerHTML,
+          topic: topicDiv.innerHTML,
+          details: descriptionDiv.innerHTML,
         }),
       }
     ).then((r) => r.json());
@@ -272,8 +287,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     // Confirm the card payment given the clientSecret
     // from the payment intent that was just created on
     // the server.
-    const { error: stripeError, paymentIntent } =
-      await stripe.confirmCardPayment(clientSecret, {
+    const { error: stripeError } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
         payment_method: {
           card: card,
           billing_details: {
@@ -281,7 +297,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             email: emailInput.value,
           },
         },
-      });
+      }
+    );
 
     if (stripeError) {
       addMessage(stripeError.message);

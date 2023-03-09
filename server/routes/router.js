@@ -30,6 +30,7 @@ router.get("/config", userController.configGET);
 router.post("/create-payment-intent", userController.createPaymentIntentPOST);
 router.post("/webhook", userController.webhookPOST);
 
+router.post("/create-order", userController.createOrderPOST);
 // router.get("/summarycomplete", userController.summaryCompleteGET);
 // router.post('/summary', userController.summaryPOST)
 

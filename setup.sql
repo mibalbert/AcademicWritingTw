@@ -102,16 +102,19 @@ DROP TABLE IF EXISTS orders;
 CREATE TABLE IF NOT EXISTS orders (
     id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_email VARCHAR(255) NOT NULL,
-    user_full_name VARCHAR(255),
+    user_first_name VARCHAR(255),
+    user_last_name VARCHAR(255),
+    user_telephone VARCHAR(55),
     currency VARCHAR(25),
     type_service VARCHAR(255),
     type_paper VARCHAR(255),
     number_of_pages INT(25),
+    number_of_resources INT(25),
     academic_level VARCHAR(255),
     title VARCHAR(300),
     description VARCHAR(3000),
     urgency INT(25),
-    paid VARCHAR(25) DEFAULT 'no',
+    payment_status VARCHAR(255),
     status VARCHAR(45) DEFAULT 'To be accepted', 
     date_time_created DATETIME,
     date_time_accepted DATETIME,
@@ -120,13 +123,16 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 
-	INSERT INTO orders (user_email, user_full_name, currency, type_service, type_paper, number_of_pages, academic_level, title, description, urgency, paid, date_time_created, uuid ) VALUES ( 
+	INSERT INTO orders (user_email, user_first_name, user_last_name, user_telephone, currency, type_service, type_paper, number_of_pages, number_of_resources, academic_level, title, description, urgency, payment_status, date_time_created, uuid ) VALUES ( 
         "john.ibrahimovic@gmail.com",     
-        "John Ibrahimovic",              
+        "John",
+        "Ibrahimovic",
+        "07952102580",              
         "eur",                           
         "Academic Writing Paper",        
         "Essay",                         
         22,                                
+        4,                                
         "Master's",
         "Examining the Relationship between Income Inequality and Health Outcomes",
         "Examining the Relationship between Income Inequality and Health Outcomes is a research paper that explores the relationship between income inequality and health outcomes. The paper analyzes data from various sources, including academic articles and government reports, to examine the impact of income inequality on various health outcomes such as mortality, morbidity, and mental health.
@@ -139,9 +145,9 @@ Finally, the paper discusses potential policy interventions that could help to r
 
 Overall, Examining the Relationship between Income Inequality and Health Outcomes is a comprehensive analysis of the impact of income inequality on health outcomes. The paper provides a nuanced understanding of the complex relationship between these two factors and highlights potential avenues for policy intervention.",                     
         13,                              
-        "yes",                             
-        "2023-01-19 03:14:07",             
-        UUID()                            
+        "succeeded",                             
+        "2023-03-09 03:14:07",             
+        "ads122dwx"                            
   ) ;                                
   
 
