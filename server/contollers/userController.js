@@ -8,13 +8,14 @@ const axios = require("axios");
 const bcrypt = require("bcrypt");
 const flash = require("express-flash");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
-
-const dateNow = new Date();
+const geoip = require("geoip-lite");
+const moment = require("moment-timezone");
 
 const {
   createCustomerOrder,
   generateProductId,
 } = require("../modules/orders.js");
+const session = require("express-session");
 
 const SALTROUNDS = 10;
 
@@ -25,7 +26,6 @@ exports.homeGET = (req, res) => {
   let roleCustomer = false;
   let roleAdmin = false;
 
-  console.log("adasdasdasdas");
   if (roleData === "customer") {
     roleCustomer = true;
   } else if (roleData === "admin") {
@@ -45,7 +45,7 @@ exports.loginGET = (req, res) => {
   res.render("login", {
     authorised: authorised,
     emailError: req.flash("emailError"),
-    emailError: req.flash("systemError"),
+    systemError: req.flash("systemError"),
     passError: req.flash("passError"),
   });
 };
@@ -65,9 +65,9 @@ exports.loginPOST = async (req, res) => {
 
     if (!rows || !data) {
       req.flash("emailError", "Email not found");
-      req.session.save(() => {
-        res.redirect("/login");
-      });
+      // req.session.save(() => {
+      res.redirect("/login");
+      // });
     }
     if (await argon2.verify(data.pass, inputLogPassword)) {
       req.flash("success", `Successfully Logged in as ${data.user_email}`);
@@ -78,14 +78,14 @@ exports.loginPOST = async (req, res) => {
       const end = new Date();
       const duration = end - start;
       console.log(`It took ${duration} milliseconds to complete.`);
-      return req.session.save(() => {
-        res.redirect("/customer-home");
-      });
+      // return req.session.save(() => {
+      res.redirect("/customer-home");
+      // });
     } else {
       req.flash("passError", "Incorrect password");
-      return req.session.save(() => {
-        res.redirect("/login");
-      });
+      // return req.session.save(() => {
+      res.redirect("/login");
+      // });
     }
   } catch (err) {
     console.log(err);
@@ -118,9 +118,9 @@ exports.registerPOST = async (req, res) => {
 
     if (rows && rows.length > 0) {
       req.flash("error", `Email already in use!`);
-      req.session.save(() => {
-        res.redirect("/register");
-      });
+      // req.session.save(() => {
+      res.redirect("/register");
+      // });
     } else {
       // If email does not exist, hash password and insert user information into database
       // const salt = bcrypt.genSaltSync(SALTROUNDS);
@@ -146,9 +146,9 @@ exports.registerPOST = async (req, res) => {
       res.cookie("_ro2e12s3", `customer`);
       res.cookie("_firN21kll21", `${data.inputFirstName}`);
       res.cookie("_sltN21kll21", `${data.inputLastName}`);
-      req.session.save(() => {
-        res.redirect("/customer-home");
-      });
+      // req.session.save(() => {
+      res.redirect("/customer-home");
+      // });
     }
   } catch (err) {
     console.log(err);
@@ -166,17 +166,17 @@ exports.customerHomeGET = async (req, res) => {
   const roleData = req.cookies["_ro2e12s3"];
   let roleCustomer = true;
   const activeHome = true;
-  console.log("THE CUSTOMER HOME AUTHORISED", authorised);
 
   if (!authorised) {
     res.redirect("/login");
   }
-  const conn = await db.getConnection();
+  // const conn = await db.getConnection();
   try {
     const [rows] = await db.execute(
-      "SELECT * FROM orders WHERE user_email = ? LIMIT 3",
+      "SELECT * FROM orders WHERE user_email = ? ORDER BY id DESC LIMIT 3",
       [authorised]
     );
+    // console.log("THE FUCKING ROWS", rows);
 
     res.render("customer-home", {
       rows,
@@ -190,9 +190,10 @@ exports.customerHomeGET = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.redirect("/customer-home");
-  } finally {
-    conn.release();
   }
+  // finally {
+  //   conn.release();
+  // }
 };
 
 exports.logout = (req, res) => {
@@ -209,6 +210,7 @@ exports.about = (req, res) => {
   const authorised = req.cookies["_aut121421"];
   const active = true;
   let roleCustomer = true;
+
   res.render("about", { authorised, active, roleCustomer });
 };
 
@@ -221,7 +223,6 @@ exports.pricingGET = (req, res) => {
   let roleCustomer = false;
   let roleAdmin = false;
 
-  console.log("adasdasdasdas");
   if (roleData !== "admin") {
     roleCustomer = true;
   } else {
@@ -263,50 +264,101 @@ exports.orderID = async (req, res) => {
   }
 };
 
-exports.profileGET = (req, res) => {
+exports.profileGET = async (req, res) => {
   console.log("GET /profile");
   const authorised = req.cookies["_aut121421"];
   const activeProfile = true;
   const all = true;
   const roleCustomer = true;
+  // const firstName = req.cookies["_firN21kll21"];
+  // const lastName = req.cookies["_sltN21kll21"];
 
   if (!authorised) {
     res.redirect("/login");
   } else {
     //  const data = getUserData(authorised);
-    res.render("profile", { authorised, all, activeProfile, roleCustomer });
-  }
-};
 
-exports.profilePOST = (req, res) => {
-  console.log("POST /profile");
-  const authorised = req.cookies["_aut121421"];
-  if (!authorised) {
-    res.redirect("/login");
-  } else {
     try {
-      const data = req.body;
-      const [result] = await;
+      const [userData] = await db.query(
+        "SELECT * FROM accounts WHERE user_email= ?",
+        [authorised]
+      );
 
-      // context.response.status = result.status;
-      // context.response.message = result.message;
-    } catch (err) {
-      console.log(err);
+      console.log(userData);
+
+      res.render("profile", {
+        firstName: userData[0].user_first_name,
+        lastName: userData[0].user_last_name,
+        country: userData[0].user_country,
+        city: userData[0].user_city,
+        phoneNumber: userData[0].user_telephone,
+        authorised,
+        all,
+        activeProfile,
+        roleCustomer,
+        updated: req.flash("updated"),
+      });
+      // console.log(userData);
+    } catch (error) {
+      console.log(error);
     }
   }
 };
 
+exports.profilePOST = async (req, res) => {
+  console.log("POST /profile");
+
+  const authorised = req.cookies["_aut121421"];
+  if (!authorised) {
+    res.redirect("/login");
+  } else {
+    const data = req.body;
+    try {
+      const [result] = await db.query(
+        `UPDATE accounts SET user_first_name = ?, \
+      user_last_name = ?, user_telephone = ?, user_country = ?,\
+       user_city = ? WHERE user_email='${authorised}'`,
+        [data.firstName, data.lastName, data.phone, data.country, data.city]
+      );
+      console.log(result);
+
+      res.send("IT WORKED");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  // res.status(200);
+};
+
 // Billing
-exports.billingGET = (req, res) => {
+exports.billingGET = async (req, res) => {
   console.log("GET /billing");
   const authorised = req.cookies["_aut121421"];
   const activeBilling = true;
   const all = true;
   const roleCustomer = true;
+
   if (!authorised) {
     res.redirect("/login");
   } else {
-    res.render("billing", { authorised, all, activeBilling, roleCustomer });
+    try {
+      const result = await db.query(
+        "SELECT * FROM billing WHERE user_email = ?",
+        [authorised]
+      );
+
+      // console.log(result[0]);
+
+      res.render("billing", {
+        authorised,
+        data: result[0],
+        all,
+        activeBilling,
+        roleCustomer,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 };
 // Billing
@@ -334,6 +386,39 @@ exports.securityGET = (req, res) => {
   }
 };
 
+exports.securityPOST = async (req, res) => {
+  console.log("POST /security");
+  const authorised = req.cookies["_aut121421"];
+  if (!authorised) {
+    res.redirect("/login");
+  } else {
+    const data = req.body;
+    try {
+      const [re] = await db.query(
+        "SELECT pass FROM accounts WHERE user_email=? ",
+        [authorised]
+      );
+      const isPasswordValid = await argon2.verify(
+        re[0].pass,
+        data.currentPassword
+      );
+      if (isPasswordValid) {
+        const hashedNewPassword = await argon2.hash(data.newPassword);
+        const [result] = await db.query(
+          "UPDATE accounts SET pass = ? WHERE user_email = ?",
+          [hashedNewPassword, authorised]
+        );
+        console.log(result);
+        res.send("Congratulations! You have changed your password");
+      } else {
+        res.send(`Passwords don't match`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
 // Notification-Settings
 exports.notificationsGET = (req, res) => {
   console.log("GET /notificcations-settings");
@@ -353,6 +438,38 @@ exports.notificationsGET = (req, res) => {
     });
   }
 };
+exports.notificationsPOST = async (req, res) => {
+  console.log("GET /notificcations-settings");
+  const authorised = req.cookies["_aut121421"];
+  if (!authorised) {
+    res.redirect("/login");
+  } else {
+    const data = req.body;
+    try {
+      const [re] = await db.query(
+        "SELECT pass FROM accounts WHERE user_email=? ",
+        [authorised]
+      );
+      const isPasswordValid = await argon2.verify(
+        re[0].pass,
+        data.currentPassword
+      );
+      if (isPasswordValid) {
+        const hashedNewPassword = await argon2.hash(data.newPassword);
+        const [result] = await db.query(
+          "UPDATE accounts SET pass = ? WHERE user_email = ?",
+          [hashedNewPassword, authorised]
+        );
+        console.log(result);
+        res.send("Congratulations! You have changed your password");
+      } else {
+        res.send(`Passwords don't match`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 
 exports.customerOrdersGET = async (req, res) => {
   console.log("GET /customer-orders");
@@ -364,13 +481,15 @@ exports.customerOrdersGET = async (req, res) => {
   } else {
     try {
       const [data] = await db.query(
-        `SELECT * FROM orders WHERE user_email= ?`,
+        `SELECT * FROM orders WHERE user_email= ? ORDER BY id DESC`,
         [authorised]
       );
 
+      // console.log(data);
+
       res.render("customer-orders", {
         authorised,
-        activeCustomerOrders,
+        // activeCustomerOrders,
         data,
         roleCustomer,
       });
@@ -392,10 +511,10 @@ exports.summaryGET = (req, res) => {
     });
   }
 };
-
 exports.summaryCompleteGET = (req, res) => {
   console.log("GET /summary-complete");
   const authorised = req.cookies["_aut121421"];
+
   if (!authorised) {
     res.redirect("/login");
   } else {
@@ -404,49 +523,35 @@ exports.summaryCompleteGET = (req, res) => {
     });
   }
 };
-
 exports.configGET = (req, res) => {
+  console.log("GET /config");
   res.send({
     publishableKey: process.env.STRIPE_PUBLIC_KEY,
   });
 };
 
 exports.createPaymentIntentPOST = async (req, res) => {
-  // const {paymentMethodType, currency,paymentMethodOptions} = req.body;
-
-  // const {
-  //   currency,
-  //   typeService,
-  //   typePaper,
-  //   numOfPages,
-  //   academicLevel,
-  //   urgency,
-  //   format,
-  //   subjectArea,
-  //   numOfResources,
-  //   topic,
-  //   details,
-  // } = req.body;
-
+  console.log("POST /create-payment-intent");
   const data = req.body;
-
   const authorised = req.cookies["_aut121421"];
-  // console.log(data);
-  // let currency = "eur";
-  // Each payment method type has support for different currencies. In order to
-  // support many payment method types and several currencies, this server
-  // endpoint accepts both the payment method type and the currency as
-  // parameters. To get compatible payment method types, pass
-  // `automatic_payment_methods[enabled]=true` and enable types in your dashboard
-  // at https://dashboard.stripe.com/settings/payment_methods.
-  //
-  // Some example payment method types include `card`, `ideal`, and `link`.
+
+  // function getPriceByName(name) {
+  //   const item = Array.from(itemsData.keys()).find((key) => key.name === name);
+  //   if (item) {
+  //     // console.log(item);
+  //     // console.log(itemsData.get(item).price);
+  //     return itemsData.get(item).price;
+  //   }
+  //   return null;
+  // }
+
   const params = {
     payment_method_types: ["card"],
-    amount: 5999,
+    amount: data.total,
     // currency: currency,
     currency: "eur",
     metadata: {
+      // orderID: dorderID,
       authorised: authorised,
       currency: data.currency,
       typeService: data.typeService,
@@ -458,58 +563,12 @@ exports.createPaymentIntentPOST = async (req, res) => {
       format: data.format,
       subjectArea: data.subjectArea,
       topic: data.topic,
-      // details: data.details,
+      details: data.details,
     },
     // description: `${data.details}`,
   };
-
-  // console.log("THE PARAMS", params);
-  // If this is for an ACSS payment, we add payment_method_options to create
-  // the Mandate.
-  // if (paymentMethodType === "acss_debit") {
-  //   params.payment_method_options = {
-  //     acss_debit: {
-  //       mandate_options: {
-  //         payment_schedule: "sporadic",
-  //         transaction_type: "personal",
-  //       },
-  //     },
-  //   };
-  // } else if (paymentMethodType === "konbini") {
-  //   /**
-  //    * Default value of the payment_method_options
-  //    */
-  //   params.payment_method_options = {
-  //     konbini: {
-  //       product_description: "Tシャツ",
-  //       expires_after_days: 3,
-  //     },
-  //   };
-  // } else if (paymentMethodType === "customer_balance") {
-  //   params.payment_method_data = {
-  //     type: "customer_balance",
-  //   };
-  //   params.confirm = true;
-  //   params.customer =
-  //     req.body.customerId ||
-  //     (await stripe.customers.create().then((data) => data.id));
-  // }
-
-  /**
-   * If API given this data, we can overwride it
-   */
-  // if (paymentMethodOptions) {
-  //   params.payment_method_options = paymentMethodOptions;
-  // }
-
-  // Create a PaymentIntent with the amount, currency, and a payment method type.
-  //
-  // See the documentation [0] for the full list of supported parameters.
-  //
-  // [0] https://stripe.com/docs/api/payment_intents/create
   try {
     const paymentIntent = await stripe.paymentIntents.create(params);
-
     // Send publishable key and PaymentIntent details to client
     res.send({
       clientSecret: paymentIntent.client_secret,
@@ -524,11 +583,9 @@ exports.createPaymentIntentPOST = async (req, res) => {
   }
 };
 
-// Expose a endpoint as a webhook handler for asynchronous events.
-// Configure your webhook in the stripe developer dashboard
-// https://dashboard.stripe.com/test/webhooks
 exports.webhookPOST = async (req, res) => {
   let data, eventType;
+  console.log("POST /webhook");
 
   // Check if webhook signing is configured.
   if (process.env.STRIPE_WEBHOOK_SECRET) {
@@ -548,114 +605,306 @@ exports.webhookPOST = async (req, res) => {
     data = event.data;
     eventType = event.type;
   } else {
-    // Webhook signing is recommended, but if the secret is not configured in `config.js`,
-    // we can retrieve the event data directly from the request body.
     data = req.body.data;
     eventType = req.body.type;
   }
 
   if (eventType === "payment_intent.succeeded") {
-    // Funds have been captured
-    // Fulfill any orders, e-mail receipts, etc
-    // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
     console.log("💰 Payment captured!");
 
-    console.log("THE EVENT TYPE", eventType);
+    const now = new Date();
+
+    try {
+      const paymentStatus = eventType.split(".");
+      // console.log(paymentStatus);
+      const user_email = data.object.metadata.authorised;
+      // console.log("THIS USER_EMAIL", user_email);
+
+      const currency = data.object.metadata.currency;
+      // console.log("THIS CURRENCY", currency);
+
+      const authorised = data.object.metadata.authorised;
+      // console.log("THIS AUTHORISED", authorised);
+
+      const type_service = data.object.metadata.typeService;
+      // console.log("THIS TYPE_SERVICE", type_service);
+
+      const type_paper = data.object.metadata.typePaper;
+      // console.log("THIS TYPE_PAPER", type_paper);
+
+      const number_of_pages = data.object.metadata.numOfPages;
+      // console.log("THIS NUMBER_OF_PAGES", number_of_pages);
+
+      const number_of_resources = data.object.metadata.numOfResources;
+      // console.log("THIS NUMBER_OF_RESOURCES", number_of_resources);
+
+      const academic_level = data.object.metadata.academicLevel;
+      // console.log("THIS ACADEMIC_LEVEL", academic_level);
+
+      const title = data.object.metadata.topic;
+      // console.log("THIS TITLE", title);
+
+      const description = data.object.metadata.details;
+      // console.log("THIS DESCRIPTION", description);
+
+      const urgency = data.object.metadata.urgency;
+      // console.log("THIS URGENCY", urgency);
+
+      const format = data.object.metadata.format;
+      // console.log("THIS FORMAT", format);
+
+      const subject_area = data.object.metadata.subjectArea;
+      // console.log("THIS SUBJECT_AREA", subject_area);
+
+      // Get the user's IP address from the request headers
+      const ipAddress =
+        req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+
+      // Get the user's location based on their IP address
+      const geo = geoip.lookup(ipAddress);
+
+      if (geo) {
+        // Get the user's timezone based on their location
+        const timezone = geo.timezone;
+
+        // Get the current time in the user's timezone
+        const currentTime = moment().tz(timezone);
+        const uuid = generateProductId();
+
+        // console.log(currentTime.format()); // Output the current time in ISO 8601 format
+        const [result] = await db.query(
+          `INSERT INTO orders   \
+          (
+            user_email,\
+            currency,\
+            type_service,\
+            type_paper,\
+            number_of_pages,\
+            number_of_resources,\
+            academic_level,\
+            title,\
+            description,\
+            urgency,\
+            format,\
+            subject_area,\
+            payment_status,\
+            date_time_created,\
+            uuid ) \
+          VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?, ?, ?)`,
+          [
+            user_email,
+            currency,
+            type_service,
+            type_paper,
+            number_of_pages,
+            number_of_resources,
+            academic_level,
+            title,
+            description,
+            urgency,
+            format,
+            subject_area,
+            paymentStatus[1],
+            currentTime.format(),
+            uuid,
+          ]
+        );
+        console.log("DATA OBJECT", data.object);
+
+        const [result2] = await db.query(
+          "INSERT INTO billing (uuid, user_email, date_time_created, ammount_paid, status) VALUES (?,?,?,?,?)",
+          [
+            uuid,
+            authorised,
+            currentTime.format(),
+            data.object.amount,
+            paymentStatus[1],
+          ]
+        );
+      }
+
+      // res.sendStatus(200);
+    } catch (error) {
+      console.error(error);
+      // res.sendStatus(500);
+    }
   } else if (eventType === "payment_intent.payment_failed") {
     console.log("❌ Payment failed.");
+    // res.sendStatus(200);
   }
-
-  // try {
-  //   // Update the payment status in your database
-  //   await db.query(`UPDATE orders SET payment_status = ? WHERE order_id = ?`, [
-  //     paymentStatus,
-  //     orderDetails.orderId,
-  //   ]);
-  //   // Do any other database updates or actions needed for the specific payment status
-  //   // Return a 200 OK response to acknowledge receipt of the event
-
-  const paymentStatus = eventType.split(".");
-
-  try {
-    // Send a POST request to /route2 with some data
-    const response = await axios.post("http://localhost:8080/create-order", {
-      body: paymentStatus[1],
-    });
-    // Handle the response from /route2
-    // res.send(response.data);
-  } catch (error) {
-    console.error(error);
-    // res.sendStatus(500);
-  }
-
-  // console.log(paymentStatus[1]);
-
   res.sendStatus(200);
 };
 
-exports.createOrderPOST = async (req, res) => {
-  console.log("POST /profile");
-  // const authorised = req.cookies["_aut121421"];
+exports.testingGET = (req, res) => {
+  console.log("GET /testing");
   const authorised = req.cookies["_aut121421"];
-  const data = req.body;
-
   console.log(authorised);
-  console.log(data);
+  res.send(authorised);
+  // res.sendStatus(200);
+};
+exports.testingPOST = (req, res) => {
+  console.log("POST /testing");
+  const authorised = req.cookies["_aut121421"];
+  console.log(authorised);
+  res.send(authorised);
+  // res.sendStatus(200);
+};
 
-  try {
-    const [userData] = await db.query(
-      `SELECT * FROM accounts WHERE user_email = ?`,
-      [authorised]
-    );
-    console.log(userData);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //   console.log("THE BODY DATA", data.body);
+// View Users
+exports.adminHomeGET = async (req, res) => {
+  console.log("GET /admin-home");
 
-    //   const [result] = await db.query(
-    //     `INSERT INTO orders          \
-    //   	(
-    //   		user_email,\
-    //   		user_first_name,\
-    //   		user_last_name,\
-    //   		user_telephone,\
-    //   		currency,\
-    //   		type_service,\
-    //   		type_paper,\
-    //   		number_of_pages,\
-    //   		number_of_resources,\
-    //   		academic_level,\
-    //   		title,\
-    //   		description,\
-    //   		urgency,\
-    //   		payment_status,\
-    //   		date_time_created,\
-    //   		uuid ) \
-    //   		VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)`[
-    //       (authorised,
-    //       userFirstName,
-    //       userLastName,
-    //       userTelephone,
-    //       data.currency,
-    //       data.typeService,
-    //       data.typePaper,
-    //       data.numOfPages,
-    //       data.numOfResources,
-    //       data.academicLevel,
-    //       data.urgency,
-    //       data.format,
-    //       data.subjectArea,
-    //       data.topic,
-    //       data.details,
-    //       paymentStatus[1],
-    //       dateNow(),
-    //       generateProductId())
-    //     ]
-    //   );
-    //   console.log(result);
-    //   res.status(200).end();
-  } catch (err) {
-    // If there was an error updating the database, return a 500 Internal Server Error response
-    console.error(err);
-    res.status(500).end();
-  }
+  const result = await db.query('SELECT * FROM accounts WHERE status="active"');
+
+  console.log(result);
+
+  res.render("admin-home");
+  // db.query('SELECT * FROM user WHERE status = "active"', (err, rows) => {
+  //   // When done with the connection, release it
+  //   if (!err) {
+  //     let removedUser = req.query.removed;
+  //     res.render("admin-home", { rows, removedUser });
+  //   } else {
+  //     console.log(err);
+  //   }
+  //   console.log("The data from user table: \n", rows);
+  // });
+};
+
+// Find User by Search
+exports.find = (req, res) => {
+  let searchTerm = req.body.search;
+  // User the connection
+  db.query(
+    "SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?",
+    ["%" + searchTerm + "%", "%" + searchTerm + "%"],
+    (err, rows) => {
+      if (!err) {
+        res.render("home", { rows });
+      } else {
+        console.log(err);
+      }
+      console.log("The data from user table: \n", rows);
+    }
+  );
+};
+
+exports.form = (req, res) => {
+  res.render("add-user");
+};
+
+// Add new user
+exports.create = (req, res) => {
+  const { first_name, last_name, email, phone, comments } = req.body;
+  let searchTerm = req.body.search;
+
+  // User the db
+  db.query(
+    "INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?",
+    [first_name, last_name, email, phone, comments],
+    (err, rows) => {
+      if (!err) {
+        res.render("add-user", { alert: "User added successfully." });
+      } else {
+        console.log(err);
+      }
+      console.log("The data from user table: \n", rows);
+    }
+  );
+};
+
+// Edit user
+exports.edit = (req, res) => {
+  // User the db
+  db.query("SELECT * FROM user WHERE id = ?", [req.params.id], (err, rows) => {
+    if (!err) {
+      res.render("edit-user", { rows });
+    } else {
+      console.log(err);
+    }
+    console.log("The data from user table: \n", rows);
+  });
+};
+
+// Update User
+exports.update = (req, res) => {
+  const { first_name, last_name, email, phone, comments } = req.body;
+  // User the db
+  db.query(
+    "UPDATE user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ? WHERE id = ?",
+    [first_name, last_name, email, phone, comments, req.params.id],
+    (err, rows) => {
+      if (!err) {
+        // User the db
+        db.query(
+          "SELECT * FROM user WHERE id = ?",
+          [req.params.id],
+          (err, rows) => {
+            // When done with the db, release it
+
+            if (!err) {
+              res.render("edit-user", {
+                rows,
+                alert: `${first_name} has been updated.`,
+              });
+            } else {
+              console.log(err);
+            }
+            console.log("The data from user table: \n", rows);
+          }
+        );
+      } else {
+        console.log(err);
+      }
+      console.log("The data from user table: \n", rows);
+    }
+  );
+};
+
+// Delete User
+exports.delete = (req, res) => {
+  // Delete a record
+
+  // User the db
+  // db.query('DELETE FROM user WHERE id = ?', [req.params.id], (err, rows) => {
+
+  //   if(!err) {
+  //     res.redirect('/');
+  //   } else {
+  //     console.log(err);
+  //   }
+  //   console.log('The data from user table: \n', rows);
+
+  // });
+
+  // Hide a record
+
+  db.query(
+    "UPDATE user SET status = ? WHERE id = ?",
+    ["removed", req.params.id],
+    (err, rows) => {
+      if (!err) {
+        let removedUser = encodeURIComponent("User successeflly removed.");
+        res.redirect("/?removed=" + removedUser);
+      } else {
+        console.log(err);
+      }
+      console.log("The data from beer table are: \n", rows);
+    }
+  );
+};
+
+// View Users
+exports.viewall = (req, res) => {
+  // User the db
+  db.query("SELECT * FROM user WHERE id = ?", [req.params.id], (err, rows) => {
+    if (!err) {
+      res.render("view-user", { rows });
+    } else {
+      console.log(err);
+    }
+    console.log("The data from user table: \n", rows);
+  });
 };

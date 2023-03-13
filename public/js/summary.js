@@ -226,7 +226,29 @@ window.addEventListener("DOMContentLoaded", async () => {
   const stripe = Stripe(publishableKey);
 
   const elements = stripe.elements();
-  const card = elements.create("card");
+
+  const card = elements.create("card", {
+    style: {
+      base: {
+        // iconColor: "#c4f0ff",
+        // color: "#fff",
+        fontWeight: "500",
+        fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+        fontSize: "18px",
+        fontSmoothing: "antialiased",
+        ":-webkit-autofill": {
+          // color: "#fce883",
+        },
+        "::placeholder": {
+          // color: "#87BBFD",
+        },
+      },
+      invalid: {
+        // iconColor: "#FFC7EE",
+        // color: "#FFC7EE",
+      },
+    },
+  });
   card.mount("#card-element");
 
   // When the form is submitted...
@@ -254,7 +276,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify({
           // currency: "usd",
           // paymentMethodType: "card",
-
+          total: sessionStorage.getItem("total"),
           currency: currencyDiv.innerHTML,
           typeService: typeServiceDiv.innerHTML,
           typePaper: typePaperDiv.innerHTML,
@@ -279,7 +301,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    addMessage(`Client secret returned.`);
+    // addMessage(`Client secret returned.`);
 
     const nameInput = document.querySelector("#name");
     const emailInput = document.querySelector("#email");
@@ -311,7 +333,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       }, 2000);
       return;
     }
-    window.location.href = "/customer-home";
+    window.location.href = "/summary-complete";
     // addMessage(`Payment ${paymentIntent.status}: ${paymentIntent.id}`);
     // setTimeout(() => {
     //   removeAddMessage();

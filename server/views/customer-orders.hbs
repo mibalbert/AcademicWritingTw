@@ -1,35 +1,35 @@
-<script src='../js/all.js' type='text/javascript' defer></script>
+<script src='../js/customer-orders.js' type='text/javascript' defer></script>
 
 <title>Academic Writing - Account</title>
 
 
 {{> user-header}}
 
-<section class='container'>
-  <div class='h4 py-2 mt-3'>Customer orders</div>
+{{!-- <section class='container conteiner-res mt-0'> --}}
 
-</section>
-<div class='container'>
+{{!-- </section> --}}
+<div class='container container-res mt-0 pt-0'>
+  <div class='h4  mb-4'>Customer orders</div>
   <div class='mb-5 pb-5 mt-2 min-h-60'>
 
-    <div class='list-group'>
+    <div class='list-group gap-5'>
       {{#if data}}
         {{#each data}}
           <a
             href='order/{{this.uuid}}'
-            class='list-group-item list-group-item-action'
+            class='list-group-item2 list-group-item-action p-5'
             aria-current='true'
           >
-            <div class='d-flex w-100 justify-content-between'>
-              <h5 class='mb-1 truncate'>{{this.title}}</h5>
-              <small>{{this.date_time_created}}</small>
+            <div class='d-flex w-100 justify-content-between border-bottom'>
+              <div class='mb-1 truncate h4 pb-2'>{{this.title}}</div>
+              <small>{{formatDate this.date_time_created}}</small>
             </div>
-            <div class='d-flex justify-content-between'>
-              <div>
+            <div class='d-flex justify-content-between pt-2'>
+              <div class="max-w-50">
                 <p class='mb-1'>{{this.type_service}}</p>
-                <small>And some small print.</small>
+                <small id="description">{{this.description}}</small>
               </div>
-              <div>{{this.status}}</div>
+              <div class="fw-boldish">{{this.status}}</div>
             </div>
           </a>
         {{/each}}

@@ -26,9 +26,13 @@
     "express-flash": "^0.0.2",
     "express-handlebars": "^6.0.3",
     "express-session": "^1.17.3",
+    "geoip-lite": "^1.4.7",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.41",
     "mysql": "^2.18.1",
     "mysql2": "^3.1.2",
     "nodemailer": "^6.9.1",
+    "sessionstorage-for-nodejs": "^1.0.2",
     "stripe": "^11.13.0"
   },
   "devDependencies": {

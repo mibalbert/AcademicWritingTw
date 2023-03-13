@@ -25,10 +25,12 @@ CREATE TABLE IF NOT EXISTS accounts (
   user_city VARCHAR(255),
   user_telephone VARCHAR(35),
   subscribed BOOL,
-  role VARCHAR(25) DEFAULT 'customer'
+  comments TEXT,
+  status VARCHAR(10) NOT NULL DEFAULT 'active',
+  role VARCHAR(25) NOT NULL DEFAULT 'customer'
 );
 
-INSERT INTO accounts(user_email, pass, user_first_name, user_last_name, user_country, user_city, user_telephone, role)
+INSERT INTO accounts(user_email, pass, user_first_name, user_last_name, user_country, user_city, user_telephone, subscribed, comments, status,role)
 	VALUES
         (
         "admin", 
@@ -38,52 +40,132 @@ INSERT INTO accounts(user_email, pass, user_first_name, user_last_name, user_cou
         NULL, 
         NULL, 
         NULL, 
+        NULL,
+        NULL,
+        NULL,
         "admin"
         ),
         (
         "john.ibrahimovic@gmail.com",
-        "$2a$10$cn1SBeTylMQNR6vWSSdAlO4pSv2r2ObOpZngqxSt9tWgYurMZnQia",
+        "$argon2id$v=19$m=65536,t=3,p=4$hKyrrN5fVzjnhhAHN1yCcQ$5T60B5WYfoiNcgK1AaT/rTBjWetWEc9SOG32PqbIE/0",
         "John", 
         "Ibrahimovic",
         "Mongolia", 
         "Darab", 
         "+40739012134",
         true,
+        "This customer is good",
+        "active",
         "customer"
         ),
         ( 
         "mark.jhonson@gmail.com",
-        "$2a$10$i2ejgx8v2y.taWzQA0/C/O1e5wEPsFbTwgPIzlbU3z2pDv2iUjPGq", 
+        "$argon2id$v=19$m=65536,t=3,p=4$hKyrrN5fVzjnhhAHN1yCcQ$5T60B5WYfoiNcgK1AaT/rTBjWetWEc9SOG32PqbIE/0", 
         "Mark",
         "Jhonson",
         "Germany",
         "Munich",
         "+40739213131",
         false,
+        "This customer is good",
+        "active",
         "customer"
         ),
         ( 
         "alexa.thompson@gmail.com",
-        "$2a$10$X5T11GyRD5CeCg8YjYBvTO8U1bm.R8Dr.ocK21q/pJ91xqoUsJjuC",
+        "$argon2id$v=19$m=65536,t=3,p=4$hKyrrN5fVzjnhhAHN1yCcQ$5T60B5WYfoiNcgK1AaT/rTBjWetWEc9SOG32PqbIE/0",
         "Alexa",
         "Thompson",
         "France",
         "Paris",
         "+40734257853",
         true,
+        "This customer is good",
+        "active",
         "customer"
         ),
         ( 
         "margaret.spencer@yahoo.com",
-        "$2a$10$i2ejgx8v2y.taWzQA0/C/O1e5wEPsFbTwgPIzlbU3z2pDv2iUjPGq", 
+        "$argon2id$v=19$m=65536,t=3,p=4$hKyrrN5fVzjnhhAHN1yCcQ$5T60B5WYfoiNcgK1AaT/rTBjWetWEc9SOG32PqbIE/0", 
         "Margaret",
         "Spencer",
         "Romania",
         "Bucharest",
         "+40732134443",
         true,
+        "This customer is good",
+        "active",
         "customer"
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS billing;
+
+CREATE TABLE IF NOT EXISTS billing (
+  id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  order_id VARCHAR(255) NOT NULL,
+  user_email VARCHAR(255) NOT NULL,
+  date_time_created DATETIME,
+  status VARCHAR(255) NOT NULL
+  
+);
+
+INSERT INTO billing(order_id, user_email, date_time_created, status)
+	VALUES
+        (
+        "as12ewfdq2e",
+        "john.ibrahimovic@gmail.com",
+        "2023-03-10T21:00:43.000Z",
+        "successful"
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -111,6 +193,8 @@ CREATE TABLE IF NOT EXISTS orders (
     number_of_pages INT(25),
     number_of_resources INT(25),
     academic_level VARCHAR(255),
+    subject_area VARCHAR(255),
+    format VARCHAR(255),
     title VARCHAR(300),
     description VARCHAR(3000),
     urgency INT(25),
@@ -123,7 +207,8 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 
-	INSERT INTO orders (user_email, user_first_name, user_last_name, user_telephone, currency, type_service, type_paper, number_of_pages, number_of_resources, academic_level, title, description, urgency, payment_status, date_time_created, uuid ) VALUES ( 
+	INSERT INTO orders (user_email, user_first_name, user_last_name, user_telephone, currency, type_service, type_paper, number_of_pages, number_of_resources, academic_level,
+  subject_area, format, title, description, urgency, payment_status, date_time_created, uuid ) VALUES ( 
         "john.ibrahimovic@gmail.com",     
         "John",
         "Ibrahimovic",
@@ -134,6 +219,8 @@ CREATE TABLE IF NOT EXISTS orders (
         22,                                
         4,                                
         "Master's",
+        "Arhitecture",
+        "APA",
         "Examining the Relationship between Income Inequality and Health Outcomes",
         "Examining the Relationship between Income Inequality and Health Outcomes is a research paper that explores the relationship between income inequality and health outcomes. The paper analyzes data from various sources, including academic articles and government reports, to examine the impact of income inequality on various health outcomes such as mortality, morbidity, and mental health.
 

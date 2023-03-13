@@ -1,91 +1,118 @@
-{{! <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script> }}
-<script src='../js/profile.js' type='text/javascript' defer></script>
-<script src='../js/all.js' type='text/javascript' defer></script>
+<script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 
+<script src="../js/profile.js" type="text/javascript" defer></script>
 
 <title>Academic Writing - Profile</title>
 
-
-
-
 {{> user-header}}
 
-<section class='container container-res mh'>
-      <div class='h4 py-4'>Account Details</div>
-  <div class='row'>
-    <div class='col-lg-8'>
-      
+  <div class='alert alert-success alert-dismissible fade show' id="alert" role='alert'>
+    <strong>Congratulations! You have updated your profile!</strong>
+    <button
+      type='button'
+      class='btn-close'
+      data-bs-dismiss='alert'
+      aria-label='Close'
+    ></button>
+  </div>
 
-      <div class='card mb-5 py-4 py-lg-5 px-sm-4 px-lg-5 round'>
-      
-        <div class='card-header text-center h4'>Change Profile Details</div>
-        <hr class='mb-0' />
-        <div class='card-body'>
-          <form class='mx-600 mx-auto'>
-            <div class='form-label-group'>
+
+
+<section class="container container-res mh">
+  <div class="h4 py-4">Account Details</div>
+  <div class="row">
+    <div class="col-lg-8">
+
+      <div class="card mb-5 py-4 py-lg-5 px-sm-4 px-lg-5 round">
+
+        <div class="card-header text-center h4">Change Profile Details</div>
+        <hr class="mb-0" />
+        <div class="card-body">
+          {{!-- <form class="mx-600 mx-auto" 
+          name="profileForm" action="/profile" method="POST"> --}}
+          <form class="mx-600 mx-auto" 
+          name="profileForm">
+            <div class="form-label-group">
               <label
-                class='h5 normal-weight text-muted mt-3'
-                for='inputFullName'
-              >Full name</label>
+                class="h5 normal-weight text-muted mt-3"
+                for="inputFirstName"
+              >First Name</label>
               <input
-                class='form-control'
-                id='inputFullName'
-                name='inputFullName'
-                type='text'
-                placeholder='Enter your full name'
-                value='{{data.user_full_name}}'
+                class="form-control fc-black"
+                id="inputFirstName"
+                name="inputFirstName"
+                type="text"
+                placeholder="Enter your full name"
+                value="{{firstName}}"
               />
             </div>
-            <div class='form-label-group'>
+
+            <div class="form-label-group">
               <label
-                class='h5 normal-weight text-muted mt-3'
-                for='inputCountry'
+                class="h5 normal-weight text-muted mt-3"
+                for="inputLastName"
+              >Last Name</label>
+              <input
+                class="form-control fc-black"
+                id="inputLastName"
+                name="inputLastName"
+                type="text"
+                placeholder="Enter your full name"
+                value="{{lastName}}"
+              />
+            </div>
+            <div class="form-label-group">
+              <label
+                class="h5 normal-weight text-muted mt-3"
+                for="inputCountry"
               >Country</label>
               <input
-                class='form-control'
-                id='inputCountry'
-                name='inputCountry'
-                type='text'
-                placeholder='Enter your country'
-                value='{{data.user_country}}'
+                class="form-control fc-black"
+                id="inputCountry"
+                name="inputCountry"
+                type="text"
+                placeholder="Enter your country"
+                value="{{country}}"
               />
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                class='h5 normal-weight text-muted mt-3'
-                for='inputCity'
+                class="h5 normal-weight text-muted mt-3"
+                for="inputCity"
               >City</label>
               <input
-                class='form-control'
-                id='inputCity'
-                name='inputCity'
-                type='text'
-                placeholder='Enter your city'
-                value='{{data.user_city}}'
+                class="form-control fc-black"
+                id="inputCity"
+                name="inputCity"
+                type="text"
+                placeholder="Enter your city"
+                value="{{city}}"
               />
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <label
-                class='h5 normal-weight text-muted mt-3'
-                for='inputPhone'
+                class="h5 normal-weight text-muted mt-3"
+                for="inputPhone"
               >Phone number</label>
               <input
-                class='form-control'
-                id='inputPhone'
-                name='inputPhone'
-                type='tel'
-                placeholder='Enter your phone number'
-                value='{{data.user_telephone}}'
+                class="form-control fc-black"
+                id="inputPhone"
+                name="inputPhone"
+                type="tel"
+                placeholder="Enter your phone number"
+                value="{{phoneNumber}}"
               />
             </div>
 
-            <div class='form-label-group'>
+            <div class="form-label-group">
               <button
-                id='saveChanges'
-                class='btn bg-orange text-white enjoy-button w-100 mt-5 height-50 disabled'
-                type='button'
+                id="saveChanges"
+                {{!-- class="btn bg-orange text-white enjoy-button w-100 mt-5 height-50 disabled" --}}
+                class="btn bg-orange text-white enjoy-button w-100 mt-5 height-50 disabled"
+                {{!-- type="submit" --}}
+                type="button"
                 {{! style="display: none;" }}
               >Save changes</button>
             </div>
@@ -93,73 +120,73 @@
         </div>
       </div>
     </div>
-    <div class='col-lg-4'>
+    <div class="col-lg-4">
 
-      <div class=''>
+      <div class="">
 
-        <div class='card mini-summary2'>
-          <div class='h5'>Amazing things for FREE</div>
-          <hr class='mb-0' />
-          <ul id='mini-ul2'>
+        <div class="card mini-summary2">
+          <div class="h5">Amazing things for FREE</div>
+          <hr class="mb-0" />
+          <ul id="mini-ul2">
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
 
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Formating
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$7.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
 
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
 
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
           </ul>
           <a
-            href='/pricing'
-            class='btn bg-orange text-white enjoy-button'
+            href="/pricing"
+            class="btn bg-orange text-white enjoy-button"
           >Enjoy</a>
         </div>
 
@@ -169,8 +196,3 @@
   </div>
 
 </section>
-
-
-
-
-

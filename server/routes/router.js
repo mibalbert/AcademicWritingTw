@@ -21,30 +21,28 @@ router.post("/profile", userController.profilePOST);
 router.get("/billing", userController.billingGET);
 router.post("/billing", userController.billingPOST);
 router.get("/security", userController.securityGET);
+router.post("/security", userController.securityPOST);
 router.get("/notifications-settings", userController.notificationsGET);
 router.get("/customer-orders", userController.customerOrdersGET);
 //Payment Routes
 router.get("/summary", userController.summaryGET);
+router.get("/summary-complete", userController.summaryCompleteGET);
 router.get("/config", userController.configGET);
 
 router.post("/create-payment-intent", userController.createPaymentIntentPOST);
 router.post("/webhook", userController.webhookPOST);
 
-router.post("/create-order", userController.createOrderPOST);
-// router.get("/summarycomplete", userController.summaryCompleteGET);
-// router.post('/summary', userController.summaryPOST)
+//////////////// ADMIN
+router.get("/admin-home", userController.adminHomeGET);
+router.post("/admin", userController.find);
+router.get("/admin-adduser", userController.form);
+router.post("/admin-adduser", userController.create);
+router.get("/admin-edituser/:id", userController.edit);
+router.post("/admin-edituser/:id", userController.update);
+router.get("/admin-viewuser/:id", userController.viewall);
+router.get("/admin/:id", userController.delete);
 
-// router.post(
-//   "/webhook",
-//   express.raw({ type: "application/json" }),
-//   userController.webhookPOST
-// );
-// router.post(
-//   "/webhooks",
-//   express.raw({ type: "application/json" }),
-//   userController.webhooksPOST
-// );
-
-// router.get('/testing/:id', userController.testing)
+router.post("/testing", userController.testingPOST);
+router.get("/testing", userController.testingGET);
 
 module.exports = router;

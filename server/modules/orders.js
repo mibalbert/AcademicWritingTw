@@ -144,7 +144,7 @@ exports.generateProductId = () => {
       Math.floor(Math.random() * characters.length)
     );
   }
-  console.log(productId);
+  // console.log(productId);
   return productId;
 };
 

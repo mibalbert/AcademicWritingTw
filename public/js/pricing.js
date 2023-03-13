@@ -7,6 +7,9 @@ import { totalAmount } from "./pricing-helper.js";
 window.addEventListener("DOMContentLoaded", () => {
   console.log("DOMContentLoaded");
 
+  // const myTextArea = document.getElementById("paperDetails");
+  // const myTextArea = document.getElementById("topic");
+
   totalAmount();
 
   const itemsData = new Map([
@@ -228,8 +231,15 @@ window.addEventListener("DOMContentLoaded", () => {
       if (event.keyCode === 13 && event.target.nodeName !== "TEXTAREA") {
         event.preventDefault();
       }
-
-      window.location = "/summary";
+      if (textarea.value.length < 20 || topic.value.length < 20) {
+        // myTextArea.setCustomValidity("Please enter at least 20 characters.");
+        alert(
+          "Please enter at least 20 characters in the Topic field and the Paper Details."
+        );
+      } else {
+        // myTextArea.setCustomValidity("");
+        window.location = "/summary";
+      }
     });
   }
 

@@ -1,146 +1,138 @@
-<script src='js/all.js' type='text/javascript' defer></script>
-
 {{! <script src='js/app.js' type='text/javascript' defer></script> }}
 
 <title>Academic Writing - Billing</title>
 
 {{> user-header}}
 
-<section class='container container-res mh'>
+<section class="container container-res mh">
 
-      <div class='h4 py-4'>Billing History</div>
-  <div class='row'>
-    <div class='col-lg-8'>
-      <div class='card mb-4 py-4 py-lg-5 px-sm-4 px-lg-5'>
-        <div class='card-body w-100 h-100 d-flex justify-content-center align-center'>
-            {{#if data}}
-            <table class='table w-80 min-h-300px'>
-              <thead class="border-bottom">
+  <div class="h4 py-4">Billing History</div>
+  <div class="row">
+    <div class="col-lg-8">
+      {{!-- <div class="card mb-4 py-4 py-lg-5 px-sm-4 px-lg-1"> --}}
+      <div class="card p-3 mb-4rem">
+        {{!-- <div
+          class="card-body w-100 h-100 d-flex justify-content-center align-center"
+        > --}}
+        <div
+          class="card-body w-100 h-100 d-flex justify-content-center align-center"
+        >
+          {{#if data}}
+            <table class="table table-striped">
+              <thead>
                 <tr>
-                  <th class='border-gray-200' scope='col'>Transaction ID</th>
-                  <th class='border-gray-200' scope='col'>Date</th>
-                  <th class='border-gray-200' scope='col'>Amount</th>
-                  <th class='border-gray-200 ' scope='col'>Status</th>
+                  <th scope="col">#</th>
+                  <th scope="col">OrderID</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Ammount</th>
+                  <th scope="col">Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>#39201</td>
-                  <td>06/15/2021</td>
-                  <td>$29.99</td>
-                  <td><span class='badge bg-light text-dark min-h-30px d-flex justify-content-center align-items-center'>Pending</span></td>
+          {{#each data}}
+                <a href="/">
+                <tr onclick="location.href='order/{{this.uuid}}'">
+                  <th scope="row">{{addOne @index}}</th>
+                  <td>{{this.uuid}}</td>
+                  <td>{{this.user_email}}</td>
+                  <td>{{this.ammount_paid}} €</td>
+                  <td>{{this.status}}</td>
                 </tr>
-                <tr>
-                  <td>#38594</td>
-                  <td>05/15/2021</td>
-                  <td>$29.99</td>
-                  <td><span class='badge bg-success min-h-30px d-flex justify-content-center align-items-center'>Paid</span></td>
-                </tr>
-                <tr>
-                  <td>#38223</td>
-                  <td>04/15/2021</td>
-                  <td>$29.99</td>
-                  <td><span class='badge bg-success min-h-30px d-flex justify-content-center align-items-center'>Paid</span></td>
-                </tr>
-                <tr>
-                  <td>#38125</td>
-                  <td>03/15/2021</td>
-                  <td>$29.99</td>
-                  <td><span class='badge bg-success min-h-30px d-flex justify-content-center align-items-center'>Paid</span></td>
-                </tr>
+                </a>
+            {{/each}}
               </tbody>
             </table>
-            {{else}}
-           <div class='w-100'>
-          <a class='new-ord-cell d-flex' href='/pricing'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='30'
-              height='30'
-              fill='currentColor'
-              class='bi bi-plus-circle-fill'
-              viewBox='0 0 16 16'
-            >
-              <path
-                d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z'
-              ></path>
-            </svg>
-            {{! <div class="new-order-cont">New Order</div> }}
-            <div class='orange'>Create a new Order</div>
-          </a>
-        </div>
-            {{/if}}
+          {{else}}
+            <div class="w-100">
+              <a class="new-ord-cell d-flex" href="/pricing">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  fill="currentColor"
+                  class="bi bi-plus-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
+                  ></path>
+                </svg>
+                {{! <div class="new-order-cont">New Order</div> }}
+                <div class="orange">Create a new Order</div>
+              </a>
+            </div>
+          {{/if}}
         </div>
       </div>
 
     </div>
-    <div class='col-lg-4'>
+    <div class="col-lg-4">
 
-      <div class=''>
+      <div class="">
 
-        <div class='card mini-summary2'>
-          <div class='h5'>Amazing things for FREE</div>
-          <hr class='mb-0' />
-          <ul id='mini-ul2'>
+        <div class="card mini-summary2 mb-4rem">
+          <div class="h5">Amazing things for FREE</div>
+          <hr class="mb-0" />
+          <ul id="mini-ul2">
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
 
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Formating
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$7.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
 
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
 
             <li>
-              <div class='mini-summary-serv-title'>
+              <div class="mini-summary-serv-title">
                 Title page
               </div>
-              <div class='d-flex'>
+              <div class="d-flex">
                 <div>for
                   <span>$4.99</span>
                 </div>
-                <div class='free'>FREE</div>
+                <div class="free">FREE</div>
               </div>
             </li>
 
-            <hr class='my-0' />
+            <hr class="my-0" />
           </ul>
           <a
-            href='/pricing'
-            class='btn bg-orange text-white enjoy-button'
+            href="/pricing"
+            class="btn bg-orange text-white enjoy-button"
           >Enjoy</a>
         </div>
 

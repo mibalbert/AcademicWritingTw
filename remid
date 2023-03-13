@@ -322,3 +322,162 @@
 //     res.status(500).json({ error: e.message });
 //   }
 // };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// exports.summaryCompletePOST = (req, res) => {
+//   console.log("GET /summary-complete");
+//   const authorised = req.cookies["_aut121421"];
+
+//   // if (!authorised) {
+//   //   res.redirect("/login");
+//   // } else {
+//   //   res.render("summary-complete", {
+//   //     authorised,
+//   //   });
+//   // }
+// };
+
+exports.createOrderGET = async (req, res) => {
+  console.log("GET /create-order");
+  const authorised = req.cookies["_aut121421"];
+  console.log(authorised);
+  res.sendStatus(200);
+};
+
+// exports.createOrderPOST = async (req, res) => {
+//   console.log("POST /create-order");
+//   const data = req.body;
+//   console.log(data.authorised);
+//   console.log(data.payment_status);
+
+//   const authorised = req.cookies["_aut121421"];
+//   console.log(authorised);
+
+//   try {
+
+//     const [userData] = await db.query(
+//       `SELECT * FROM accounts WHERE user_email = ?`,
+//       [data.authorised]
+//     );
+//     console.log(userData);
+
+//   const [result] = await db.query(
+//   `INSERT INTO orders          \
+// 	(
+// 		user_email,\
+// 		user_first_name,\
+// 		user_last_name,\
+// 		user_telephone,\
+// 		currency,\
+// 		type_service,\
+// 		type_paper,\
+// 		number_of_pages,\
+// 		number_of_resources,\
+// 		academic_level,\
+// 		title,\
+// 		description,\
+// 		urgency,\
+// 		payment_status,\
+// 		date_time_created,\
+// 		uuid ) \
+// 		VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)`[
+//       (authorised,
+//         userFirstName,
+//         userLastName,
+//         userTelephone,
+//         data.currency,
+//         data.typeService,
+//         data.typePaper,
+//         data.numOfPages,
+//     data.numOfResources,
+//     data.academicLevel,
+//     data.urgency,
+//     data.format,
+//     data.subjectArea,
+//     data.topic,
+//     data.details,
+//     paymentStatus[1],
+//     dateNow(),
+//     generateProductId())
+//   ]
+// );
+// console.log(result);
+// res.sendStatus(200);
+// res.send("adadsasasdasdadsdsadasd");
+// res.status(200).end();
+// } catch (err) {
+
+// console.error(err);
+// res.status(500).end();
+// res.sendStatus(200);
+// }
+// }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// const authorised = data.object.metadata.authorised;
+
+// const now = new Date();
+
+// const topic = req.session.typePaper;
+
+// console.log(topic);
+
+// try {
+//   const [userData] = await db.query(
+//     `SELECT * FROM accounts WHERE user_email = ?`,
+//     [authorised]
+//   );
+
+//   // console.log(userData);
+//   const userFirstName = userData[0].user_first_name;
+//   const userLastName = userData[0].user_last_name;
+//   const userTelephone = userData[0].user_telephone;
+
+//   // console.log(now);
+//   // const [result] = await db.query(
+//   //   `INSERT INTO orders   \
+//   //   (
+//   //     user_email,\
+//   //     user_first_name,\
+//   //     user_last_name,\
+//   //     user_telephone,\
+//   //     currency,\
+//   //     type_service,\
+//   //     type_paper,\
+//   //     number_of_pages,\
+//   //     number_of_resources,\
+//   //     academic_level,\
+//   //     title,\
+//   //     description,\
+//   //     urgency,\
+//   //     payment_status,\
+//   //     date_time_created,\
+//   //     uuid ) \
+//   //     VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)`[
+//   //     (authorised,
+//   //     userFirstName,
+//   //     userLastName,
+//   //     userTelephone,
+//   //     data.currency,
+//   //     data.typeService,
+//   //     data.typePaper,
+//   //     data.numOfPages,
+//   //     data.numOfResources,
+//   //     data.academicLevel,
+//   //     data.urgency,
+//   //     data.format,
+//   //     data.subjectArea,
+//   //     data.topic,
+//   //     data.details,
+//   //     paymentStatus[1],
+//   //     now,
+//   //     generateProductId())
+//   //   ]
+//   // );
+//   // console.log(result);
+//   res.sendStatus(200);
+// } catch (err) {
+//   console.log(err);
+//   res.sendStatus(500);
+// }

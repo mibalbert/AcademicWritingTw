@@ -10,14 +10,15 @@
 
 {{> user-header}}
 
-<div class="container container-res mt-4">
+{{!-- <div class="container container-res mt-4"> --}}
+<div class="container mt-4 mb-5rem">
 
   <div class="h4 py-4">Final Step</div>
 
   <div class="row">
-    <div class="col-12 col-lg-7 ">
+    <div class="col-12 col-lg-7">
 
-      <div class="card ">
+      <div class="card">
 
         <div
           class="card-body p-4 p-md-5 m-md-3 mb-md-2 pt-md-2 d-flex flex-column gap-15"
@@ -26,7 +27,7 @@
               class="list-choices-title text-center p2-4 pt-4 mt-2 mb-3 font-32"
             > Order Details</div>
           </div>
-          {{!-- <hr class="mb-4 p-0" /> --}}
+          {{! <hr class="mb-4 p-0" /> }}
 
           {{! <div class="list-choices"><div class="list-choices-title"><i class="bi bi-fonts pe-2"></i>Topic: </div> <div id="list-choices-more-title" ></div> </div> 
                               <div class="list-choices"><div class="list-choices-title"><i class="bi bi-type pe-2"></i>Type Service: </div><div id="list-choices-more-type-service" ></div> </div>
@@ -41,7 +42,7 @@
 
           <div class="row list-choices inner-shad px-4 py-2">
             <div class="col-12 list-choices-title-summary">
-              <i class="bi  bi-cash-coin pe-2"></i>
+              <i class="bi bi-cash-coin pe-2"></i>
               Currency:
             </div>
             <div class="col-6 ps-3rem" id="list-choices-more-currency">
@@ -49,23 +50,20 @@
             <div class="col-6 ps-3rem" id="list-choices-more-currency">
             </div>
           </div>
-          <div class="row list-choices inner-shad px-4 py-2">
-            <div class="col-12 list-choices-title-summary">
-              <i class="bi bi-fonts pe-2"></i>
-              Topic:
-            </div>
-            <div class="col-6 ps-3rem" id="list-choices-more-title">
-            </div>
-            <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-title-price">
-            </div>
-          </div>
+          
           <div class="row list-choices inner-shad px-4 py-2">
             <div class="col-12 list-choices-title-summary">
               <i class="bi bi-type pe-2"></i>
               Type Service:
             </div>
-            <div class="col-6 ps-3rem" id="list-choices-more-type-service"></div>
-            <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-type-service-price"></div>
+            <div
+              class="col-6 ps-3rem"
+              id="list-choices-more-type-service"
+            ></div>
+            <div
+              class="col-6 ps-3rem d-flex justify-content-center small"
+              id="list-choices-more-type-service-price"
+            ></div>
           </div>
           <div class="row list-choices inner-shad px-4 py-2">
             <div class="col-12 list-choices-title-summary">
@@ -73,7 +71,10 @@
               Type Paper:
             </div>
             <div class="col-6 ps-3rem" id="list-choices-more-type-paper"></div>
-            <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-type-paper-price"></div></div>
+            <div
+              class="col-6 ps-3rem d-flex justify-content-center small"
+              id="list-choices-more-type-paper-price"
+            ></div></div>
           <div class="row list-choices inner-shad px-4 py-2">
             <div class="col-12 list-choices-title-summary">
               <i class="bi bi-mortarboard pe-2"></i>
@@ -87,7 +88,7 @@
               class="col-6 ps-3rem d-flex justify-content-center small"
               id="list-choices-more-academic-level-price"
             ></div>
-            </div>
+          </div>
           <div class="row list-choices inner-shad px-4 py-2">
             <div class="col-12 list-choices-title-summary">
               <i class="bi bi-file-earmark-plus pe-2"></i>
@@ -95,7 +96,10 @@
             </div>
             <div class="col-6 ps-3rem" id="list-choices-more-number-of-pages">
             </div>
-            <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-number-of-pages-price">
+            <div
+              class="col-6 ps-3rem d-flex justify-content-center small"
+              id="list-choices-more-number-of-pages-price"
+            >
             </div>
           </div>
           <div class="row list-choices inner-shad px-4 py-2">
@@ -117,7 +121,10 @@
               <i class="bi bi-file-earmark-text pe-2"></i>
               Paper Format:
             </div><div class="col-6 ps-3rem" id="list-choices-more-format">
-            </div><div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-format-price">
+            </div><div
+              class="col-6 ps-3rem d-flex justify-content-center small"
+              id="list-choices-more-format-price"
+            >
 
             </div>
           </div>
@@ -127,8 +134,11 @@
               Urgency:
             </div>
             <div class="col-6 ps-3rem" id="list-choices-more-urgency"></div>
-            <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-urgency-price"></div>
-            
+            <div
+              class="col-6 ps-3rem d-flex justify-content-center small"
+              id="list-choices-more-urgency-price"
+            ></div>
+
           </div>
           <div class="row list-choices inner-shad px-4 py-2">
             <div class="col-12 list-choices-title-summary">
@@ -143,70 +153,86 @@
               class="col-6 ps-3rem d-flex justify-content-center small"
               id="list-choices-more-subject-area-price"
             ></div>
+          </div>
+          <div class="row list-choices inner-shad px-4 py-2">
+            <div class="col-12 list-choices-title-summary">
+              <i class="bi bi-fonts pe-2"></i>
+              Topic:
             </div>
+            <div class="col-12 ps-3rem" id="list-choices-more-title">
+            </div>
+            <div
+              class="col-6 ps-3rem d-flex justify-content-center small"
+              id="list-choices-more-title-price"
+            >
+            </div>
+          </div>
           <div class="row list-choices inner-shad px-4 py-2">
             <div class="col-12 list-choices-title-summary">
               <i class="bi bi-justify-left pe-2"></i>
               Details:
             </div>
-            <div class="col-12 ps-3rem" id="list-choices-more-description"></div>
-            {{!-- <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-description-price"></div> --}}
+            <div
+              class="col-12 ps-3rem"
+              id="list-choices-more-description"
+            ></div>
+            {{! <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-description-price"></div> }}
           </div>
-          <div class="row  px-4 py-2">
+          <div class="row px-4 py-2">
             <div class="col-12 d-flex justify-content-end">
-            <div class="h4 pe-2" id="totalTitle">
-              Total:
+              <div class="h4 pe-2" id="totalTitle">
+                Total:
+              </div>
+              <div class="h4" id="totalVal"></div>
             </div>
-            <div class="h4" id="totalVal"></div>
-            </div>
-            {{!-- <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-description-price"></div> --}}
+            {{! <div class="col-6 ps-3rem d-flex justify-content-center small" id="list-choices-more-description-price"></div> }}
           </div>
 
-        <div class="text-center small pt-5 px-4 mt-1 mb-2">All these selections
-          can be changed by emailing us at academicwriting@gmail.com</div>
-          
-              <a class="d-flex justify-start p-4 mb-3"
-              href="/pricing">
-                <div
-                  class="btn-navigate-form-step2 go-back"
-                  step_number="1"
-                  id="prevButton"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    fill="currentColor"
-                    class="bi bi-arrow-right-circle-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
-                    ></path>
-                  </svg>
-                  <span>Step 1</span>
-                </div>
-              </a>
+          <div class="text-center small pt-5 px-4 mt-1 mb-2">All these
+            selections can be changed by emailing us at
+            academicwriting@gmail.com</div>
 
-          {{!-- <hr class="mt-4 p-0" /> --}}
+          <a class="d-flex justify-start p-4 mb-3" href="/pricing">
+            <div
+              class="btn-navigate-form-step2 go-back"
+              step_number="1"
+              id="prevButton"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                class="bi bi-arrow-right-circle-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
+                ></path>
+              </svg>
+              <span>Step 1</span>
+            </div>
+          </a>
+
+          {{! <hr class="mt-4 p-0" /> }}
         </div>
 
       </div>
 
     </div>
-    <div class="col-12 col-lg-5 mb-6rem mt-3rem mt-md-0 ">
+    <div class="col-12 col-lg-5 mb-6rem mt-3rem mt-md-0">
       <div class="card mb-4">
         <div class="checkout-form">
           <div class="h3 text-center">Checkout</div>
-          {{!-- <form id="payment-form">
+          {{! <form id="payment-form">
             <div id="link-authentication-element">
       
       <div id="payment-element"></div>
             <button id="pay-button"></button>
             <div id="error-message"></div>
-          </form> --}}
+          </form> }}
 
-{{!--           
+          {{!           
     <form id="payment-form">
       <div id="link-authentication-element">
         <!--Stripe.js injects the Link Authentication Element-->
@@ -219,9 +245,9 @@
         <span id="button-text"></span>
       </button>
       <div id="payment-message" class="hidden"></div>
-    </form> --}}
+    </form> }}
 
-<p>
+          {{! <p>
         <h4>Try a <a href="https://stripe.com/docs/testing#cards" target="_blank">test card</a>:</h4>
         <div>
           <code>4242424242424242</code> (Visa)
@@ -236,35 +262,35 @@
 
       <p>
         Use any future expiration, any 3 digit CVC, and any postal code.
-      </p>
+      </p> }}
 
-      <form id="payment-form">
-        <label for="name">
-          Name
-        </label>
-        <input id="name" placeholder="Jenny Rosen" value="Jenny Rosen" required />
-        <input id="email" placeholder="jenny.rosen@gmail.com" value="jenny.rosen@gmail.com" required />
+          <form id="payment-form">
+            {{!-- <div class="form-row">
+              <label for="">
+                Please enter card details
+              </label>
+            </div> --}}
+            {{! <input id="name" placeholder="Jenny Rosen" value="Jenny Rosen" required /> }}
+            <hr>
+            <div class="form-row ">
+              <div class="mt-5 mb-3 h5">Payment details</div>
+              {{! <input id="email" placeholder="jenny.rosen@gmail.com" value="jenny.rosen@gmail.com" required /> }}
+              <div class="">Email</div>
+              <input class="mb-4" id="email" placeholder="Email Address" value={{authorised}} required />
+              <div class="">Full Name</div>
+              <input class="mb-3" id="name" placeholder="Name on card" required />
+              
+              <div class="mb-2">Card</div>
+              <div id="card-element">
+                <!-- Elements will create input elements here -->
+              </div>
+              <!-- We'll put the error messages in this element -->
+              <div id="card-errors" role="alert"></div>
+            </div>
+            <button class="mb-3"  id="submit">Pay</button>
+          </form>
 
-        <label for="card-element">
-          Card
-        </label>
-        <div id="card-element">
-          <!-- Elements will create input elements here -->
-        </div>
-
-        <!-- We'll put the error messages in this element -->
-        <div id="card-errors" role="alert"></div>
-
-        <button id="submit">Pay</button>
-      </form>
-
-      <div id="messages" role="alert" style="display: none;"></div>
-
-      <p> <a href="https://youtu.be/0oHjwz-WHcc" target="_blank">Watch a demo walkthrough</a> </p>
-
-
-
-
+          <div id="messages" role="alert" style="display: none;"></div>
 
         </div>
       </div>
