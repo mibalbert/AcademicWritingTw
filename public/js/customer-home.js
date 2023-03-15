@@ -8,7 +8,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (alert) {
     setTimeout(() => {
-      alert.remove();
+      alert.style.display = "none";
+      // location.reload();
     }, 1700);
   }
 

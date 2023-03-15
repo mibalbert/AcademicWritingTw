@@ -79,7 +79,11 @@ exports.loginPOST = async (req, res) => {
       const duration = end - start;
       console.log(`It took ${duration} milliseconds to complete.`);
       // return req.session.save(() => {
-      res.redirect("/customer-home");
+      if (data.role !== "customer") {
+        res.redirect("/admin-home");
+      } else {
+        res.redirect("/customer-home");
+      }
       // });
     } else {
       req.flash("passError", "Incorrect password");
@@ -177,16 +181,21 @@ exports.customerHomeGET = async (req, res) => {
       [authorised]
     );
     // console.log("THE FUCKING ROWS", rows);
+    // const successMessage = req.flash("success");
+    // const successMessageReg = req.flash("registered");
+    // req.flash("success", null);
 
     res.render("customer-home", {
       rows,
       authorised,
       userFirstName,
       roleCustomer,
-      success: req.flash("success"),
-      registered: req.flash("registered"),
+      // success: successMessage,
+      // registered: successMessageReg,
       activeHome,
     });
+    // req.flash("success", null);
+    // req.flash("registered", null);
   } catch (err) {
     console.log(err);
     res.redirect("/customer-home");
@@ -420,7 +429,7 @@ exports.securityPOST = async (req, res) => {
 };
 
 // Notification-Settings
-exports.notificationsGET = (req, res) => {
+exports.notificationsGET = async (req, res) => {
   console.log("GET /notificcations-settings");
   const authorised = req.cookies["_aut121421"];
   const activeNotifications = true;
@@ -430,43 +439,57 @@ exports.notificationsGET = (req, res) => {
   if (!authorised) {
     res.redirect("/login");
   } else {
-    res.render("notifications-settings", {
-      authorised,
-      all,
-      activeNotifications,
-      roleCustomer,
-    });
+    try {
+      const [result] = await db.query(
+        "SELECT subscribed FROM accounts WHERE user_email=?",
+        [authorised]
+      );
+      console.log(result[0].subscribed);
+      let subscribed;
+      if (result[0].subscribed === 1) {
+        subscribed = true;
+      } else {
+        subscribed = false;
+      }
+      res.render("notifications-settings", {
+        authorised,
+        all,
+        sub: subscribed,
+        activeNotifications,
+        roleCustomer,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 };
 exports.notificationsPOST = async (req, res) => {
-  console.log("GET /notificcations-settings");
+  console.log("GET /notifications-settings");
   const authorised = req.cookies["_aut121421"];
   if (!authorised) {
     res.redirect("/login");
   } else {
     const data = req.body;
     try {
-      const [re] = await db.query(
-        "SELECT pass FROM accounts WHERE user_email=? ",
-        [authorised]
-      );
-      const isPasswordValid = await argon2.verify(
-        re[0].pass,
-        data.currentPassword
-      );
-      if (isPasswordValid) {
-        const hashedNewPassword = await argon2.hash(data.newPassword);
-        const [result] = await db.query(
-          "UPDATE accounts SET pass = ? WHERE user_email = ?",
-          [hashedNewPassword, authorised]
-        );
-        console.log(result);
-        res.send("Congratulations! You have changed your password");
+      console.log(data);
+      let sub;
+      if (data.checked == true) {
+        sub = 1;
       } else {
-        res.send(`Passwords don't match`);
+        sub = 0;
       }
+
+      const [result] = await db.query(
+        "UPDATE accounts SET subscribed = ? WHERE user_email = ?",
+        [sub, authorised]
+      );
+
+      res.send(
+        "Congratulations! You have changed your notifications settings!"
+      );
     } catch (error) {
       console.log(error);
+      res.send(error);
     }
   }
 };
@@ -709,7 +732,7 @@ exports.webhookPOST = async (req, res) => {
             uuid,
           ]
         );
-        console.log("DATA OBJECT", data.object);
+        // console.log("DATA OBJECT", data.object);
 
         const [result2] = await db.query(
           "INSERT INTO billing (uuid, user_email, date_time_created, ammount_paid, status) VALUES (?,?,?,?,?)",
@@ -756,11 +779,21 @@ exports.testingPOST = (req, res) => {
 exports.adminHomeGET = async (req, res) => {
   console.log("GET /admin-home");
 
-  const result = await db.query('SELECT * FROM accounts WHERE status="active"');
+  const [result] = await db.query(
+    'SELECT COUNT(*) FROM accounts WHERE status="active"'
+  );
+  const totalActiveUsers = result[0]["COUNT(*)"];
+  // console.log(totalActiveUsers);
 
-  console.log(result);
+  res.render("admin-home", {
+    layout: "admin-layout.hbs",
+    totalActiveUsers: totalActiveUsers,
+    totalActiveOrders: 10,
+    ordersAccepted: 5,
+    ordersToAccept: 5,
+    totalAllOrders: 54,
+  });
 
-  res.render("admin-home");
   // db.query('SELECT * FROM user WHERE status = "active"', (err, rows) => {
   //   // When done with the connection, release it
   //   if (!err) {

@@ -3,65 +3,29 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOMContentLoaded");
 
+  const alertSuccess = document.getElementById("alert");
   const checkbox = document.getElementById("flexSwitchCheckChecked");
+  alertSuccess.style.display = "none";
 
-  checkbox.addEventListener("change", function () {
-    if (this.checked) {
-      // Code to run when the checkbox is checked
-      axios
-        .post("/notifications", {
-          currentPassword: currentPassword.value,
-          newPassword: newPassword.value,
-        })
-        .then(function (response) {
-          console.log(response);
-          button.classList.remove("disabled");
-
-          if (
-            response.data === "Congratulations! You have changed your password"
-          ) {
-            alertSuccess.style.display = "block";
-            setTimeout(() => {
-              currentPassword.value = "";
-              newPassword.value = "";
-              newPasswordConfirm.value = "";
-              alertSuccess.style.display = "none";
-            }, 1700);
-          } else if (response.data === "Passwords don't match") {
-            showErrorAlert(alertFailed);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
-      // Code to run when the checkbox is unchecked
-      axios
-        .post("/security", {
-          currentPassword: currentPassword.value,
-          newPassword: newPassword.value,
-        })
-        .then(function (response) {
-          console.log(response);
-          button.classList.remove("disabled");
-
-          if (
-            response.data === "Congratulations! You have changed your password"
-          ) {
-            alertSuccess.style.display = "block";
-            setTimeout(() => {
-              currentPassword.value = "";
-              newPassword.value = "";
-              newPasswordConfirm.value = "";
-              alertSuccess.style.display = "none";
-            }, 1700);
-          } else if (response.data === "Passwords don't match") {
-            showErrorAlert(alertFailed);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
+  checkbox.addEventListener("change", (event) => {
+    console.log(event.target.checked);
+    axios
+      .post("/notifications-settings", {
+        checked: event.target.checked,
+      })
+      .then(function (response) {
+        if (
+          response.data ===
+          "Congratulations! You have changed your notifications settings!"
+        ) {
+          alertSuccess.style.display = "block";
+          setTimeout(() => {
+            alertSuccess.style.display = "none";
+          }, 1700);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   });
 });

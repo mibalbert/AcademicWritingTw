@@ -3727,7 +3727,8 @@ input[id='name'] {
 
 /* Style the success message */
 #messages {
-  color: #28a745;
+  color: #ff512f;
+  /* color: #28a745; */
   font-size: 14px;
   margin-top: 10px;
 }
@@ -3833,3 +3834,10 @@ fieldset, input, select {
   font-size:0.7em;
   overflow: scroll;
 } */ 
+
+
+
+
+
+
+

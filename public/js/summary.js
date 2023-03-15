@@ -349,7 +349,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   };
   const removeAddMessage = () => {
     const messagesDiv = document.querySelector("#messages");
-    messagesDiv.style.display = "none";
+    // messagesDiv.style.display = "none";
+    messagesDiv.remove();
+    location.reload();
   };
   const addDashboardLinks = (message) => {
     const piDashboardBase = "https://dashboard.stripe.com/test/payments";

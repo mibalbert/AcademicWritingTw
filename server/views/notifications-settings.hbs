@@ -1,8 +1,19 @@
+<script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 <script src='../js/notifications.js' type='text/javascript' defer></script>
 
 <title>Academic Writing - Notifications Settings</title>
 
 {{> user-header}}
+  <div class='alert alert-success alert-dismissible fade show' id="alert" role='alert'>
+    <strong>Congratulations! You have changed your notifications settings!</strong>
+    <button
+      type='button'
+      class='btn-close'
+      data-bs-dismiss='alert'
+      aria-label='Close'
+    ></button>
+  </div>
+
 
 <div class='container container-res mh'>
 
@@ -15,6 +26,7 @@
         <hr class='mb-0' />
         <div class='card-header'>
           Allow Email Notifications?
+          {{#if sub}}
           <div class='form-check form-switch'>
             <input
               class='form-check-input w-10prc mt-2'
@@ -27,6 +39,20 @@
               for='flexSwitchCheckChecked'
             ></label>
           </div>
+          {{else}}
+          <div class='form-check form-switch'>
+            <input
+              class='form-check-input w-10prc mt-2'
+              id='flexSwitchCheckChecked'
+              type='checkbox'
+              {{!-- checked='' --}}
+            />
+            <label
+              class='form-check-label'
+              for='flexSwitchCheckChecked'
+            ></label>
+          </div>
+          {{/if}}
         </div>
         <div class='card-body'>
           <form>

@@ -23,6 +23,7 @@ router.post("/billing", userController.billingPOST);
 router.get("/security", userController.securityGET);
 router.post("/security", userController.securityPOST);
 router.get("/notifications-settings", userController.notificationsGET);
+router.post("/notifications-settings", userController.notificationsPOST);
 router.get("/customer-orders", userController.customerOrdersGET);
 //Payment Routes
 router.get("/summary", userController.summaryGET);

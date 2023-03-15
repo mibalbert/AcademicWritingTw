@@ -24,8 +24,8 @@ app.use(cookieParser("NotSoSecret"));
 app.use(
   session({
     secret: "something",
-    cookie: { maxAge: 600000000 },
-    resave: true,
+    // cookie: { maxAge: 600000000 },
+    resave: false,
     saveUninitialized: true,
   })
 );
