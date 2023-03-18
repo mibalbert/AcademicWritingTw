@@ -23,7 +23,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">OrderID</th>
-                  <th scope="col">Email</th>
+                  <th scope="col">Date</th>
                   <th scope="col">Ammount</th>
                   <th scope="col">Status</th>
                 </tr>
@@ -34,7 +34,7 @@
                 <tr onclick="location.href='order/{{this.uuid}}'">
                   <th scope="row">{{addOne @index}}</th>
                   <td>{{this.uuid}}</td>
-                  <td>{{this.user_email}}</td>
+                  <td>{{this.date_time_created}}</td>
                   <td>{{this.ammount_paid}} €</td>
                   <td>{{this.status}}</td>
                 </tr>

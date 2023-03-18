@@ -352,7 +352,7 @@ exports.billingGET = async (req, res) => {
   } else {
     try {
       const result = await db.query(
-        "SELECT * FROM billing WHERE user_email = ?",
+        "SELECT * FROM billing WHERE user_email = ? ORDER BY id DESC ",
         [authorised]
       );
 

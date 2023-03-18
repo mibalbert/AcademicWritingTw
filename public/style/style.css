@@ -2298,6 +2298,11 @@ a {
 /* .slick:active {
   cursor: grabbing;
 } */
+
+.slick-slider {
+  transform: scale(1.07);
+}
+
 .slick::after {
   content: '';
   position: absolute;
