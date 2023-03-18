@@ -327,9 +327,10 @@ window.addEventListener("DOMContentLoaded", async () => {
 
       // reenable the form.
       submitted = false;
-      form.querySelector("button").disabled = false;
+      form.querySelector("button").disabled = true;
       setTimeout(() => {
         removeAddMessage();
+        location.reload();
       }, 2000);
       return;
     }
@@ -353,6 +354,19 @@ window.addEventListener("DOMContentLoaded", async () => {
     messagesDiv.remove();
     location.reload();
   };
+  // function setLoading(isLoading) {
+  //       if (isLoading) {
+  //         // Disable the button and show a spinner
+  //         document.querySelector("#submit").disabled = true;
+  //         document.querySelector("#spinner").classList.remove("hidden");
+  //         document.querySelector("#button-text").classList.add("hidden");
+  //       } else {
+  //         document.querySelector("#submit").disabled = false;
+  //         document.querySelector("#spinner").classList.add("hidden");
+  //         document.querySelector("#button-text").classList.remove("hidden");
+  //       }
+  //     }
+
   const addDashboardLinks = (message) => {
     const piDashboardBase = "https://dashboard.stripe.com/test/payments";
     return message.replace(

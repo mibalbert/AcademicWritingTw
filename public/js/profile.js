@@ -4,18 +4,18 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log("DOMContentLoaded");
 
   const alert = document.getElementById("alert");
-  alert.style.display = "none";
-  // if (alert) {
-  //   setTimeout(() => {
-  //     alert.remove();
-  //   }, 1700);
-  // }
 
-  const firstName = document.getElementById("inputFirstName");
-  const lastName = document.getElementById("inputLastName");
-  const country = document.getElementById("inputCountry");
-  const city = document.getElementById("inputCity");
-  const phone = document.getElementById("inputPhone");
+  if (alert) {
+    setTimeout(() => {
+      alert.remove();
+    }, 1700);
+  }
+
+  // const firstName = document.getElementById("inputFirstName");
+  // const lastName = document.getElementById("inputLastName");
+  // const country = document.getElementById("inputCountry");
+  // const city = document.getElementById("inputCity");
+  // const phone = document.getElementById("inputPhone");
 
   const formElements = document.querySelectorAll("form input");
   const initialValues = {};
@@ -34,25 +34,25 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.getElementById("saveChanges").addEventListener("click", () => {
-    axios
-      .post("/profile", {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        country: country.value,
-        city: city.value,
-        phone: phone.value,
-      })
-      .then(function (response) {
-        if (response.statusText) {
-          alert.style.display = "block";
-          setTimeout(() => {
-            alert.style.display = "none";
-          }, 1700);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  });
+  // document.getElementById("saveChanges").addEventListener("click", () => {
+  //   axios
+  //     .post("/profile", {
+  //       firstName: firstName.value,
+  //       lastName: lastName.value,
+  //       country: country.value,
+  //       city: city.value,
+  //       phone: phone.value,
+  //     })
+  //     .then(function (response) {
+  //       if (response.statusText) {
+  //         alert.style.display = "block";
+  //         setTimeout(() => {
+  //           alert.style.display = "none";
+  //         }, 1700);
+  //       }
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // });
 });

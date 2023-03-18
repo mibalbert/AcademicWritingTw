@@ -180,7 +180,8 @@ exports.customerHomeGET = async (req, res) => {
       "SELECT * FROM orders WHERE user_email = ? ORDER BY id DESC LIMIT 3",
       [authorised]
     );
-    // console.log("THE FUCKING ROWS", rows);
+
+    console.log(rows);
     // const successMessage = req.flash("success");
     // const successMessageReg = req.flash("registered");
     // req.flash("success", null);
@@ -293,7 +294,7 @@ exports.profileGET = async (req, res) => {
         [authorised]
       );
 
-      console.log(userData);
+      console.log("USER DATA", userData[0].user_city);
 
       res.render("profile", {
         firstName: userData[0].user_first_name,
@@ -322,16 +323,25 @@ exports.profilePOST = async (req, res) => {
     res.redirect("/login");
   } else {
     const data = req.body;
+    console.log(data);
     try {
       const [result] = await db.query(
         `UPDATE accounts SET user_first_name = ?, \
       user_last_name = ?, user_telephone = ?, user_country = ?,\
        user_city = ? WHERE user_email='${authorised}'`,
-        [data.firstName, data.lastName, data.phone, data.country, data.city]
+        [
+          data.inputFirstName,
+          data.inputLastName,
+          data.inputPhone,
+          data.inputCountry,
+          data.inputCity,
+        ]
       );
       console.log(result);
+      req.flash("updated", "congrats!");
 
-      res.send("IT WORKED");
+      res.redirect("/profile");
+      // res.send("IT WORKED");
     } catch (err) {
       console.log(err);
     }

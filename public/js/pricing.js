@@ -325,6 +325,27 @@ window.addEventListener("DOMContentLoaded", () => {
   const formatSessVal = sessionStorage.getItem("format");
   const subjectAreaSessVal = sessionStorage.getItem("subjectArea");
   const numOfResourcesSessVal = sessionStorage.getItem("numOfResources");
+  const topicSessVal = sessionStorage.getItem("topic");
+  const detailsSessVal = sessionStorage.getItem("details");
+  const tableSessVal = sessionStorage.getItem("numOfResources");
+
+  radioGroup.value = currencySessVal;
+  typeService.value = typeServiceSessVal;
+  typePaper.value = typePaperSessVal;
+  numOfPages.value = numOfPagesSessVal;
+  academicLevel.value = academicLevelSessVal;
+  radioFormat.value = formatSessVal;
+  subjectArea.value = subjectAreaSessVal;
+  numOfResouces.value = numOfResourcesSessVal;
+  topic.value = topicSessVal;
+  details.value = detailsSessVal;
+
+  document.querySelector(
+    `input[name="urgency"][value="${urgencySessVal}"]`
+  ).checked = true;
+  document.querySelector(
+    `input[name="paperFormat"][value="${formatSessVal}"]`
+  ).checked = true;
 
   total();
 

@@ -1,13 +1,14 @@
-<script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 
-<script src="../js/profile.js" type="text/javascript" defer></script>
-
+<script src="js/profile.js" type="module"></script>
 <title>Academic Writing - Profile</title>
 
 {{> user-header}}
 
+
+{{#if updated}}
   <div class='alert alert-success alert-dismissible fade show' id="alert" role='alert'>
     <strong>Congratulations! You have updated your profile!</strong>
+    <strong>{{updated}}</strong>
     <button
       type='button'
       class='btn-close'
@@ -15,7 +16,7 @@
       aria-label='Close'
     ></button>
   </div>
-
+{{/if}}
 
 
 <section class="container container-res mh">
@@ -31,7 +32,10 @@
           {{!-- <form class="mx-600 mx-auto" 
           name="profileForm" action="/profile" method="POST"> --}}
           <form class="mx-600 mx-auto" 
-          name="profileForm">
+          name="profileForm"
+          action="/profile"
+          method="POST"
+          >
             <div class="form-label-group">
               <label
                 class="h5 normal-weight text-muted mt-3"
@@ -42,8 +46,8 @@
                 id="inputFirstName"
                 name="inputFirstName"
                 type="text"
-                placeholder="Enter your full name"
-                value="{{firstName}}"
+                placeholder="Enter your First name"
+                value='{{firstName}}'
               />
             </div>
 
@@ -57,7 +61,7 @@
                 id="inputLastName"
                 name="inputLastName"
                 type="text"
-                placeholder="Enter your full name"
+                placeholder="Enter your Last name"
                 value="{{lastName}}"
               />
             </div>
@@ -111,8 +115,8 @@
                 id="saveChanges"
                 {{!-- class="btn bg-orange text-white enjoy-button w-100 mt-5 height-50 disabled" --}}
                 class="btn bg-orange text-white enjoy-button w-100 mt-5 height-50 disabled"
-                {{!-- type="submit" --}}
-                type="button"
+                type="submit"
+                {{!-- type="button" --}}
                 {{! style="display: none;" }}
               >Save changes</button>
             </div>
