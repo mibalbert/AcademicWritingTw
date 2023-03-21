@@ -2,7 +2,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  darkMode: true,
+  darkMode: false,
   content: ["./server/**/*.{hbs,html,js}"],
   corePlugins: {
     preflight: false,
@@ -15,5 +15,5 @@ module.exports = {
       ...defaultTheme.screens,
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

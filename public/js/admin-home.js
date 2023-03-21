@@ -1,198 +1,101 @@
-"use strict";
-class Selectize {
-  constructor() {
-    this.init();
-  }
-  init() {
-    var initValue;
-    $(".action-box").selectric({
-      onInit: function (element) {
-        initValue = $(this).val();
-      },
-      onChange: function (element) {
-        if ($(this).val() !== initValue) $(element).parents("form").submit();
-      },
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("DOMContentLoaded");
+
+  var script = document.createElement("script");
+  script.src =
+    "https://maps.googleapis.com/maps/api/js?key=AIzaSyAqWH0IS8beHBRWjpwU1OP0h00gtgd7Wvc&libraries=places,geometry&callback=initMap";
+  script.async = true;
+
+  window.initMap = async function () {
+    google.maps.visualRefresh = true;
+    const map = new google.maps.Map(document.getElementById("map"), {
+      // mapId: "b1beacae401d047c", //Really Grey Map
+      // mapId: "5dc01d292296e5fa", //Dark Map
+      mapId: "3d77b9a82b60bc5a", //DarkBlue Map
+      disableDefaultUI: true,
+      zoomControl: true,
+
+      zoom: 3,
+      center: { lat: -28.024, lng: 140.887 },
+      // restriction: {
+      //   latLngBounds: {
+      //     east: 179.9999,
+      //     north: 82,
+      //     south: -85,
+      //     west: -179.9999,
+      //   },
+      //   strictBounds: true,
+      // },
     });
-  }
-}
-class Charts {
-  constructor() {
-    this.colors = ["#DB66AE", "#8185D6", "#89D9DF", "#E08886"];
-    this.tickColor = "#757681";
-    this.initRadar();
-    this.initBarHorizontal();
-    this.initDoughnut();
-  }
-  initRadar() {
-    var ctxD = $("#radarChartDark"),
-      chartData = {
-        type: "radar",
-        data: {
-          labels: ["Education", "Food", "Transport", "Drinks", "Other"],
-          datasets: [
-            {
-              label: "2014",
-              backgroundColor: this.convertHex(this.colors[0], 20),
-              borderColor: this.colors[0],
-              borderWidth: 1,
-              pointRadius: 2,
-              data: [51, 67, 90, 31, 16],
-            },
-            {
-              label: "2015",
-              backgroundColor: this.convertHex(this.colors[1], 20),
-              borderColor: this.colors[1],
-              borderWidth: 1,
-              pointRadius: 2,
-              data: [75, 44, 19, 22, 43],
-            },
-            {
-              label: "2015",
-              backgroundColor: this.convertHex(this.colors[2], 20),
-              borderColor: this.colors[2],
-              borderWidth: 1,
-              pointRadius: 2,
-              data: [7, 14, 29, 82, 33],
-            },
-          ],
-        },
-        options: {
-          scale: {
-            pointLabels: {
-              fontColor: this.tickColor,
-            },
-            ticks: {
-              display: false,
-              stepSize: 25,
-            },
-          },
-          legend: {
-            position: "bottom",
-            labels: {
-              boxWidth: 11,
-              fontColor: this.tickColor,
-              fontSize: 11,
-            },
-          },
-        },
-      },
-      myDarkRadarChart = new Chart(ctxD, chartData);
-  }
-  initBarHorizontal() {
-    var ctxD = $("#barChartHDark"),
-      chartData = {
-        type: "horizontalBar",
-        data: {
-          labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              data: [27, 59, 68, 26, 79, 55, 36, 43, 44, 30, 55, 64],
-              backgroundColor: this.colors[0],
-              hoverBackgroundColor: this.convertHex(this.colors[0], 70),
-            },
-            {
-              data: [136, 23, 44, 30, 79, 55, 61, 94, 27, 59, 98, 91],
-              backgroundColor: this.colors[1],
-              hoverBackgroundColor: this.convertHex(this.colors[1], 70),
-            },
-            {
-              data: [88, 31, 87, 61, 77, 27, 59, 58, 136, 26, 79, 85],
-              backgroundColor: this.colors[2],
-              hoverBackgroundColor: this.convertHex(this.colors[2], 70),
-            },
-          ],
-        },
-        options: {
-          barThickness: 10,
-          scales: {
-            xAxes: [
-              {
-                stacked: true,
-                ticks: {
-                  fontColor: this.tickColor,
-                },
-                gridLines: {
-                  drawOnChartArea: false,
-                },
-              },
-            ],
-            yAxes: [
-              {
-                stacked: true,
-                ticks: {
-                  fontColor: this.tickColor,
-                  min: 0,
-                  max: 175,
-                  stepSize: 25,
-                },
-              },
-            ],
-          },
-          legend: {
-            display: false,
-          },
-        },
-      },
-      myDarkRadarChart = new Chart(ctxD, chartData);
-  }
-  initDoughnut() {
-    var ctxD = $("#doughnutChartDark"),
-      chartData = {
-        type: "doughnut",
-        data: {
-          labels: ["Brasil", "India", "China"],
-          datasets: [
-            {
-              data: [300, 50, 100],
-              borderWidth: 0,
-              backgroundColor: [
-                this.convertHex(this.colors[0], 60),
-                this.convertHex(this.colors[1], 60),
-                this.convertHex(this.colors[2], 60),
-              ],
-              hoverBackgroundColor: [
-                this.colors[0],
-                this.colors[1],
-                this.colors[2],
-              ],
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          legend: {
-            position: "bottom",
-            labels: {
-              boxWidth: 11,
-              fontColor: this.tickColor,
-              fontSize: 11,
-            },
-          },
-        },
-      },
-      myDarkRadarChart = new Chart(ctxD, chartData);
-  }
-  convertHex(hex, opacity) {
-    hex = hex.replace("#", "");
-    var r = parseInt(hex.substring(0, 2), 16);
-    var g = parseInt(hex.substring(2, 4), 16);
-    var b = parseInt(hex.substring(4, 6), 16);
-    var result = "rgba(" + r + "," + g + "," + b + "," + opacity / 100 + ")";
-    return result;
-  }
-}
-new Selectize();
-new Charts();
+
+    window.addEventListener("resize", () => {
+      const screenWidth = window.screen.width;
+      if (screenWidth < 640) {
+        map.setOptions({ zoomControl: false });
+      } else {
+        map.setOptions({ zoomControl: true });
+      }
+    });
+
+    const infoWindow = new google.maps.InfoWindow({
+      content: "",
+      disableAutoPan: true,
+    });
+    map.setTilt(45);
+    // Create an array of alphabetical characters used to label the markers.
+    const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // Add some markers to the map.
+    const markers = locations.map((position, i) => {
+      const label = labels[i % labels.length];
+      const marker = new google.maps.Marker({
+        position,
+        label,
+      });
+
+      // markers can only be keyboard focusable when they have click listeners
+      // open info window when marker is clicked
+      marker.addListener("click", () => {
+        infoWindow.setContent(label);
+        infoWindow.open(map, marker);
+        map.setTilt(45);
+      });
+      return marker;
+    });
+
+    const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
+    markerCluster.addEventListener("click", (cluster) => {
+      map.setTilt(45);
+    });
+
+    // new MarkerClusterer({ markers, map });
+    // Add a marker clusterer to manage the markers.
+  };
+
+  const locations = [
+    { lat: -31.56391, lng: 147.154312 },
+    { lat: -33.718234, lng: 150.363181 },
+    { lat: -33.727111, lng: 150.371124 },
+    { lat: -33.848588, lng: 151.209834 },
+    { lat: -33.851702, lng: 151.216968 },
+    { lat: -34.671264, lng: 150.863657 },
+    { lat: -35.304724, lng: 148.662905 },
+    { lat: -36.817685, lng: 175.699196 },
+    { lat: -36.828611, lng: 175.790222 },
+    { lat: -37.75, lng: 145.116667 },
+    { lat: -37.759859, lng: 145.128708 },
+    { lat: -37.765015, lng: 145.133858 },
+    { lat: -37.770104, lng: 145.143299 },
+    { lat: -37.7737, lng: 145.145187 },
+    { lat: -37.774785, lng: 145.137978 },
+    { lat: -37.819616, lng: 144.968119 },
+    { lat: -38.330766, lng: 144.695692 },
+    { lat: -39.927193, lng: 175.053218 },
+    { lat: -41.330162, lng: 174.865694 },
+    { lat: -42.734358, lng: 147.439506 },
+    { lat: -42.734358, lng: 147.501315 },
+    { lat: -42.735258, lng: 147.438 },
+    { lat: -43.999792, lng: 170.463352 },
+  ];
+
+  document.head.appendChild(script);
+});

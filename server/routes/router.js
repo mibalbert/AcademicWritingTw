@@ -35,15 +35,27 @@ router.post("/webhook", userController.webhookPOST);
 
 //////////////// ADMIN
 router.get("/admin-home", userController.adminHomeGET);
-router.post("/admin", userController.find);
-router.get("/admin-adduser", userController.form);
-router.post("/admin-adduser", userController.create);
-router.get("/admin-edituser/:id", userController.edit);
-router.post("/admin-edituser/:id", userController.update);
-router.get("/admin-viewuser/:id", userController.viewall);
-router.get("/admin/:id", userController.delete);
+/// Amin Orders
+router.get("/admin-new-orders", userController.adminNewOrdersGET);
+router.get("/admin-accepted-orders", userController.adminAcceptedOrdersGET);
+router.get("/admin-all-orders", userController.adminAllOrdersGET);
+/// Amin Users
+router.get("/admin-active-users", userController.adminActiveUsersGET);
+router.get("/admin-create-user", userController.adminCreateUserGET);
+router.post("/admin-create-user", userController.adminCreateUserPOST);
+router.get("/admin-edit-users", userController.adminEditUsersGET);
+router.get("/admin-all-users", userController.adminAllUsersGET);
 
-router.post("/testing", userController.testingPOST);
-router.get("/testing", userController.testingGET);
+/////////////////
+// router.post("/admin", userController.find);
+// router.get("/admin-adduser", userController.form);
+// router.post("/admin-adduser", userController.create);
+// router.get("/admin-edituser/:id", userController.edit);
+// router.post("/admin-edituser/:id", userController.update);
+// router.get("/admin-viewuser/:id", userController.viewall);
+// router.get("/admin/:id", userController.delete);
+
+// router.post("/testing", userController.testingPOST);
+// router.get("/testing", userController.testingGET);
 
 module.exports = router;

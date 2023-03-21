@@ -200,6 +200,7 @@ CREATE TABLE IF NOT EXISTS orders (
     urgency INT(25),
     payment_status VARCHAR(255),
     status VARCHAR(45) DEFAULT 'To be accepted', 
+    is_new BOOL DEFAULT true, 
     date_time_created DATETIME,
     date_time_accepted DATETIME,
     date_time_delivered DATETIME,
@@ -208,7 +209,7 @@ CREATE TABLE IF NOT EXISTS orders (
 
 
 	INSERT INTO orders (user_email, user_first_name, user_last_name, user_telephone, currency, type_service, type_paper, number_of_pages, number_of_resources, academic_level,
-  subject_area, format, title, description, urgency, payment_status, date_time_created, uuid ) VALUES ( 
+  subject_area, format, title, description, urgency, payment_status, status, is_new,  date_time_created, uuid ) VALUES ( 
         "john.ibrahimovic@gmail.com",     
         "John",
         "Ibrahimovic",
@@ -232,7 +233,67 @@ Finally, the paper discusses potential policy interventions that could help to r
 
 Overall, Examining the Relationship between Income Inequality and Health Outcomes is a comprehensive analysis of the impact of income inequality on health outcomes. The paper provides a nuanced understanding of the complex relationship between these two factors and highlights potential avenues for policy intervention.",                     
         13,                              
-        "succeeded",                             
+        "succeeded",               
+        "To be accepted",              
+        true,              
+        "2023-03-09 03:14:07",             
+        "ads122dwx"                            
+  ) , ( 
+        "john.ibrahimovic@gmail.com",     
+        "John",
+        "Ibrahimovic",
+        "07952102580",              
+        "eur",                           
+        "Academic Writing Paper",        
+        "Essay",                         
+        22,                                
+        4,                                
+        "Master's",
+        "Arhitecture",
+        "APA",
+        "Examining the Relationship between Income Inequality and Health Outcomes",
+        "Examining the Relationship between Income Inequality and Health Outcomes is a research paper that explores the relationship between income inequality and health outcomes. The paper analyzes data from various sources, including academic articles and government reports, to examine the impact of income inequality on various health outcomes such as mortality, morbidity, and mental health.
+
+The paper begins by providing a brief overview of income inequality and its effects on society. It then delves into the impact of income inequality on health outcomes, citing various studies that have explored the relationship between income inequality and specific health outcomes such as heart disease, mental illness, and life expectancy.
+
+In addition to analyzing the existing research on income inequality and health outcomes, the paper also examines potential mechanisms that may explain this relationship. The paper explores factors such as access to healthcare, social support, and stress as potential mediating factors that may help to explain why income inequality is linked to poorer health outcomes.
+
+Finally, the paper discusses potential policy interventions that could help to reduce income inequality and improve health outcomes. It examines various policy options such as progressive taxation, universal healthcare, and affordable housing as potential ways to reduce income inequality and improve health outcomes.
+
+Overall, Examining the Relationship between Income Inequality and Health Outcomes is a comprehensive analysis of the impact of income inequality on health outcomes. The paper provides a nuanced understanding of the complex relationship between these two factors and highlights potential avenues for policy intervention.",                     
+        13,                              
+        "succeeded",               
+        "Accepted",              
+        true,              
+        "2023-03-09 03:14:07",             
+        "ads122dwx"                            
+  ) , ( 
+        "john.ibrahimovic@gmail.com",     
+        "John",
+        "Ibrahimovic",
+        "07952102580",              
+        "eur",                           
+        "Academic Writing Paper",        
+        "Essay",                         
+        22,                                
+        4,                                
+        "Master's",
+        "Arhitecture",
+        "APA",
+        "Examining the Relationship between Income Inequality and Health Outcomes",
+        "Examining the Relationship between Income Inequality and Health Outcomes is a research paper that explores the relationship between income inequality and health outcomes. The paper analyzes data from various sources, including academic articles and government reports, to examine the impact of income inequality on various health outcomes such as mortality, morbidity, and mental health.
+
+The paper begins by providing a brief overview of income inequality and its effects on society. It then delves into the impact of income inequality on health outcomes, citing various studies that have explored the relationship between income inequality and specific health outcomes such as heart disease, mental illness, and life expectancy.
+
+In addition to analyzing the existing research on income inequality and health outcomes, the paper also examines potential mechanisms that may explain this relationship. The paper explores factors such as access to healthcare, social support, and stress as potential mediating factors that may help to explain why income inequality is linked to poorer health outcomes.
+
+Finally, the paper discusses potential policy interventions that could help to reduce income inequality and improve health outcomes. It examines various policy options such as progressive taxation, universal healthcare, and affordable housing as potential ways to reduce income inequality and improve health outcomes.
+
+Overall, Examining the Relationship between Income Inequality and Health Outcomes is a comprehensive analysis of the impact of income inequality on health outcomes. The paper provides a nuanced understanding of the complex relationship between these two factors and highlights potential avenues for policy intervention.",                     
+        13,                              
+        "succeeded",               
+        "Accepted",              
+        false,              
         "2023-03-09 03:14:07",             
         "ads122dwx"                            
   ) ;                                

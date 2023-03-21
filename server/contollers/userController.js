@@ -186,7 +186,7 @@ exports.customerHomeGET = async (req, res) => {
     // const successMessageReg = req.flash("registered");
     // req.flash("success", null);
 
-    res.render("customer-home", {
+    res.render("customer/customer-home", {
       rows,
       authorised,
       userFirstName,
@@ -261,7 +261,7 @@ exports.orderID = async (req, res) => {
         ]);
         if (data.length !== 0) {
           const rows = data[0];
-          res.render("order", { authorised, rows });
+          res.render("customer/order", { authorised, rows });
         } else {
           res.redirect("/");
         }
@@ -296,7 +296,7 @@ exports.profileGET = async (req, res) => {
 
       console.log("USER DATA", userData[0].user_city);
 
-      res.render("profile", {
+      res.render("customer/profile", {
         firstName: userData[0].user_first_name,
         lastName: userData[0].user_last_name,
         country: userData[0].user_country,
@@ -368,7 +368,7 @@ exports.billingGET = async (req, res) => {
 
       // console.log(result[0]);
 
-      res.render("billing", {
+      res.render("customer/billing", {
         authorised,
         data: result[0],
         all,
@@ -401,7 +401,12 @@ exports.securityGET = (req, res) => {
   if (!authorised) {
     res.redirect("/login");
   } else {
-    res.render("security", { authorised, all, activeSecurity, roleCustomer });
+    res.render("customer/security", {
+      authorised,
+      all,
+      activeSecurity,
+      roleCustomer,
+    });
   }
 };
 
@@ -461,7 +466,7 @@ exports.notificationsGET = async (req, res) => {
       } else {
         subscribed = false;
       }
-      res.render("notifications-settings", {
+      res.render("customer/notifications-settings", {
         authorised,
         all,
         sub: subscribed,
@@ -520,7 +525,7 @@ exports.customerOrdersGET = async (req, res) => {
 
       // console.log(data);
 
-      res.render("customer-orders", {
+      res.render("customer/customer-orders", {
         authorised,
         // activeCustomerOrders,
         data,
@@ -539,7 +544,7 @@ exports.summaryGET = (req, res) => {
   if (!authorised) {
     res.redirect("/login");
   } else {
-    res.render("summary", {
+    res.render("customer/summary", {
       authorised,
     });
   }
@@ -551,7 +556,7 @@ exports.summaryCompleteGET = (req, res) => {
   if (!authorised) {
     res.redirect("/login");
   } else {
-    res.render("summary-complete", {
+    res.render("customer/summary-complete", {
       authorised,
     });
   }
@@ -789,20 +794,36 @@ exports.testingPOST = (req, res) => {
 exports.adminHomeGET = async (req, res) => {
   console.log("GET /admin-home");
 
-  const [result] = await db.query(
-    'SELECT COUNT(*) FROM accounts WHERE status="active"'
-  );
-  const totalActiveUsers = result[0]["COUNT(*)"];
-  // console.log(totalActiveUsers);
+  try {
+    let [acceptedOrders] = await db.query(
+      'SELECT COUNT(*) FROM orders WHERE status="Accepted"'
+    );
 
-  res.render("admin-home", {
-    layout: "admin-layout.hbs",
-    totalActiveUsers: totalActiveUsers,
-    totalActiveOrders: 10,
-    ordersAccepted: 5,
-    ordersToAccept: 5,
-    totalAllOrders: 54,
-  });
+    acceptedOrders = acceptedOrders[0]["COUNT(*)"];
+    console.log("Accepted Orders", acceptedOrders);
+
+    let [newOrders] = await db.query(
+      "SELECT COUNT(*) FROM orders WHERE is_new=true"
+    );
+
+    newOrders = newOrders[0]["COUNT(*)"];
+
+    console.log("New Orders", newOrders);
+
+    let [activeUsers] = await db.query(
+      'SELECT COUNT(*) FROM accounts WHERE status="active"'
+    );
+    activeUsers = activeUsers[0]["COUNT(*)"];
+
+    res.render("admin/admin-home", {
+      layout: "admin-layout.hbs",
+      acceptedOrders: acceptedOrders,
+      newOrders: newOrders,
+      activeUsers: activeUsers,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 
   // db.query('SELECT * FROM user WHERE status = "active"', (err, rows) => {
   //   // When done with the connection, release it
@@ -816,138 +837,267 @@ exports.adminHomeGET = async (req, res) => {
   // });
 };
 
-// Find User by Search
-exports.find = (req, res) => {
-  let searchTerm = req.body.search;
-  // User the connection
-  db.query(
-    "SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?",
-    ["%" + searchTerm + "%", "%" + searchTerm + "%"],
-    (err, rows) => {
-      if (!err) {
-        res.render("home", { rows });
-      } else {
-        console.log(err);
-      }
-      console.log("The data from user table: \n", rows);
-    }
-  );
-};
+exports.adminAcceptedOrdersGET = async (req, res) => {
+  console.log("GET /admin-accepted-orders");
 
-exports.form = (req, res) => {
-  res.render("add-user");
-};
+  try {
+    let [acceptedOrders] = await db.query(
+      'SELECT * FROM orders WHERE status="Accepted"'
+    );
+    acceptedOrders = acceptedOrders[0]["COUNT(*)"];
+    console.log(acceptedOrders);
 
-// Add new user
-exports.create = (req, res) => {
-  const { first_name, last_name, email, phone, comments } = req.body;
-  let searchTerm = req.body.search;
-
-  // User the db
-  db.query(
-    "INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?",
-    [first_name, last_name, email, phone, comments],
-    (err, rows) => {
-      if (!err) {
-        res.render("add-user", { alert: "User added successfully." });
-      } else {
-        console.log(err);
-      }
-      console.log("The data from user table: \n", rows);
-    }
-  );
-};
-
-// Edit user
-exports.edit = (req, res) => {
-  // User the db
-  db.query("SELECT * FROM user WHERE id = ?", [req.params.id], (err, rows) => {
-    if (!err) {
-      res.render("edit-user", { rows });
-    } else {
-      console.log(err);
-    }
-    console.log("The data from user table: \n", rows);
-  });
-};
-
-// Update User
-exports.update = (req, res) => {
-  const { first_name, last_name, email, phone, comments } = req.body;
-  // User the db
-  db.query(
-    "UPDATE user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ? WHERE id = ?",
-    [first_name, last_name, email, phone, comments, req.params.id],
-    (err, rows) => {
-      if (!err) {
-        // User the db
-        db.query(
-          "SELECT * FROM user WHERE id = ?",
-          [req.params.id],
-          (err, rows) => {
-            // When done with the db, release it
-
-            if (!err) {
-              res.render("edit-user", {
-                rows,
-                alert: `${first_name} has been updated.`,
-              });
-            } else {
-              console.log(err);
-            }
-            console.log("The data from user table: \n", rows);
-          }
-        );
-      } else {
-        console.log(err);
-      }
-      console.log("The data from user table: \n", rows);
-    }
-  );
-};
-
-// Delete User
-exports.delete = (req, res) => {
-  // Delete a record
-
-  // User the db
-  // db.query('DELETE FROM user WHERE id = ?', [req.params.id], (err, rows) => {
-
-  //   if(!err) {
-  //     res.redirect('/');
-  //   } else {
-  //     console.log(err);
-  //   }
-  //   console.log('The data from user table: \n', rows);
-
-  // });
-
-  // Hide a record
-
-  db.query(
-    "UPDATE user SET status = ? WHERE id = ?",
-    ["removed", req.params.id],
-    (err, rows) => {
-      if (!err) {
-        let removedUser = encodeURIComponent("User successeflly removed.");
-        res.redirect("/?removed=" + removedUser);
-      } else {
-        console.log(err);
-      }
-      console.log("The data from beer table are: \n", rows);
-    }
-  );
+    res.render("admin/admin-accepted-orders", {
+      layout: "admin-layout.hbs",
+      acceptedOrders: acceptedOrders,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // View Users
-exports.viewall = (req, res) => {
-  // User the db
-  db.query("SELECT * FROM user WHERE id = ?", [req.params.id], (err, rows) => {
-    if (!err) {
-      res.render("view-user", { rows });
-    } else {
-      console.log(err);
-    }
-    console.log("The data from user table: \n", rows);
-  });
+
+exports.adminNewOrdersGET = async (req, res) => {
+  console.log("GET /admin-new-orders");
+
+  try {
+    let [newOrders] = await db.query("SELECT * FROM orders WHERE is_new=true ");
+    newOrders = newOrders[0];
+
+    res.render("admin/admin-new-orders", {
+      layout: "admin-layout.hbs",
+      newOrders: newOrders,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+exports.adminActiveUsersGET = async (req, res) => {
+  console.log("GET /admin-active-users");
+
+  try {
+    let [activeUsers] = await db.query(
+      'SELECT COUNT(*) FROM accounts WHERE status="active"'
+    );
+    activeUsers = activeUsers[0]["COUNT(*)"];
+
+    res.render("admin/admin-active-users", {
+      layout: "admin-layout.hbs",
+      activeUsers: activeUsers,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.adminAllOrdersGET = async (req, res) => {
+  console.log("GET /admin-all-orders");
+  try {
+    let [allOrders] = await db.query("SELECT * FROM orders");
+    allOrders = allOrders[0]["COUNT(*)"];
+
+    res.render("admin/admin-all-orders", {
+      layout: "admin-layout.hbs",
+      allOrders: allOrders,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.adminCreateUserGET = async (req, res) => {
+  console.log("GET /admin-create-user");
+  try {
+    res.render("admin/admin-create-user", {
+      layout: "admin-layout.hbs",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.adminCreateUserPOST = async (req, res) => {
+  console.log("POST /admin-create-user");
+  try {
+    const { first_name, last_name, email, password, role } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const [result] = await db.query(
+      "INSERT INTO accounts (first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, ?)",
+      [first_name, last_name, email, hashedPassword, role]
+    );
+    console.log(result);
+    res.redirect("/admin-home");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.adminAllUsersGET = async (req, res) => {
+  console.log("GET /admin-all-users");
+  try {
+    let [allUsers] = await db.query("SELECT * FROM accounts");
+    allUsers = allUsers[0]["COUNT(*)"];
+
+    res.render("admin/admin-view-all-users", {
+      layout: "admin-layout.hbs",
+      allUsers: allUsers,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+exports.adminEditUsersGET = async (req, res) => {
+  console.log("GET /admin-edit-users");
+  try {
+    let [allUsers] = await db.query("SELECT * FROM accounts");
+    allUsers = allUsers[0];
+
+    res.render("admin/admin-edit-users", {
+      layout: "admin-layout.hbs",
+      allUsers: allUsers,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+// // Find User by Search
+// exports.find = (req, res) => {
+//   let searchTerm = req.body.search;
+//   // User the connection
+//   db.query(
+//     "SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?",
+//     ["%" + searchTerm + "%", "%" + searchTerm + "%"],
+//     (err, rows) => {
+//       if (!err) {
+//         res.render("home", { rows });
+//       } else {
+//         console.log(err);
+//       }
+//       console.log("The data from user table: \n", rows);
+//     }
+//   );
+// };
+
+// exports.form = (req, res) => {
+//   res.render("add-user");
+// };
+
+// // Add new user
+// exports.create = (req, res) => {
+//   const { first_name, last_name, email, phone, comments } = req.body;
+//   let searchTerm = req.body.search;
+
+//   // User the db
+//   db.query(
+//     "INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?",
+//     [first_name, last_name, email, phone, comments],
+//     (err, rows) => {
+//       if (!err) {
+//         res.render("add-user", { alert: "User added successfully." });
+//       } else {
+//         console.log(err);
+//       }
+//       console.log("The data from user table: \n", rows);
+//     }
+//   );
+// };
+
+// // Edit user
+// exports.edit = (req, res) => {
+//   // User the db
+//   db.query("SELECT * FROM user WHERE id = ?", [req.params.id], (err, rows) => {
+//     if (!err) {
+//       res.render("edit-user", { rows });
+//     } else {
+//       console.log(err);
+//     }
+//     console.log("The data from user table: \n", rows);
+//   });
+// };
+
+// // Update User
+// exports.update = (req, res) => {
+//   const { first_name, last_name, email, phone, comments } = req.body;
+//   // User the db
+//   db.query(
+//     "UPDATE user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ? WHERE id = ?",
+//     [first_name, last_name, email, phone, comments, req.params.id],
+//     (err, rows) => {
+//       if (!err) {
+//         // User the db
+//         db.query(
+//           "SELECT * FROM user WHERE id = ?",
+//           [req.params.id],
+//           (err, rows) => {
+//             // When done with the db, release it
+
+//             if (!err) {
+//               res.render("edit-user", {
+//                 rows,
+//                 alert: `${first_name} has been updated.`,
+//               });
+//             } else {
+//               console.log(err);
+//             }
+//             console.log("The data from user table: \n", rows);
+//           }
+//         );
+//       } else {
+//         console.log(err);
+//       }
+//       console.log("The data from user table: \n", rows);
+//     }
+//   );
+// };
+
+// // Delete User
+// exports.delete = (req, res) => {
+//   // Delete a record
+
+//   // User the db
+//   // db.query('DELETE FROM user WHERE id = ?', [req.params.id], (err, rows) => {
+
+//   //   if(!err) {
+//   //     res.redirect('/');
+//   //   } else {
+//   //     console.log(err);
+//   //   }
+//   //   console.log('The data from user table: \n', rows);
+
+//   // });
+
+//   // Hide a record
+
+//   db.query(
+//     "UPDATE user SET status = ? WHERE id = ?",
+//     ["removed", req.params.id],
+//     (err, rows) => {
+//       if (!err) {
+//         let removedUser = encodeURIComponent("User successeflly removed.");
+//         res.redirect("/?removed=" + removedUser);
+//       } else {
+//         console.log(err);
+//       }
+//       console.log("The data from beer table are: \n", rows);
+//     }
+//   );
+// };
+
+// // View Users
+// exports.viewall = (req, res) => {
+//   // User the db
+//   db.query("SELECT * FROM user WHERE id = ?", [req.params.id], (err, rows) => {
+//     if (!err) {
+//       res.render("view-user", { rows });
+//     } else {
+//       console.log(err);
+//     }
+//     console.log("The data from user table: \n", rows);
+//   });
+// };
