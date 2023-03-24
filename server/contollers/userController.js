@@ -239,7 +239,7 @@ exports.pricingGET = (req, res) => {
     roleAdmin = true;
   }
 
-  res.render("pricing", {
+  res.render("customer/pricing", {
     authorised,
     activePricing,
     roleCustomer: roleCustomer,
@@ -800,15 +800,12 @@ exports.adminHomeGET = async (req, res) => {
     );
 
     acceptedOrders = acceptedOrders[0]["COUNT(*)"];
-    console.log("Accepted Orders", acceptedOrders);
 
     let [newOrders] = await db.query(
       "SELECT COUNT(*) FROM orders WHERE is_new=true"
     );
 
     newOrders = newOrders[0]["COUNT(*)"];
-
-    console.log("New Orders", newOrders);
 
     let [activeUsers] = await db.query(
       'SELECT COUNT(*) FROM accounts WHERE status="active"'
@@ -874,8 +871,8 @@ exports.adminNewOrdersGET = async (req, res) => {
   }
 };
 
-exports.adminActiveUsersGET = async (req, res) => {
-  console.log("GET /admin-active-users");
+exports.adminViewAllUsersGET = async (req, res) => {
+  console.log("GET /admin-view-all-users");
 
   try {
     let [activeUsers] = await db.query(
@@ -883,7 +880,7 @@ exports.adminActiveUsersGET = async (req, res) => {
     );
     activeUsers = activeUsers[0]["COUNT(*)"];
 
-    res.render("admin/admin-active-users", {
+    res.render("admin/admin-view-all-users", {
       layout: "admin-layout.hbs",
       activeUsers: activeUsers,
     });
@@ -949,22 +946,98 @@ exports.adminAllUsersGET = async (req, res) => {
   }
 };
 
-
 exports.adminEditUsersGET = async (req, res) => {
   console.log("GET /admin-edit-users");
   try {
-    let [allUsers] = await db.query("SELECT * FROM accounts");
-    allUsers = allUsers[0];
+    let [users] = await db.query("SELECT * FROM accounts");
 
     res.render("admin/admin-edit-users", {
       layout: "admin-layout.hbs",
-      allUsers: allUsers,
+      users: users,
     });
   } catch (error) {
     console.log(error);
   }
 };
 
+exports.adminEditUsersIdGET = async (req, res) => {
+  console.log("GET /admin-edit-users/:id");
+  try {
+    const { id } = req.params;
+    let [user] = await db.query("SELECT * FROM accounts WHERE id=?", [id]);
+    user = user[0];
+
+    // console.log(user);
+
+    let subscribed;
+    if (user.subscribed == 1) {
+      subscribed = true;
+    } else {
+      subscribed = false;
+    }
+
+    res.render("admin/admin-edit-user-id", {
+      layout: "admin-layout.hbs",
+      user: user,
+      subscribed: subscribed,
+      success: req.flash("success"),
+      error: req.flash("error"),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.adminEditUsersIdPOST = async (req, res) => {
+  console.log("POST /admin-edit-users/:id");
+  try {
+    const { id } = req.params;
+    console.log(req.body);
+    const {
+      pass,
+      user_first_name,
+      user_last_name,
+      user_country,
+      user_city,
+      user_telephone,
+      comments,
+      subscribed,
+    } = req.body;
+    const hashedPassword = await argon2.hash(pass);
+    let sub;
+    if (subscribed == "on") {
+      sub = 1;
+    } else {
+      sub = 0;
+    }
+    // const sanitizedContent = db.escape(comments);
+
+    const [result] = await db.query(
+      "UPDATE accounts SET pass=?, user_first_name=?, user_last_name=?, user_country=?, user_city=?, user_telephone=?, comments=?, subscribed=?  WHERE id=?",
+      [
+        hashedPassword,
+        user_first_name,
+        user_last_name,
+        user_country,
+        user_city,
+        user_telephone,
+        comments,
+        // sanitizedContent,
+        sub,
+        id,
+      ]
+    );
+    console.log(result.affectedRows);
+    if (result.affectedRows != 0) {
+      req.flash("success", "User updated successfully!");
+    } else {
+      req.flash("error", "User not updated!");
+    }
+    res.redirect(`/admin-edit-users/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // // Find User by Search
 // exports.find = (req, res) => {

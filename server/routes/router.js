@@ -40,11 +40,12 @@ router.get("/admin-new-orders", userController.adminNewOrdersGET);
 router.get("/admin-accepted-orders", userController.adminAcceptedOrdersGET);
 router.get("/admin-all-orders", userController.adminAllOrdersGET);
 /// Amin Users
-router.get("/admin-active-users", userController.adminActiveUsersGET);
+router.get("/admin-view-all-users", userController.adminViewAllUsersGET);
 router.get("/admin-create-user", userController.adminCreateUserGET);
 router.post("/admin-create-user", userController.adminCreateUserPOST);
 router.get("/admin-edit-users", userController.adminEditUsersGET);
-router.get("/admin-all-users", userController.adminAllUsersGET);
+router.get("/admin-edit-users/:id", userController.adminEditUsersIdGET);
+router.post("/admin-edit-users/:id", userController.adminEditUsersIdPOST);
 
 /////////////////
 // router.post("/admin", userController.find);

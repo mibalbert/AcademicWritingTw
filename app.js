@@ -57,6 +57,17 @@ const handlebars = exphbs.create({
     addOne: function (index) {
       return index + 1;
     },
+    ifEquals: function (arg1, arg2, options) {
+      return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+    },
+    // ifSubscribed: function (arg1, options) {
+    //   if (arg1 == 1) {
+    //     return { checked: "checked" };
+    //   } else {
+    //     return { checked: "unchecked" };
+    //   }
+    // },
+
     // capitalize: (str) => {
     //   return str.toUpperCase() + str.slice(1);
     // },
