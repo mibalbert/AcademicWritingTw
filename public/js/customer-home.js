@@ -12,6 +12,30 @@ window.addEventListener("DOMContentLoaded", () => {
       // location.reload();
     }, 1700);
   }
+  const container3 = document.querySelector(".container3");
+  const show = document.querySelector(".show");
+  // const width = window.innerWidth;
+  // if (width <= 782) {
+  //   console.log("width is less than 782");
+  //   container3.style.display = "none";
+  //   show.style.display = "block";
+  // } else {
+  //   console.log("width is greater than 782");
+  //   container3.style.display = "block";
+  //   show.style.display = "none";
+  // }
+  window.addEventListener("resize", function () {
+    const width = window.innerWidth;
+    if (width <= 782) {
+      console.log("width is less than 782");
+      container3.style.display = "none";
+      show.style.display = "block";
+    } else {
+      console.log("width is greater than 782");
+      container3.style.display = "block";
+      show.style.display = "none";
+    }
+  });
 
   $(function () {
     let slickSettings = {
